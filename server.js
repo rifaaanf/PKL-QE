@@ -1,6 +1,6 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
 // akan masuk otomatis ke index.js
 const db = require("./app/models");
 const app = express();

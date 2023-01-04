@@ -60,75 +60,50 @@ exports.signin = (req, res) => {
         });
       }
 
-      if (user.roles.name === "proposer") {
-        Proposer.findOne({ user: user._id }, (err, proposer) => {
-          if (err) {
-            res.status(500).send({ message: err });
-            return;
-          }
-          if (!proposer) {
-            return res.status(404).send({ message: "Proposer Not found." });
-          }
-          var token = new jose.SignJWT({
-            id: user._id,
-            role: user.roles.name,
-            name: proposer.name,
-          })
-            .setProtectedHeader({ alg: "HS256", typ: "JWT" })
-            .setIssuedAt()
-            .setExpirationTime("12h")
-            .sign(new TextEncoder().encode(SECRET));
-          res.status(200).send({
-            id: user._id,
-            username: user.username,
-            roles: user.roles.name,
-            name: proposer.name,
-            accessToken: token,
-          });
-        });
-      } else if (user.roles.name === "approver") {
-        Approver.findOne({ user: user._id }, (err, approver) => {
-          if (err) {
-            res.status(500).send({ message: err });
-            return;
-          }
-          if (!approver) {
-            return res.status(404).send({ message: "Approver Not found." });
-          }
-          var token = new jose.SignJWT({
-            id: user.id,
-            role: user.roles.name,
-            name: approver.name,
-          })
-            .setProtectedHeader({ alg: "HS256", typ: "JWT" })
-            .setIssuedAt()
-            .setExpirationTime("12h")
-            .sign(new TextEncoder().encode(SECRET));
-          res.status(200).send({
-            id: user._id,
-            username: user.username,
-            roles: user.roles,
-            name: approver.name,
-            accessToken: token,
-          });
-        });
-      } else {
-        var token = jose.JWT.sign(
-          {
-            id: user.id,
-            username: user.username,
-            roles: user.roles,
-          },
-          SECRET,
-          {
-            expiresIn: 86400, // 24 hours
-            algorithm: "HS256",
+      if (user.roles.name == "proposer") {
+        // Get mahasiswa name from user.id
+        const proposer = await Proposer.findOne(
+          { user: user._id },
+          (err, proposer) => {
+            if (err) {
+              res.status(500).send({ message: err });
+              return;
+            }
+            return proposer;
           }
         );
+
+        var token = await new jose.SignJWT({
+          id: user._id,
+          role: user.roles.name,
+          name: proposer.name,
+        })
+          .setProtectedHeader({ alg: "HS256", typ: "JWT" })
+          .setIssuedAt()
+          .setExpirationTime("12h")
+          .sign(new TextEncoder().encode(SECRET));
+
         res.status(200).send({
           id: user._id,
           username: user.username,
-          roles: user.roles,
+          roles: user.roles.name,
+          accessToken: token,
+        });
+      } else {
+        var token = await new jose.SignJWT({
+          id: user.id,
+          role: user.roles.name,
+        })
+          .setProtectedHeader({ alg: "HS256", typ: "JWT" })
+          .setIssuedAt()
+          .setExpirationTime("12h")
+          .sign(new TextEncoder().encode(SECRET));
+
+        res.status(200).send({
+          id: user._id,
+          username: user.username,
+          email: user.email,
+          roles: user.roles.name,
           accessToken: token,
         });
       }
@@ -136,15 +111,11 @@ exports.signin = (req, res) => {
 };
 
 exports.signout = (req, res) => {
-  req.session.user = null;
-  req.session.save(function (err) {
-    if (err) next(err);
-
-    // regenerate the session, which is good practice to help
-    // guard against forms of session fixation
-    req.session.regenerate(function (err) {
-      if (err) next(err);
-      res.redirect("/");
-    });
+  req.session.destroy(function (err) {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    res.status(200).send({ message: "User logged out" });
   });
 };
