@@ -2,7 +2,7 @@ const db = require("../models");
 const User = db.user;
 const Role = db.role;
 const Proposer = db.proposer;
-const Admin = db.admin
+const Admin = db.admin;
 const Approver = db.approver;
 const bcrypt = require("bcryptjs");
 
@@ -11,9 +11,7 @@ exports.designerBoard = (req, res) => {
 };
 
 exports.adminBoard = (req, res) => {
-  res.render(
-    'layouts/main-layout-admin'
-  )
+  res.render("layouts/main-layout-admin");
 };
 
 // exports.formAdmin = (req, res) => {
@@ -23,9 +21,7 @@ exports.adminBoard = (req, res) => {
 // };
 
 exports.proposerBoard = (req, res) => {
-  res.render(
-    'layouts/main-layout-proposer'
-  )
+  res.render("layouts/main-layout-proposer");
 };
 
 exports.approverBoard = (req, res) => {
@@ -47,7 +43,7 @@ exports.signup = (req, res) => {
     user: user._id,
     name: req.body.name,
   });
-  
+
   const admin = new Admin({
     user: user._id,
     name: req.body.name,
@@ -175,7 +171,7 @@ exports.signup = (req, res) => {
               });
               return;
             }
-            admin.save((err, approver) => {
+            admin.save((err, admin) => {
               if (err) {
                 res.status(500).send({
                   message: err,
