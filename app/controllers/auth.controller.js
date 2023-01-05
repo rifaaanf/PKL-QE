@@ -83,10 +83,17 @@ exports.signin = (req, res) => {
           .setExpirationTime("12h")
           .sign(new TextEncoder().encode(SECRET));
 
-        res.status(200).send({
+        res.cookie("x-access-token", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+        });
+
+        res.send({
           id: user._id,
           username: user.username,
           roles: user.roles.name,
+          name: proposer.name,
           accessToken: token,
         });
       } else {
@@ -99,10 +106,16 @@ exports.signin = (req, res) => {
           .setExpirationTime("12h")
           .sign(new TextEncoder().encode(SECRET));
 
-        res.status(200).send({
+        res.cookie("x-access-token", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+        });
+
+        //if x-access-token is set on client side then redirect to dashboard based on role
+        res.send({
           id: user._id,
           username: user.username,
-          email: user.email,
           roles: user.roles.name,
           accessToken: token,
         });

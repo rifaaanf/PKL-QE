@@ -1,10 +1,14 @@
 require("dotenv").config();
+const path = require("path");
+const ejs = require("ejs");
 const express = require("express");
 const cors = require("cors");
+const bodyparser = require("body-parser");
 // akan masuk otomatis ke index.js
 const db = require("./app/models");
 const app = express();
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 //get mongourl from .env
 const MONGO_URL = process.env.MONGO_URL;
 const SECRET = process.env.SECRET;
@@ -22,11 +26,12 @@ app.use(
 );
 
 app.use(cors(corsOptions));
-
 app.use(express.json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "./app/views"));
+app.use(express.static(path.join(__dirname, "./app/views")));
+app.use(bodyparser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 db.mongoose
   .connect(MONGO_URL, {
@@ -44,7 +49,7 @@ db.mongoose
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to application." });
+  res.render("index");
 });
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);

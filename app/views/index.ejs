@@ -1,0 +1,96 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/output.css" />
+  </head>
+  <body class>
+    <div class="lg:flex">
+      <div class="lg:w-1/2 xl:max-w-screen-sm">
+        <div
+          class="py-12 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12"
+        >
+          <div class="cursor-pointer flex items-center">
+            <div></div>
+          </div>
+        </div>
+        <div
+          class="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl"
+        >
+          <h2
+            class="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-left xl:text-5xl xl:text-bold"
+          >
+            Log in
+          </h2>
+          <div class="mt-12">
+            <form action="/signin" method="post">
+              <div>
+                <div class="text-sm font-bold text-gray-700 tracking-wide">
+                  Username
+                </div>
+                <input
+                  class="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                  type=""
+                  placeholder="Enter your username"
+                  name="username"
+                />
+              </div>
+              <div class="mt-8">
+                <div class="flex justify-between items-center">
+                  <div class="text-sm font-bold text-gray-700 tracking-wide">
+                    Password
+                  </div>
+                  <div>
+                    <a
+                      class="text-xs font-display font-semibold text-indigo-600 hover:text-indigo-800 cursor-pointer"
+                    >
+                      Forgot Password?
+                    </a>
+                  </div>
+                </div>
+                <input
+                  class="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                  type="password"
+                  placeholder="Enter your password"
+                  name="password"
+                />
+              </div>
+              <div class="mt-10">
+                <input type="submit"
+                  class="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg"
+                    value="Log In"
+                  >
+
+                </input>
+              </div>
+            </form>
+            <div
+              class="mt-12 text-sm font-display font-semibold text-gray-700 text-center"
+            >
+              Don't have an account ?
+              <a class="cursor-pointer text-indigo-600 hover:text-indigo-800"
+                >Sign up</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="hidden lg:flex items-center justify-center bg-indigo-100 flex-1 h-screen"
+      >
+        <div
+          class="max-w-xs transform duration-200 hover:scale-110 cursor-pointer"
+        >
+          <img
+            src="https://www.telkom.co.id/data/image_upload/page/1594108255409_compress_logo%20telkom%20indonesia.png"
+            width="500"
+            height="500"
+            alt="logo telkom indonesia"
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
