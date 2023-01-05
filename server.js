@@ -24,7 +24,8 @@ app.use(
     saveUninitialized: true,
   })
 );
-
+// const expressLayout = require('express-ejs-layouts')
+// app.use(expressLayout)
 app.use(cors(corsOptions));
 app.use(express.json());
 app.set("view engine", "ejs");
@@ -53,6 +54,7 @@ app.get("/", (req, res) => {
 });
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
+require("./app/routes/admin.routes")(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
