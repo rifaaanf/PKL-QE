@@ -89,13 +89,7 @@ exports.signin = (req, res) => {
           sameSite: "none",
         });
 
-        res.send({
-          id: user._id,
-          username: user.username,
-          roles: user.roles.name,
-          name: proposer.name,
-          accessToken: token,
-        });
+        res.redirect(`/${user.roles.name}`);
       } else {
         var token = await new jose.SignJWT({
           id: user.id,
@@ -113,22 +107,19 @@ exports.signin = (req, res) => {
         });
 
         //if x-access-token is set on client side then redirect to dashboard based on role
-        res.send({
-          id: user._id,
-          username: user.username,
-          roles: user.roles.name,
-          accessToken: token,
-        });
+        res.redirect(`/${user.roles.name}`);
       }
     });
 };
 
 exports.signout = (req, res) => {
+  // destroy session and delete cookie
   req.session.destroy(function (err) {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
-    res.status(200).send({ message: "User logged out" });
   });
+  res.clearCookie("x-access-token");
+  res.redirect("/");
 };
