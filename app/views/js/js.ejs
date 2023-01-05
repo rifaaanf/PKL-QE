@@ -1,76 +1,99 @@
 <script>
-const dropdown = (s1, s2, s3) => {
-    let sel1 = document.getElementById(s1)
-    let sel2 = document.getElementById(s2)
-    let sel3 = document.getElementById(s3)
+  const signoutButton = document.getElementById("signout");
+  signoutButton.addEventListener("click", () => {
+    fetch("/signout", {
+      method: "POST",
+    }).then(() => {
+      window.location.href = "/";
+    });
+  });
+  const dropdown = (s1, s2, s3) => {
+    let sel1 = document.getElementById(s1);
+    let sel2 = document.getElementById(s2);
+    let sel3 = document.getElementById(s3);
 
-    sel3.innerHTML = ""
-    
-    if(sel2.value === "KabelFeeder"){
-        var optionArray = ['FE1|FE-01', 'FE2|FE-02', 'FE3|FE-03']
-    }
+    sel3.innerHTML = "";
 
-    else if(sel1.value === "SMT" && sel2.value === "ODC"){
-        var optionArray = ['SMTODCA|ODC-SMT-FA', 'SMTODCB|ODC-SMT-FB', 'SMTODCC|ODC-SMT-FC']
-    }
-
-    else if(sel1.value === "JHR" && sel2.value === "ODC"){
-        var optionArray = ['JHRODCA|ODC-JHR-FA', 'JHRODCB|ODC-JHR-FB', 'JHRODCC|ODC-JHR-FC']
-    }
-    
-    else if(sel1.value === "MJB" && sel2.value === "ODC"){
-        var optionArray = ['MJBODCA|ODC-MJB-FA', 'MJBODCB|ODC-MJB-FB', 'MJBODCC|ODC-MJB-FC']
-    }
-
-    else if(sel1.value === "SMT" && sel2.value === "DIS"){
-        var optionArray = ['SMTFB1|SMT-FB-D01', 'SMTFB2|SMT-FB-D02', 'SMTFB3|SMT-FC-D03']
-    }
-
-    else if(sel1.value === "JHR" && sel2.value === "DIS"){
-        var optionArray = ['JHRFB1|JHR-FB-D01', 'JHRFB2|JHR-FB-D02', 'JHRFB3|JHR-FB-D03']
-    }
-    
-    else if(sel1.value === "MJB" && sel2.value === "DIS"){
-        var optionArray = ['MJBDIS1|MJB-FB-D01', 'MJBDIS2|MJB-FB-D02', 'MJBDIS3|MJB-FB-D03']
-    }
-
-    else if(sel1.value === "SMT" && sel2.value === "ODP"){
-        var optionArray = ['SMTODP1|ODP-SMT-FB/001', 'SMTODP2|ODP-SMT-FB/002', 'SMTODP3|ODP-SMT-FB/003']
-    }
-
-    else if(sel1.value === "JHR" && sel2.value === "ODP"){
-        var optionArray = ['JHRODP1|ODP-JHR-FB/001', 'JHRODP2|ODP-JHR-FB/002', 'JHRODP3|ODP-JHR-FB/003']
-    }
-    
-    else if(sel1.value === "MJB" && sel2.value === "ODP"){
-        var optionArray = ['MJBODP1|ODP-MJB-FB/001', 'MJBODP2|ODP-MJB-FB/002', 'MJBDODP3|ODP-MJB-FB/003']
+    if (sel2.value === "KabelFeeder") {
+      var optionArray = ["FE1|FE-01", "FE2|FE-02", "FE3|FE-03"];
+    } else if (sel1.value === "SMT" && sel2.value === "ODC") {
+      var optionArray = [
+        "SMTODCA|ODC-SMT-FA",
+        "SMTODCB|ODC-SMT-FB",
+        "SMTODCC|ODC-SMT-FC",
+      ];
+    } else if (sel1.value === "JHR" && sel2.value === "ODC") {
+      var optionArray = [
+        "JHRODCA|ODC-JHR-FA",
+        "JHRODCB|ODC-JHR-FB",
+        "JHRODCC|ODC-JHR-FC",
+      ];
+    } else if (sel1.value === "MJB" && sel2.value === "ODC") {
+      var optionArray = [
+        "MJBODCA|ODC-MJB-FA",
+        "MJBODCB|ODC-MJB-FB",
+        "MJBODCC|ODC-MJB-FC",
+      ];
+    } else if (sel1.value === "SMT" && sel2.value === "DIS") {
+      var optionArray = [
+        "SMTFB1|SMT-FB-D01",
+        "SMTFB2|SMT-FB-D02",
+        "SMTFB3|SMT-FC-D03",
+      ];
+    } else if (sel1.value === "JHR" && sel2.value === "DIS") {
+      var optionArray = [
+        "JHRFB1|JHR-FB-D01",
+        "JHRFB2|JHR-FB-D02",
+        "JHRFB3|JHR-FB-D03",
+      ];
+    } else if (sel1.value === "MJB" && sel2.value === "DIS") {
+      var optionArray = [
+        "MJBDIS1|MJB-FB-D01",
+        "MJBDIS2|MJB-FB-D02",
+        "MJBDIS3|MJB-FB-D03",
+      ];
+    } else if (sel1.value === "SMT" && sel2.value === "ODP") {
+      var optionArray = [
+        "SMTODP1|ODP-SMT-FB/001",
+        "SMTODP2|ODP-SMT-FB/002",
+        "SMTODP3|ODP-SMT-FB/003",
+      ];
+    } else if (sel1.value === "JHR" && sel2.value === "ODP") {
+      var optionArray = [
+        "JHRODP1|ODP-JHR-FB/001",
+        "JHRODP2|ODP-JHR-FB/002",
+        "JHRODP3|ODP-JHR-FB/003",
+      ];
+    } else if (sel1.value === "MJB" && sel2.value === "ODP") {
+      var optionArray = [
+        "MJBODP1|ODP-MJB-FB/001",
+        "MJBODP2|ODP-MJB-FB/002",
+        "MJBDODP3|ODP-MJB-FB/003",
+      ];
     }
 
     for (let option in optionArray) {
-        let pair = optionArray[option].split("|")
-        let newOption = document.createElement("option")
+      let pair = optionArray[option].split("|");
+      let newOption = document.createElement("option");
 
-        newOption.value = pair[0]
-        newOption.innerHTML = pair[1]
-        sel3.options.add(newOption)
+      newOption.value = pair[0];
+      newOption.innerHTML = pair[1];
+      sel3.options.add(newOption);
     }
-}
+  };
 </script>
 
 <script>
-    const hiddens = () => {
-        let jenisQE = document.getElementById("QE")
-        let koordinatBaru = document.getElementById("koordinat")
+  const hiddens = () => {
+    let jenisQE = document.getElementById("QE");
+    let koordinatBaru = document.getElementById("koordinat");
 
-        if(jenisQE.value === "NODP"){
-           koordinatBaru.classList.remove("hidden")
-        }
-        else{
-            koordinatBaru.classList.add("hidden")
-        }
+    if (jenisQE.value === "NODP") {
+      koordinatBaru.classList.remove("hidden");
+    } else {
+      koordinatBaru.classList.add("hidden");
     }
+  };
 </script>
 
-<script>
-    
-</script>
+<script></script>
