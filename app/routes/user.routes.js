@@ -13,7 +13,7 @@ module.exports = function (app) {
 
   app.get(
     "/approver",
-    [authJwt.verifyToken, authJwt.isApprover],
+     [authJwt.verifyToken, authJwt.isApprover],
     controller.approverBoard
   );
   app.get(
@@ -26,6 +26,11 @@ module.exports = function (app) {
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.adminBoard
   );
+  // app.get(
+  //   "/formAdmin",
+  //   [authJwt.verifyToken, authJwt.isAdmin],
+  //   controller.formAdmin
+  // );
   app.get(
     "/designer",
     [authJwt.verifyToken, authJwt.isDesigner],
