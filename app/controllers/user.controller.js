@@ -11,7 +11,10 @@ exports.designerBoard = (req, res) => {
 };
 
 exports.adminBoard = (req, res) => {
-  res.render("layouts/main-layout-admin");
+  // render the admin page and pass table as a variable
+  res.render("layouts/main-layout-admin", { data: "admin" });
+
+  // res.render("layouts/main-layout-admin", { table: "admin" });
 };
 
 // exports.formAdmin = (req, res) => {
