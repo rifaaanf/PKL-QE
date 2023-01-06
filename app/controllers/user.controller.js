@@ -5,7 +5,10 @@ const Proposer = db.proposer;
 const Admin = db.admin;
 const Approver = db.approver;
 const bcrypt = require("bcryptjs");
-
+const namaSTO = db.namaSTO;
+const segmen = db.segmen;
+const jenisQE = db.jenisQE;
+const namaAlpro = db.namaAlpro;
 exports.designerBoard = (req, res) => {
   res.status(200).send("Designer Content.");
 };
@@ -24,7 +27,21 @@ exports.adminBoard = (req, res) => {
 // };
 
 exports.proposerBoard = (req, res) => {
-  res.render("layouts/main-layout-proposer");
+  namaSTO.find({}, (err, namasto) => {
+    segmen.find({}, (err, segmen) => {
+      jenisQE.find({}, (err, jenisqe) => {
+        namaAlpro.find({}, (err, namaalpro) => {
+          res.render("layouts/main-layout-proposer", {
+            data: "formAdmin",
+            namaSTO: namasto,
+            segmen: segmen,
+            jenisQE: jenisqe,
+            namaAlpro: namaalpro,
+          });
+        });
+      });
+    });
+  });
 };
 
 exports.approverBoard = (req, res) => {

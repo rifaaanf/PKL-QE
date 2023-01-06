@@ -16,9 +16,5 @@ module.exports = function (app) {
     controller.formAdmin
   );
 
-  app.get(
-    "/api/admin/getAllNamaAlpro",
-
-    controller.getAllNamaAlpro
-  );
+  app.get("/api/admin/getAllNamaAlpro", controller.getAllNamaAlpro);
 };

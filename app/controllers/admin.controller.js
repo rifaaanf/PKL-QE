@@ -28,39 +28,6 @@ exports.formAdmin = (req, res) => {
   });
 };
 
-//get all namaSTO
-exports.getAllNamaSTO = (req, res) => {
-  namaSTO.find({}, (err, data) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    res.status(200).send(data);
-  });
-};
-
-//get all segmen
-exports.getAllSegmen = (req, res) => {
-  segmen.find({}, (err, data) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    res.status(200).send(data);
-  });
-};
-
-//get all jenisQE
-exports.getAllJenisQE = (req, res) => {
-  jenisQE.find({}, (err, data) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    res.status(200).send(data);
-  });
-};
-
 //get all namaAlpro
 exports.getAllNamaAlpro = (req, res) => {
   namaAlpro.find({}, (err, data) => {
