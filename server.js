@@ -13,6 +13,10 @@ const cookieParser = require("cookie-parser");
 const MONGO_URL = process.env.MONGO_URL;
 const SECRET = process.env.SECRET;
 const Role = db.role;
+const namaSTO = db.namaSTO;
+const segmen = db.segmen;
+const namaAlpro = db.namaAlpro;
+const jenisQE = db.jenisQE;
 var corsOptions = {
   origin: "http://localhost:3000",
 };
@@ -62,6 +66,218 @@ app.listen(PORT, () => {
 });
 
 function initial() {
+  jenisQE.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      new jenisQE({
+        name: "Normalisasi ODP",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'Normalisasi ODP' to jenisQE collection");
+      });
+
+      new jenisQE({
+        name: "Box ODP",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'Box ODP' to jenisQE collection");
+      });
+
+      new jenisQE({
+        name: "Perapihan ODC",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'Perapihan ODC' to jenisQE collection");
+      });
+    }
+  });
+  namaAlpro.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      new namaAlpro({
+        name: "FE-01",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'FE-01' to namaAlpro collection");
+      });
+
+      new namaAlpro({
+        name: "FE-02",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'FE-02' to namaAlpro collection");
+      });
+
+      new namaAlpro({
+        name: "JHR-FB-D01",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'JHR-FB-D01' to namaAlpro collection");
+      });
+
+      new namaAlpro({
+        name: "SMT-FB-D01",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'SMT-FB-D01' to namaAlpro collection");
+      });
+
+      new namaAlpro({
+        name: "MJB-FB-D01",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'MJB-FB-D01' to namaAlpro collection");
+      });
+
+      new namaAlpro({
+        name: "ODC-MJB-FA",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'ODC-MJB-FA' to namaAlpro collection");
+      });
+
+      new namaAlpro({
+        name: "ODC-SMT-FA",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'ODC-SMT-FA' to namaAlpro collection");
+      });
+
+      new namaAlpro({
+        name: "ODP-SMT-FB/001",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'ODP-SMT-FB/001' to namaAlpro collection");
+      });
+
+      new namaAlpro({
+        name: "ODC-JHR-FA",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'ODC-JHR-FA' to namaAlpro collection");
+      });
+
+      new namaAlpro({
+        name: "ODP-JHR-FB/001",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'ODP-JHR-FB/001' to namaAlpro collection");
+      });
+    }
+  });
+  segmen.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      new segmen({
+        name: "Kabel Feeder",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'Kabel Feeder' to segmen collection");
+      });
+
+      new segmen({
+        name: "ODC",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'ODC' to segmen collection");
+      });
+
+      new segmen({
+        name: "Kabel/Distribusi",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'Kabel/Distribusi' to segmen collection");
+      });
+
+      new segmen({
+        name: "ODP",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'ODP' to segmen collection");
+      });
+    }
+  });
+  namaSTO.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      new namaSTO({
+        name: "SMT",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'SMT' to namaSTO collection");
+      });
+
+      new namaSTO({
+        name: "JHR",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'JHR' to namaSTO collection");
+      });
+
+      new namaSTO({
+        name: "MJB",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'MJB' to namaSTO collection");
+      });
+    }
+  });
   Role.estimatedDocumentCount((err, count) => {
     if (!err && count === 0) {
       new Role({

@@ -1,7 +1,6 @@
 const authJwt = require("../middlewares/authJwt");
 const controller = require("../controllers/admin.controller");
 
-
 module.exports = function (app) {
   app.use(function (req, res, next) {
     res.header(
@@ -15,5 +14,11 @@ module.exports = function (app) {
     "/formAdmin",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.formAdmin
+  );
+
+  app.get(
+    "/api/admin/getAllNamaAlpro",
+
+    controller.getAllNamaAlpro
   );
 };

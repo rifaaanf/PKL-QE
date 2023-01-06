@@ -7,6 +7,46 @@
       window.location.href = "/";
     });
   });
+
+  //get namaalpro.name that starts with FE- from database
+  const fearray = [];
+  const odcsmt = [];
+  const odcjhr = [];
+  const odcmjb = [];
+  const smtdist = [];
+  const jhrdist = [];
+  const mjbdist = [];
+  const odpsmt = [];
+  const odpjhr = [];
+  const odpmjb = [];
+  fetch("/api/admin/getAllNamaAlpro")
+    .then((res) => res.json())
+    .then((data) => {
+      data.forEach((namaalpro) => {
+        if (namaalpro.name.startsWith("FE")) {
+          fearray.push(`${namaalpro.name}|${namaalpro.name}`);
+        } else if (namaalpro.name.startsWith("ODC-SMT")) {
+          odcsmt.push(`${namaalpro.name}|${namaalpro.name}`);
+        } else if (namaalpro.name.startsWith("ODC-JHR")) {
+          odcjhr.push(`${namaalpro.name}|${namaalpro.name}`);
+        } else if (namaalpro.name.startsWith("ODC-MJB")) {
+          odcmjb.push(`${namaalpro.name}|${namaalpro.name}`);
+        } else if (namaalpro.name.startsWith("SMT-FB-D")) {
+          smtdist.push(`${namaalpro.name}|${namaalpro.name}`);
+        } else if (namaalpro.name.startsWith("JHR-FB-D")) {
+          jhrdist.push(`${namaalpro.name}|${namaalpro.name}`);
+        } else if (namaalpro.name.startsWith("MJB-FB-D")) {
+          mjbdist.push(`${namaalpro.name}|${namaalpro.name}`);
+        } else if (namaalpro.name.startsWith("ODP-SMT-FB")) {
+          odpsmt.push(`${namaalpro.name}|${namaalpro.name}`);
+        } else if (namaalpro.name.startsWith("ODP-JHR-FB")) {
+          odpjhr.push(`${namaalpro.name}|${namaalpro.name}`);
+        } else if (namaalpro.name.startsWith("ODP-MJB-FB")) {
+          odpmjb.push(`${namaalpro.name}|${namaalpro.name}`);
+        }
+      });
+    });
+
   const dropdown = (s1, s2, s3) => {
     let sel1 = document.getElementById(s1);
     let sel2 = document.getElementById(s2);
@@ -14,62 +54,26 @@
 
     sel3.innerHTML = "";
 
-    if (sel2.value === "KabelFeeder") {
-      var optionArray = ["FE1|FE-01", "FE2|FE-02", "FE3|FE-03"];
+    if (sel2.value === "Kabel Feeder") {
+      var optionArray = fearray;
     } else if (sel1.value === "SMT" && sel2.value === "ODC") {
-      var optionArray = [
-        "SMTODCA|ODC-SMT-FA",
-        "SMTODCB|ODC-SMT-FB",
-        "SMTODCC|ODC-SMT-FC",
-      ];
+      var optionArray = odcsmt;
     } else if (sel1.value === "JHR" && sel2.value === "ODC") {
-      var optionArray = [
-        "JHRODCA|ODC-JHR-FA",
-        "JHRODCB|ODC-JHR-FB",
-        "JHRODCC|ODC-JHR-FC",
-      ];
+      var optionArray = odcjhr;
     } else if (sel1.value === "MJB" && sel2.value === "ODC") {
-      var optionArray = [
-        "MJBODCA|ODC-MJB-FA",
-        "MJBODCB|ODC-MJB-FB",
-        "MJBODCC|ODC-MJB-FC",
-      ];
-    } else if (sel1.value === "SMT" && sel2.value === "DIS") {
-      var optionArray = [
-        "SMTFB1|SMT-FB-D01",
-        "SMTFB2|SMT-FB-D02",
-        "SMTFB3|SMT-FC-D03",
-      ];
-    } else if (sel1.value === "JHR" && sel2.value === "DIS") {
-      var optionArray = [
-        "JHRFB1|JHR-FB-D01",
-        "JHRFB2|JHR-FB-D02",
-        "JHRFB3|JHR-FB-D03",
-      ];
-    } else if (sel1.value === "MJB" && sel2.value === "DIS") {
-      var optionArray = [
-        "MJBDIS1|MJB-FB-D01",
-        "MJBDIS2|MJB-FB-D02",
-        "MJBDIS3|MJB-FB-D03",
-      ];
+      var optionArray = odcmjb;
+    } else if (sel1.value === "SMT" && sel2.value === "Kabel/Distribusi") {
+      var optionArray = smtdist;
+    } else if (sel1.value === "JHR" && sel2.value === "Kabel/Distribusi") {
+      var optionArray = jhrdist;
+    } else if (sel1.value === "MJB" && sel2.value === "Kabel/Distribusi") {
+      var optionArray = mjbdist;
     } else if (sel1.value === "SMT" && sel2.value === "ODP") {
-      var optionArray = [
-        "SMTODP1|ODP-SMT-FB/001",
-        "SMTODP2|ODP-SMT-FB/002",
-        "SMTODP3|ODP-SMT-FB/003",
-      ];
+      var optionArray = odpsmt;
     } else if (sel1.value === "JHR" && sel2.value === "ODP") {
-      var optionArray = [
-        "JHRODP1|ODP-JHR-FB/001",
-        "JHRODP2|ODP-JHR-FB/002",
-        "JHRODP3|ODP-JHR-FB/003",
-      ];
+      var optionArray = odpjhr;
     } else if (sel1.value === "MJB" && sel2.value === "ODP") {
-      var optionArray = [
-        "MJBODP1|ODP-MJB-FB/001",
-        "MJBODP2|ODP-MJB-FB/002",
-        "MJBDODP3|ODP-MJB-FB/003",
-      ];
+      var optionArray = odpmjb;
     }
 
     for (let option in optionArray) {
@@ -88,7 +92,7 @@
     let jenisQE = document.getElementById("QE");
     let koordinatBaru = document.getElementById("koordinat");
 
-    if (jenisQE.value === "NODP") {
+    if (jenisQE.value === "Normalisasi ODP") {
       koordinatBaru.classList.remove("hidden");
     } else {
       koordinatBaru.classList.add("hidden");
