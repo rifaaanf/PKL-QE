@@ -7,7 +7,7 @@ const Proposer = db.proposer;
 const Proposal = db.proposal;
 const Approver = db.approver;
 
-getProposalId = (req, res, next) => {
+getProposerId = (req, res, next) => {
   Proposer.findOne({
     user: req.userId,
   }).exec((err, proposer) => {
@@ -166,5 +166,6 @@ const authJwt = {
   isApprover,
   isAdmin,
   isDesigner,
+  getProposerId,
 };
 module.exports = authJwt;

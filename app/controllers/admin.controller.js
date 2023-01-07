@@ -3,7 +3,7 @@ const namaSTO = db.namaSTO;
 const segmen = db.segmen;
 const jenisQE = db.jenisQE;
 const namaAlpro = db.namaAlpro;
-const proposal  = db.proposal
+const proposal = db.proposal;
 exports.formAdmin = (req, res) => {
   // namaSTO.find({}, (err, namasto) => {
   //   res.render("layouts/main-layout-admin", {
@@ -41,12 +41,3 @@ exports.getAllNamaAlpro = (req, res) => {
 };
 
 //get all proposal
-exports.getAllProposal = (req, res) => {
-  proposal.find({}, (err, data) => {
-    if(err){
-      res.status(500).send({message: err});
-      return;
-    }
-    res.status(200).send(data)
-  })
-} 

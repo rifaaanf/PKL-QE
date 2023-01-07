@@ -17,6 +17,4 @@ module.exports = function (app) {
   );
 
   app.get("/api/admin/getAllNamaAlpro", controller.getAllNamaAlpro);
-
-  app.get("/api/admin/getAllProposal", controller.getAllProposal);
 };

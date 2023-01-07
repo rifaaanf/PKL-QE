@@ -85,11 +85,13 @@ exports.signin = (req, res) => {
 
         res.cookie("x-access-token", token, {
           httpOnly: true,
-          secure: true,
           sameSite: "none",
         });
+        res.status(200).send({
+          message: "User was logged in successfully!",
+        });
 
-        res.redirect(`/${user.roles.name}`);
+        // res.redirect(`/${user.roles.name}`);
       } else {
         var token = await new jose.SignJWT({
           id: user.id,
