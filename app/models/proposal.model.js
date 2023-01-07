@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const proposal = mongoose.model(
-  "proposal",
+  "Proposal",
   new mongoose.Schema({
     namaSTO: {
       type: String,
@@ -24,6 +24,10 @@ const proposal = mongoose.model(
     },
     keterangan: {
       type: String,
+    },
+    proposer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Proposer"
     },
   })
 );
