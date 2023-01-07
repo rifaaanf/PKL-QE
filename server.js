@@ -17,6 +17,7 @@ const namaSTO = db.namaSTO;
 const segmen = db.segmen;
 const namaAlpro = db.namaAlpro;
 const jenisQE = db.jenisQE;
+const proposal = db.proposal;
 var corsOptions = {
   origin: "http://localhost:3000",
 };

@@ -4,7 +4,21 @@ const db = require("../models");
 const User = db.user;
 const Role = db.role;
 const Proposer = db.proposer;
+const Proposal = db.proposal;
 const Approver = db.approver;
+
+getProposalId = (req, res, next) => {
+  Proposer.findOne({
+    user: req.userId,
+  }).exec((err, proposer) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    req.proposerId = proposer._id;
+    next();
+  });
+};
 
 verifyToken = (req, res, next) => {
   //get token from cookies
