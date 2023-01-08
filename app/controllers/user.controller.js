@@ -15,18 +15,27 @@ exports.designerBoard = (req, res) => {
 };
 
 exports.adminBoard = (req, res) => {
-  // render the admin page and pass table as a variable
-  // get proposer name in proposer db for each proposal
-
-  Proposal.find({}, (err, proposal) => {
-    Proposer.find({}, (err, proposer) => {
-      res.render("layouts/main-layout-admin", {
-        data: "admin",
-        proposal: proposal,
-        proposer: proposer,
+  Proposal.find({})
+    .sort({ createdAt: -1 })
+    .exec((err, proposal) => {
+      Proposer.find({}, (err, proposer) => {
+        res.render("layouts/main-layout-admin", {
+          data: "admin",
+          proposal: proposal,
+          proposer: proposer,
+        });
       });
     });
-  });
+
+  // Proposal.find({}, (err, proposal) => {
+  //   Proposer.find({}, (err, proposer) => {
+  //     res.render("layouts/main-layout-admin", {
+  //       data: "admin",
+  //       proposal: proposal,
+  //       proposer: proposer,
+  //     });
+  //   });
+  // });
 };
 exports.proposerBoard = (req, res) => {
   namaSTO.find({}, (err, namasto) => {

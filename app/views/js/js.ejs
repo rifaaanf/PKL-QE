@@ -82,7 +82,8 @@
 
       newOption.value = pair[0];
       newOption.innerHTML = pair[1];
-      sel3.options.add(newOption);
+      // add the new option
+      sel3.innerHTML = sel3.innerHTML + newOption.outerHTML;
     }
   };
 
@@ -97,6 +98,8 @@
     }
   };
 
+  // when next button is clicked show the next data to table
+
   //ambil data proposal dari database berdasarkan parameter id
   const selected = () => {
     const id = window.location.pathname.split("/")[2];
@@ -108,6 +111,7 @@
         const sel1 = document.getElementById("sel1");
         const sel2 = document.getElementById("sel2");
         const sel3 = document.getElementById("sel3");
+        const textalpro = document.getElementById("textalpro");
         const sel4 = document.getElementById("QE");
         const sel5 = document.getElementById("koordinatODPBaru");
         const sel6 = document.getElementById("keterangan");
@@ -115,7 +119,7 @@
         //set attribute selected pada option yang sesuai dengan data yang diambil dari database
         sel1.value = data.namaSTO;
         sel2.value = data.segmen;
-        sel3.value = data.namaAlpro;
+        textalpro.value = data.namaAlpro;
         sel4.value = data.jenisQE;
         sel5.value = data.koordinatODPBaru;
         sel6.value = data.keterangan;
