@@ -85,19 +85,40 @@
       sel3.options.add(newOption);
     }
   };
-</script>
 
-<script>
   const hiddens = () => {
     let jenisQE = document.getElementById("QE");
     let koordinatBaru = document.getElementById("koordinat");
 
-    if (jenisQE.value === "Normalisasi ODP") {
-      koordinatBaru.classList.remove("hidden");
-    } else {
+    if (jenisQE.value != "Normalisasi ODP") {
       koordinatBaru.classList.add("hidden");
+    } else {
+      koordinatBaru.classList.remove("hidden");
     }
   };
-</script>
 
-<script></script>
+  //ambil data proposal dari database berdasarkan parameter id
+  const selected = () => {
+    const id = window.location.pathname.split("/")[2];
+    // tambahkan selected pada option yang sesuai dengan data yang diambil dari database pada namaSTO, namaAlpro, dan namaQE
+    fetch(`/api/admin/proposal/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // set attribute selected pada option yang sesuai dengan data yang diambil dari database
+        const sel1 = document.getElementById("sel1");
+        const sel2 = document.getElementById("sel2");
+        const sel3 = document.getElementById("sel3");
+        const sel4 = document.getElementById("QE");
+        const sel5 = document.getElementById("koordinatODPBaru");
+        const sel6 = document.getElementById("keterangan");
+
+        //set attribute selected pada option yang sesuai dengan data yang diambil dari database
+        sel1.value = data.namaSTO;
+        sel2.value = data.segmen;
+        sel3.value = data.namaAlpro;
+        sel4.value = data.jenisQE;
+        sel5.value = data.koordinatODPBaru;
+        sel6.value = data.keterangan;
+      });
+  };
+</script>

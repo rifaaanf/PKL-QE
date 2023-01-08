@@ -17,7 +17,11 @@ module.exports = function (app) {
   );
 
   //get proposal by id
-  app.get("/proposal/:id", [authJwt.verifyToken], controller.getProposalById);
+  app.get(
+    "/api/admin/proposal/:id",
+    [authJwt.verifyToken],
+    controller.getProposalById
+  );
 
   //get all proposal
   app.get("/proposal", [authJwt.verifyToken], controller.getAllProposal);

@@ -9,30 +9,32 @@ const namaSTO = db.namaSTO;
 const segmen = db.segmen;
 const jenisQE = db.jenisQE;
 const namaAlpro = db.namaAlpro;
+const Proposal = db.proposal;
 exports.designerBoard = (req, res) => {
   res.status(200).send("Designer Content.");
 };
 
 exports.adminBoard = (req, res) => {
   // render the admin page and pass table as a variable
-  res.render("layouts/main-layout-admin", { data: "admin" });
+  // get proposer name in proposer db for each proposal
 
-  // res.render("layouts/main-layout-admin", { table: "admin" });
+  Proposal.find({}, (err, proposal) => {
+    Proposer.find({}, (err, proposer) => {
+      res.render("layouts/main-layout-admin", {
+        data: "admin",
+        proposal: proposal,
+        proposer: proposer,
+      });
+    });
+  });
 };
-
-// exports.formAdmin = (req, res) => {
-//   res.render(
-//     'formAdmin'
-//   )
-// };
-
 exports.proposerBoard = (req, res) => {
   namaSTO.find({}, (err, namasto) => {
     segmen.find({}, (err, segmen) => {
       jenisQE.find({}, (err, jenisqe) => {
         namaAlpro.find({}, (err, namaalpro) => {
           res.render("layouts/main-layout-proposer", {
-            data: "formAdmin",
+            data: "proposer",
             namaSTO: namasto,
             segmen: segmen,
             jenisQE: jenisqe,
