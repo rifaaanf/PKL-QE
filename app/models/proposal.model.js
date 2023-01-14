@@ -30,6 +30,11 @@ const Proposal = mongoose.model(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Proposer",
       },
+      status: {
+        type: String,
+        enum: ["PENDING", "APPROVED", "REJECTED"],
+        default: "PENDING",
+      },
     },
     { timestamps: true }
   )

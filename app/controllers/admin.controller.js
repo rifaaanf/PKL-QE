@@ -16,14 +16,11 @@ exports.formAdmin = (req, res) => {
   namaSTO.find({}, (err, namasto) => {
     segmen.find({}, (err, segmen) => {
       jenisQE.find({}, (err, jenisqe) => {
-        namaAlpro.find({}, (err, namaalpro) => {
-          res.render("layouts/main-layout-proposer", {
-            data: "proposer",
-            namaSTO: namasto,
-            segmen: segmen,
-            jenisQE: jenisqe,
-            namaAlpro: namaalpro,
-          });
+        res.render("layouts/main-layout-proposer", {
+          data: "proposer",
+          namaSTO: namasto,
+          segmen: segmen,
+          jenisQE: jenisqe,
         });
       });
     });
@@ -34,17 +31,14 @@ exports.detailProposal = (req, res) => {
   namaSTO.find({}, (err, namasto) => {
     segmen.find({}, (err, segmen) => {
       jenisQE.find({}, (err, jenisqe) => {
-        namaAlpro.find({}, (err, namaalpro) => {
-          var id = req.params.id;
-          Proposal.findById(id, (err, proposal) => {
-            res.render("layouts/main-layout-admin", {
-              data: "detail",
-              proposal: proposal,
-              namaSTO: namasto,
-              segmen: segmen,
-              jenisQE: jenisqe,
-              namaAlpro: namaalpro,
-            });
+        var id = req.params.id;
+        Proposal.findById(id, (err, proposal) => {
+          res.render("layouts/main-layout-admin", {
+            data: "detail",
+            proposal: proposal,
+            namaSTO: namasto,
+            segmen: segmen,
+            jenisQE: jenisqe,
           });
         });
       });

@@ -51,6 +51,7 @@ exports.createProposal = (req, res) => {
     koordinatODPBaru: req.body.koordinatODPBaru,
     keterangan: req.body.keterangan,
     proposer: req.proposerId,
+    status: db.proposalStatus.PENDING,
   });
 
   // Save Proposal in the database
