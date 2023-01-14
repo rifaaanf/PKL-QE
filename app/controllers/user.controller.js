@@ -5,11 +5,14 @@ const Proposer = db.proposer;
 const Admin = db.admin;
 const Approver = db.approver;
 const bcrypt = require("bcryptjs");
+const session = require("express-session");
 const namaSTO = db.namaSTO;
 const segmen = db.segmen;
 const jenisQE = db.jenisQE;
 const namaAlpro = db.namaAlpro;
 const Proposal = db.proposal;
+const SECRET = process.env.SECRET;
+const jwt = require("jsonwebtoken");
 exports.designerBoard = (req, res) => {
   res.status(200).send("Designer Content.");
 };
@@ -23,6 +26,7 @@ exports.adminBoard = (req, res) => {
           data: "admin",
           proposal: proposal,
           proposer: proposer,
+          pindah: req.roleName,
         });
       });
     });
@@ -38,6 +42,8 @@ exports.adminBoard = (req, res) => {
   // });
 };
 exports.proposerBoard = (req, res) => {
+  // get logged in user's role name from x-access-token on the cookie
+
   namaSTO.find({}, (err, namasto) => {
     segmen.find({}, (err, segmen) => {
       jenisQE.find({}, (err, jenisqe) => {
@@ -46,6 +52,7 @@ exports.proposerBoard = (req, res) => {
           namaSTO: namasto,
           segmen: segmen,
           jenisQE: jenisqe,
+          pindah: req.roleName,
         });
       });
     });

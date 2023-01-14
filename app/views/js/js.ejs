@@ -87,6 +87,17 @@
     }
   };
 
+  // add active-nav-link class to the current page and add opacity-75 hover:opacity-100 to the other page
+  const navLink = document.querySelectorAll(".leftbar");
+
+  navLink.forEach((link) => {
+    if (link.href === window.location.href) {
+      link.classList.add("active-nav-link");
+    } else {
+      link.classList.add("opacity-75", "hover:opacity-100");
+    }
+  });
+
   const hiddens = () => {
     let jenisQE = document.getElementById("QE");
     let koordinatBaru = document.getElementById("koordinat");

@@ -21,6 +21,7 @@ exports.formAdmin = (req, res) => {
           namaSTO: namasto,
           segmen: segmen,
           jenisQE: jenisqe,
+          pindah: req.roleName,
         });
       });
     });
@@ -28,6 +29,8 @@ exports.formAdmin = (req, res) => {
 };
 
 exports.detailProposal = (req, res) => {
+  // get role
+
   namaSTO.find({}, (err, namasto) => {
     segmen.find({}, (err, segmen) => {
       jenisQE.find({}, (err, jenisqe) => {
@@ -39,6 +42,7 @@ exports.detailProposal = (req, res) => {
             namaSTO: namasto,
             segmen: segmen,
             jenisQE: jenisqe,
+            pindah: req.roleName,
           });
         });
       });
