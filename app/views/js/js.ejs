@@ -82,22 +82,65 @@
 
       newOption.value = pair[0];
       newOption.innerHTML = pair[1];
-      sel3.options.add(newOption);
+      // add the new option
+      sel3.innerHTML = sel3.innerHTML + newOption.outerHTML;
     }
   };
-</script>
 
-<script>
+  // add active-nav-link class to the current page and add opacity-75 hover:opacity-100 to the other page
+  const navLink = document.querySelectorAll(".leftbar");
+
+  navLink.forEach((link) => {
+    if (link.href === window.location.href) {
+      link.classList.add("active-nav-link");
+    } else {
+      link.classList.add("opacity-75", "hover:opacity-100");
+    }
+  });
+
   const hiddens = () => {
     let jenisQE = document.getElementById("QE");
     let koordinatBaru = document.getElementById("koordinat");
 
-    if (jenisQE.value === "Normalisasi ODP") {
-      koordinatBaru.classList.remove("hidden");
-    } else {
+    if (jenisQE.value != "Normalisasi ODP") {
       koordinatBaru.classList.add("hidden");
+    } else {
+      koordinatBaru.classList.remove("hidden");
     }
   };
-</script>
 
-<script></script>
+  // when next button is clicked show the next data to table
+  const hidereport = () => {
+    // if class leftbar href is admin then hide report button
+    let pindah = document.querySelector(".leftbar").href.split("/");
+    if (pindah[pindah.length - 1] == "admin") {
+      document.getElementById("reportbutton").classList.add("hidden");
+    }
+  };
+
+  //ambil data proposal dari database berdasarkan parameter id
+  const selected = () => {
+    const id = window.location.pathname.split("/")[2];
+    // tambahkan selected pada option yang sesuai dengan data yang diambil dari database pada namaSTO, namaAlpro, dan namaQE
+    fetch(`/api/admin/proposal/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // set attribute selected pada option yang sesuai dengan data yang diambil dari database
+        const sel1 = document.getElementById("sel1");
+        const sel2 = document.getElementById("sel2");
+        const sel3 = document.getElementById("sel3");
+        const textalpro = document.getElementById("textalpro");
+        const sel4 = document.getElementById("QE");
+        const sel5 = document.getElementById("koordinatODPBaru");
+        const sel6 = document.getElementById("keterangan");
+
+        //set attribute selected pada option yang sesuai dengan data yang diambil dari database
+        sel1.value = data.namaSTO;
+        sel2.value = data.segmen;
+        textalpro.value = data.namaAlpro;
+        sel4.value = data.jenisQE;
+        sel5.value = data.koordinatODPBaru;
+        sel6.value = data.keterangan;
+      });
+  };
+</script>

@@ -50,8 +50,9 @@ exports.signin = (req, res) => {
           message: "User already logged in",
         });
       } else {
-        // set session
-        req.session.user = user.username;
+        // set session using user id and role name
+
+        req.session.user = user;
         req.session.save(function (err) {
           if (err) {
             res.status(500).send({ message: err });
@@ -90,8 +91,7 @@ exports.signin = (req, res) => {
         });
         res.redirect(`/${req.session.user.roles.name}`);
 
-
-        res.redirect(`/${user.roles.name}`);
+        // res.redirect(`/${user.roles.name}`);
       } else {
         var token = await new jose.SignJWT({
           id: user.id,
@@ -108,8 +108,10 @@ exports.signin = (req, res) => {
           sameSite: "none",
         });
 
+        // get user role from cookie
+
         //if x-access-token is set on client side then redirect to dashboard based on role
-        res.redirect(`/${user.roles.name}`);
+        res.redirect(`/${req.session.user.roles.name}`);
       }
     });
 };

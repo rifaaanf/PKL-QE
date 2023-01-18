@@ -5,39 +5,54 @@ const Proposer = db.proposer;
 const Admin = db.admin;
 const Approver = db.approver;
 const bcrypt = require("bcryptjs");
+const session = require("express-session");
 const namaSTO = db.namaSTO;
 const segmen = db.segmen;
 const jenisQE = db.jenisQE;
 const namaAlpro = db.namaAlpro;
+const Proposal = db.proposal;
+const SECRET = process.env.SECRET;
+const jwt = require("jsonwebtoken");
 exports.designerBoard = (req, res) => {
   res.status(200).send("Designer Content.");
 };
 
 exports.adminBoard = (req, res) => {
-  // render the admin page and pass table as a variable
-  res.render("layouts/main-layout-admin", { data: "admin" });
+  Proposal.find({})
+    .sort({ createdAt: -1 })
+    .exec((err, proposal) => {
+      Proposer.find({}, (err, proposer) => {
+        res.render("layouts/main-layout-admin", {
+          data: "admin",
+          proposal: proposal,
+          proposer: proposer,
+          pindah: req.roleName,
+        });
+      });
+    });
 
-  // res.render("layouts/main-layout-admin", { table: "admin" });
+  // Proposal.find({}, (err, proposal) => {
+  //   Proposer.find({}, (err, proposer) => {
+  //     res.render("layouts/main-layout-admin", {
+  //       data: "admin",
+  //       proposal: proposal,
+  //       proposer: proposer,
+  //     });
+  //   });
+  // });
 };
-
-// exports.formAdmin = (req, res) => {
-//   res.render(
-//     'formAdmin'
-//   )
-// };
-
 exports.proposerBoard = (req, res) => {
+  // get logged in user's role name from x-access-token on the cookie
+
   namaSTO.find({}, (err, namasto) => {
     segmen.find({}, (err, segmen) => {
       jenisQE.find({}, (err, jenisqe) => {
-        namaAlpro.find({}, (err, namaalpro) => {
-          res.render("layouts/main-layout-proposer", {
-            data: "formAdmin",
-            namaSTO: namasto,
-            segmen: segmen,
-            jenisQE: jenisqe,
-            namaAlpro: namaalpro,
-          });
+        res.render("layouts/main-layout-proposer", {
+          data: "proposer",
+          namaSTO: namasto,
+          segmen: segmen,
+          jenisQE: jenisqe,
+          pindah: req.roleName,
         });
       });
     });

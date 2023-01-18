@@ -3,7 +3,8 @@ const namaSTO = db.namaSTO;
 const segmen = db.segmen;
 const jenisQE = db.jenisQE;
 const namaAlpro = db.namaAlpro;
-const proposal  = db.proposal
+const Proposal = db.proposal;
+
 exports.formAdmin = (req, res) => {
   // namaSTO.find({}, (err, namasto) => {
   //   res.render("layouts/main-layout-admin", {
@@ -15,13 +16,33 @@ exports.formAdmin = (req, res) => {
   namaSTO.find({}, (err, namasto) => {
     segmen.find({}, (err, segmen) => {
       jenisQE.find({}, (err, jenisqe) => {
-        namaAlpro.find({}, (err, namaalpro) => {
+        res.render("layouts/main-layout-proposer", {
+          data: "proposer",
+          namaSTO: namasto,
+          segmen: segmen,
+          jenisQE: jenisqe,
+          pindah: req.roleName,
+        });
+      });
+    });
+  });
+};
+
+exports.detailProposal = (req, res) => {
+  // get role
+
+  namaSTO.find({}, (err, namasto) => {
+    segmen.find({}, (err, segmen) => {
+      jenisQE.find({}, (err, jenisqe) => {
+        var id = req.params.id;
+        Proposal.findById(id, (err, proposal) => {
           res.render("layouts/main-layout-admin", {
-            data: "formAdmin",
+            data: "detail",
+            proposal: proposal,
             namaSTO: namasto,
             segmen: segmen,
             jenisQE: jenisqe,
-            namaAlpro: namaalpro,
+            pindah: req.roleName,
           });
         });
       });
@@ -40,13 +61,18 @@ exports.getAllNamaAlpro = (req, res) => {
   });
 };
 
-//get all proposal
-exports.getAllProposal = (req, res) => {
-  proposal.find({}, (err, data) => {
-    if(err){
-      res.status(500).send({message: err});
-      return;
+exports.changestodata = (req, res) => {
+  // change nama sto data name to new name
+  namaSTO.findOneAndUpdate(
+    { name: req.body.namaSTO },
+    { name: req.body.namaSTObaru },
+    { new: true },
+    (err, data) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      res.status(200).send(data);
     }
-    res.status(200).send(data)
-  })
-} 
+  );
+};
