@@ -85,9 +85,11 @@ exports.signin = (req, res) => {
 
         res.cookie("x-access-token", token, {
           httpOnly: true,
-          secure: true,
+          secure : true,
           sameSite: "none",
         });
+        res.redirect(`/${req.session.user.roles.name}`);
+
 
         res.redirect(`/${user.roles.name}`);
       } else {
