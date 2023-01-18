@@ -110,6 +110,13 @@
   };
 
   // when next button is clicked show the next data to table
+  const hidereport = () => {
+    // if class leftbar href is admin then hide report button
+    let pindah = document.querySelector(".leftbar").href.split("/");
+    if (pindah[pindah.length - 1] == "admin") {
+      document.getElementById("reportbutton").classList.add("hidden");
+    }
+  };
 
   //ambil data proposal dari database berdasarkan parameter id
   const selected = () => {
