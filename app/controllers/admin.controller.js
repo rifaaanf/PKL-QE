@@ -61,4 +61,18 @@ exports.getAllNamaAlpro = (req, res) => {
   });
 };
 
-//get all proposal
+exports.changestodata = (req, res) => {
+  // change nama sto data name to new name
+  namaSTO.findOneAndUpdate(
+    { name: req.body.namaSTO },
+    { name: req.body.namaSTObaru },
+    { new: true },
+    (err, data) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      res.status(200).send(data);
+    }
+  );
+};
