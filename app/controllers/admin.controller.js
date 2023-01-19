@@ -64,8 +64,8 @@ exports.getAllNamaAlpro = (req, res) => {
 exports.changestodata = (req, res) => {
   // change nama sto data name to new name
   namaSTO.findOneAndUpdate(
-    { name: req.body.namaSTO },
-    { name: req.body.namaSTObaru },
+    { name: req.body.name },
+    { name: req.body.namebaru },
     { new: true },
     (err, data) => {
       if (err) {
@@ -80,8 +80,8 @@ exports.changestodata = (req, res) => {
 exports.changesegmendata = (req, res) => {
   // change segmen data name to new name
   segmen.findOneAndUpdate(
-    { name: req.body.segmen },
-    { name: req.body.segmenbaru },
+    { name: req.body.name },
+    { name: req.body.namebaru },
     { new: true },
     (err, data) => {
       if (err) {
@@ -96,8 +96,8 @@ exports.changesegmendata = (req, res) => {
 exports.changejenisqedata = (req, res) => {
   // change jenisQE data name to new name
   jenisQE.findOneAndUpdate(
-    { name: req.body.jenisQE },
-    { name: req.body.jenisQEbaru },
+    { name: req.body.name },
+    { name: req.body.namebaru },
     { new: true },
     (err, data) => {
       if (err) {
@@ -112,8 +112,8 @@ exports.changejenisqedata = (req, res) => {
 exports.changenamaalprodata = (req, res) => {
   // change namaAlpro data name to new name
   namaAlpro.findOneAndUpdate(
-    { name: req.body.namaAlpro },
-    { name: req.body.namaAlprobaru },
+    { name: req.body.name },
+    { name: req.body.namebaru },
     { new: true },
     (err, data) => {
       if (err) {
@@ -128,7 +128,7 @@ exports.changenamaalprodata = (req, res) => {
 exports.addnamasto = (req, res) => {
   // add new namaSTO
   const namasto = new namaSTO({
-    name: req.body.namaSTO,
+    name: req.body.namebaru,
   });
   namasto.save((err, data) => {
     if (err) {
@@ -142,7 +142,7 @@ exports.addnamasto = (req, res) => {
 exports.addsegmen = (req, res) => {
   // add new segmen
   const segmen = new segmen({
-    name: req.body.segmen,
+    name: req.body.namebaru,
   });
   segmen.save((err, data) => {
     if (err) {
@@ -156,7 +156,7 @@ exports.addsegmen = (req, res) => {
 exports.addjenisqe = (req, res) => {
   // add new jenisQE
   const jenisqe = new jenisQE({
-    name: req.body.jenisQE,
+    name: req.body.namebaru,
   });
   jenisqe.save((err, data) => {
     if (err) {
@@ -170,7 +170,7 @@ exports.addjenisqe = (req, res) => {
 exports.addnamaalpro = (req, res) => {
   // add new namaAlpro
   const namaalpro = new namaAlpro({
-    name: req.body.namaAlpro,
+    name: req.body.namebaru,
   });
   namaalpro.save((err, data) => {
     if (err) {
@@ -183,7 +183,7 @@ exports.addnamaalpro = (req, res) => {
 
 exports.deletenamasto = (req, res) => {
   // delete namaSTO
-  namaSTO.findOneAndDelete({ name: req.body.namaSTO }, (err, data) => {
+  namaSTO.findOneAndDelete({ name: req.body.namebaru }, (err, data) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -194,7 +194,7 @@ exports.deletenamasto = (req, res) => {
 
 exports.deletesegmen = (req, res) => {
   // delete segmen
-  segmen.findOneAndDelete({ name: req.body.segmen }, (err, data) => {
+  segmen.findOneAndDelete({ name: req.body.namebaru }, (err, data) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -205,7 +205,7 @@ exports.deletesegmen = (req, res) => {
 
 exports.deletejenisqe = (req, res) => {
   // delete jenisQE
-  jenisQE.findOneAndDelete({ name: req.body.jenisQE }, (err, data) => {
+  jenisQE.findOneAndDelete({ name: req.body.namebaru }, (err, data) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -216,11 +216,67 @@ exports.deletejenisqe = (req, res) => {
 
 exports.deletenamaalpro = (req, res) => {
   // delete namaAlpro
-  namaAlpro.findOneAndDelete({ name: req.body.namaAlpro }, (err, data) => {
+  namaAlpro.findOneAndDelete({ name: req.body.namebaru }, (err, data) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
     res.status(200).send(data);
+  });
+};
+
+//get namasto
+exports.getnamasto = (req, res) => {
+  namaSTO.find({}, (err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    res.status(200).send(data);
+  });
+};
+
+//get segmen
+exports.getsegmen = (req, res) => {
+  segmen.find({}, (err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    res.status(200).send(data);
+  });
+};
+
+//get jenisqe
+exports.getjenisqe = (req, res) => {
+  jenisQE.find({}, (err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    res.status(200).send(data);
+  });
+};
+
+exports.changedata = (req, res) => {
+  // get role
+
+  // });
+  // get all namaSTO and segmen
+  namaSTO.find({}, (err, namasto) => {
+    segmen.find({}, (err, segmen) => {
+      jenisQE.find({}, (err, jenisqe) => {
+        namaAlpro.find({}, (err, namaalpro) => {
+          res.render("layouts/main-layout-proposer", {
+            data: "changedata",
+            namaSTO: namasto,
+            segmen: segmen,
+            jenisQE: jenisqe,
+            namaAlpro: namaalpro,
+            pindah: req.roleName,
+          });
+        });
+      });
+    });
   });
 };

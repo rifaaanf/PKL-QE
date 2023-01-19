@@ -17,6 +17,9 @@ module.exports = function (app) {
   );
 
   app.get("/api/admin/getAllNamaAlpro", controller.getAllNamaAlpro);
+  app.get("/api/admin/getAllNamaSTO", controller.getnamasto);
+  app.get("/api/admin/getAllSegmen", controller.getsegmen);
+  app.get("/api/admin/getAllJenisQE", controller.getjenisqe);
 
   app.get("/detail/:id", [authJwt.verifyToken], controller.detailProposal);
 
@@ -24,6 +27,12 @@ module.exports = function (app) {
     "/changedata/namasto",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.changestodata
+  );
+
+  app.get(
+    "/changedata",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.changedata
   );
 
   app.post(

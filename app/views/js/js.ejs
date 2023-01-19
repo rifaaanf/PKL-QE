@@ -108,6 +108,55 @@
     }
   };
 
+  const changedata = () => {
+    const sel1 = document.getElementById("sel1");
+    const sel2 = document.getElementById("sel2");
+
+    if (sel1.value == "Nama STO") {
+      fetch("/api/admin/getAllNamaSTO")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            setdata.push(`${nama.name}|${nama.name}`);
+          });
+        });
+    } else if (sel1.value == "Segmen") {
+      fetch("/api/admin/getAllSegmen")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            setdata.push(`${nama.name}|${nama.name}`);
+          });
+        });
+    } else if (sel1.value == "Jenis QE") {
+      fetch("/api/admin/getAllJenisQE")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            setdata.push(`${nama.name}|${nama.name}`);
+          });
+        });
+    } else if (sel1.value == "Nama Alpro") {
+      fetch("/api/admin/getAllNamaAlpro")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            setdata.push(`${nama.name}|${nama.name}`);
+          });
+        });
+    }
+
+    for (let option in setdata) {
+      let pair = setdata[option].split("|");
+      let newOption = document.createElement("option");
+
+      newOption.value = pair[0];
+      newOption.innerHTML = pair[1];
+      // add the new option
+      sel2.innerHTML = sel2.innerHTML + newOption.outerHTML;
+    }
+  };
+
   const hiddens = () => {
     let jenisQE = document.getElementById("QE");
     let koordinatBaru = document.getElementById("koordinat");
