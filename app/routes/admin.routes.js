@@ -35,6 +35,18 @@ module.exports = function (app) {
     controller.changedata
   );
 
+  app.get(
+    "/adddata",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.adddata
+  );
+
+  app.get(
+    "/deletedata",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.deletedata
+  );
+
   app.post(
     "/changedata/namaalpro",
     [authJwt.verifyToken, authJwt.isAdmin],

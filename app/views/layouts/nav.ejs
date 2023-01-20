@@ -22,13 +22,14 @@
     </a>
     <!-- when menu is clicked add sub menu -->
     <a
+      id="dbmenu"
       onclick="dbedit()"
       class="leftbar cursor-pointer flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
       ><i class="fas fa-regular fa-pen mr-3"></i>Database</a
     >
     <div class="dbedit hidden">
       <a
-        href="#"
+        href="/adddata"
         class="leftbar flex items text-blue-500 bg-white py-4 pl-20 transition ease-in-out duration-150 hover:bg-slate-50"
         >Add Data</a
       >
@@ -38,13 +39,14 @@
         >Edit Data</a
       >
       <a
-        href="#"
+        href="/deletedata"
         class="leftbar flex items text-blue-500 bg-white py-4 pl-20 transition ease-in-out duration-150 hover:bg-slate-50"
         >Delete Data</a
       >
     </div>
 
     <a
+      id="formAdmin"
       href="/formAdmin"
       class="leftbar flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
     >

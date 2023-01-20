@@ -258,6 +258,52 @@ exports.getjenisqe = (req, res) => {
   });
 };
 
+exports.deletedata = (req, res) => {
+  // get role
+
+  // });
+  // get all namaSTO and segmen
+  namaSTO.find({}, (err, namasto) => {
+    segmen.find({}, (err, segmen) => {
+      jenisQE.find({}, (err, jenisqe) => {
+        namaAlpro.find({}, (err, namaalpro) => {
+          res.render("layouts/main-layout-proposer", {
+            data: "deletedata",
+            namaSTO: namasto,
+            segmen: segmen,
+            jenisQE: jenisqe,
+            namaAlpro: namaalpro,
+            pindah: req.roleName,
+          });
+        });
+      });
+    });
+  });
+};
+
+exports.adddata = (req, res) => {
+  // get role
+
+  // });
+  // get all namaSTO and segmen
+  namaSTO.find({}, (err, namasto) => {
+    segmen.find({}, (err, segmen) => {
+      jenisQE.find({}, (err, jenisqe) => {
+        namaAlpro.find({}, (err, namaalpro) => {
+          res.render("layouts/main-layout-proposer", {
+            data: "adddata",
+            namaSTO: namasto,
+            segmen: segmen,
+            jenisQE: jenisqe,
+            namaAlpro: namaalpro,
+            pindah: req.roleName,
+          });
+        });
+      });
+    });
+  });
+};
+
 exports.changedata = (req, res) => {
   // get role
 
