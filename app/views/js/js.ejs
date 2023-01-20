@@ -108,44 +108,61 @@
     }
   };
 
-  const changedata = () => {
+  const changedata = async () => {
     const sel1 = document.getElementById("sel1");
-    const sel2 = document.getElementById("sel2");
+    const sel2 = document.getElementById("pilihdata");
+    let setdata = [];
 
     if (sel1.value == "Nama STO") {
-      fetch("/api/admin/getAllNamaSTO")
+      // await fetch data from "/api/admin/getAllNamaSTO"
+      let arraysto = [];
+      await fetch("/api/admin/getAllNamaSTO")
         .then((res) => res.json())
         .then((data) => {
           data.forEach((nama) => {
-            setdata.push(`${nama.name}|${nama.name}`);
+            arraysto.push(`${nama.name}|${nama.name}`);
           });
         });
-    } else if (sel1.value == "Segmen") {
-      fetch("/api/admin/getAllSegmen")
-        .then((res) => res.json())
-        .then((data) => {
-          data.forEach((nama) => {
-            setdata.push(`${nama.name}|${nama.name}`);
-          });
-        });
-    } else if (sel1.value == "Jenis QE") {
-      fetch("/api/admin/getAllJenisQE")
-        .then((res) => res.json())
-        .then((data) => {
-          data.forEach((nama) => {
-            setdata.push(`${nama.name}|${nama.name}`);
-          });
-        });
-    } else if (sel1.value == "Nama Alpro") {
-      fetch("/api/admin/getAllNamaAlpro")
-        .then((res) => res.json())
-        .then((data) => {
-          data.forEach((nama) => {
-            setdata.push(`${nama.name}|${nama.name}`);
-          });
-        });
-    }
+      setdata = arraysto;
 
+      // change form action to "/api/admin/editNamaSTO"
+      document.getElementById("formedit").action = "/changedata/namasto";
+    } else if (sel1.value == "Segmen") {
+      let arraysegmen = [];
+      await fetch("/api/admin/getAllSegmen")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            arraysegmen.push(`${nama.name}|${nama.name}`);
+          });
+        });
+
+      setdata = arraysegmen;
+      document.getElementById("formedit").action = "/changedata/segmen";
+    } else if (sel1.value == "Jenis QE") {
+      let arrayjenisqe = [];
+      await fetch("/api/admin/getAllJenisQE")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            arrayjenisqe.push(`${nama.name}|${nama.name}`);
+          });
+        });
+      setdata = arrayjenisqe;
+      document.getElementById("formedit").action = "/changedata/jenisqe";
+    } else if (sel1.value == "Nama Alpro") {
+      let arraynamaalpro = [];
+      await fetch("/api/admin/getAllNamaAlpro")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            arraynamaalpro.push(`${nama.name}|${nama.name}`);
+          });
+        });
+      setdata = arraynamaalpro;
+      document.getElementById("formedit").action = "/changedata/namaalpro";
+    }
+    sel2.innerHTML = "<option >Pilih Data</option>";
     for (let option in setdata) {
       let pair = setdata[option].split("|");
       let newOption = document.createElement("option");
@@ -155,6 +172,8 @@
       // add the new option
       sel2.innerHTML = sel2.innerHTML + newOption.outerHTML;
     }
+
+    // add every data to the sel2 dropdown
   };
 
   const hiddens = () => {
