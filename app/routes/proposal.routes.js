@@ -24,11 +24,21 @@ module.exports = function (app) {
   );
 
   //get all proposal
-  app.get("/proposal", [authJwt.verifyToken], controller.getAllProposal);
+  app.get("/proposal", 
+    [authJwt.verifyToken], 
+    controller.getAllProposal
+  );
 
   app.post(
     "/proposal/:id",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.updateProposal
   );
+
+  app.get(
+    "/proposalconfirmpage",
+    [authJwt.verifyToken, authJwt.isProposer],
+    controller.createProposal
+  );
 };
+
