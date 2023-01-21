@@ -17,8 +17,99 @@ module.exports = function (app) {
   );
 
   app.get("/api/admin/getAllNamaAlpro", controller.getAllNamaAlpro);
+  app.get("/api/admin/getAllNamaSTO", controller.getnamasto);
+  app.get("/api/admin/getAllSegmen", controller.getsegmen);
+  app.get("/api/admin/getAllJenisQE", controller.getjenisqe);
 
   app.get("/detail/:id", [authJwt.verifyToken], controller.detailProposal);
 
-  app.post("/changedata/sto", controller.changestodata);
+  app.post(
+    "/changedata/namasto",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.changestodata
+  );
+
+  app.get(
+    "/changedata",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.changedata
+  );
+
+  app.get(
+    "/adddata",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.adddata
+  );
+
+  app.get(
+    "/deletedata",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.deletedata
+  );
+
+  app.post(
+    "/changedata/namaalpro",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.changenamaalprodata
+  );
+
+  app.post(
+    "/changedata/segmen",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.changesegmendata
+  );
+
+  app.post(
+    "/changedata/jenisqe",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.changejenisqedata
+  );
+
+  app.post(
+    "/adddata/namasto",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.addnamasto
+  );
+
+  app.post(
+    "/adddata/alpro",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.addnamaalpro
+  );
+
+  app.post(
+    "/adddata/segmen",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.addsegmen
+  );
+
+  app.post(
+    "/adddata/jenisqe",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.addjenisqe
+  );
+
+  app.post(
+    "/deletedata/namasto",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.deletenamasto
+  );
+
+  app.post(
+    "/deletedata/namaalpro",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.deletenamaalpro
+  );
+
+  app.post(
+    "/deletedata/segmen",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.deletesegmen
+  );
+
+  app.post(
+    "/deletedata/jenisqe",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.deletejenisqe
+  );
 };

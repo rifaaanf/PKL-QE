@@ -98,6 +98,176 @@
     }
   });
 
+  const hidemenu = () => {
+    // if class leftbar href is admin then hide report button
+    let pindah = document.querySelector(".leftbar").href.split("/");
+    if (pindah[pindah.length - 1] != "admin") {
+      document.getElementById("dbmenu").classList.add("hidden");
+      document.getElementById("formAdmin").classList.add("hidden");
+    }
+  };
+
+  const dbedit = () => {
+    let dbedit = document.querySelector(".dbedit");
+
+    if (dbedit.classList.contains("hidden")) {
+      dbedit.classList.remove("hidden");
+    } else {
+      dbedit.classList.add("hidden");
+    }
+  };
+
+  const adddata = () => {
+    const sel1 = document.getElementById("sel1");
+    let adddata = document.getElementById("formadd");
+
+    if (sel1.value == "Nama STO") {
+      adddata.action = "/adddata/namasto";
+    } else if (sel1.value == "Segmen") {
+      adddata.action = "/adddata/segmen";
+    } else if (sel1.value == "Nama Alpro") {
+      adddata.action = "/adddata/alpro";
+    } else if (sel1.value == "Jenis QE") {
+      adddata.action == "/adddata/jenisqe";
+    }
+  };
+
+  const deletedata = async () => {
+    const sel1 = document.getElementById("sel1");
+    const sel2 = document.getElementById("pilihdata");
+    let setdata = [];
+
+    if (sel1.value == "Nama STO") {
+      // await fetch data from "/api/admin/getAllNamaSTO"
+      let arraysto = [];
+      await fetch("/api/admin/getAllNamaSTO")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            arraysto.push(`${nama.name}|${nama.name}`);
+          });
+        });
+      setdata = arraysto;
+
+      // change form action to "/api/admin/editNamaSTO"
+      document.getElementById("formedit").action = "/deletedata/namasto";
+    } else if (sel1.value == "Segmen") {
+      let arraysegmen = [];
+      await fetch("/api/admin/getAllSegmen")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            arraysegmen.push(`${nama.name}|${nama.name}`);
+          });
+        });
+
+      setdata = arraysegmen;
+      document.getElementById("formedit").action = "/deletedata/segmen";
+    } else if (sel1.value == "Jenis QE") {
+      let arrayjenisqe = [];
+      await fetch("/api/admin/getAllJenisQE")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            arrayjenisqe.push(`${nama.name}|${nama.name}`);
+          });
+        });
+      setdata = arrayjenisqe;
+      document.getElementById("formedit").action = "/deletedata/jenisqe";
+    } else if (sel1.value == "Nama Alpro") {
+      let arraynamaalpro = [];
+      await fetch("/api/admin/getAllNamaAlpro")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            arraynamaalpro.push(`${nama.name}|${nama.name}`);
+          });
+        });
+      setdata = arraynamaalpro;
+      document.getElementById("formedit").action = "/deletedata/namaalpro";
+    }
+    sel2.innerHTML = "<option >Pilih Data</option>";
+    for (let option in setdata) {
+      let pair = setdata[option].split("|");
+      let newOption = document.createElement("option");
+
+      newOption.value = pair[0];
+      newOption.innerHTML = pair[1];
+      // add the new option
+      sel2.innerHTML = sel2.innerHTML + newOption.outerHTML;
+    }
+
+    // add every data to the sel2 dropdown
+  };
+
+  const changedata = async () => {
+    const sel1 = document.getElementById("sel1");
+    const sel2 = document.getElementById("pilihdata");
+    let setdata = [];
+
+    if (sel1.value == "Nama STO") {
+      // await fetch data from "/api/admin/getAllNamaSTO"
+      let arraysto = [];
+      await fetch("/api/admin/getAllNamaSTO")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            arraysto.push(`${nama.name}|${nama.name}`);
+          });
+        });
+      setdata = arraysto;
+
+      // change form action to "/api/admin/editNamaSTO"
+      document.getElementById("formedit").action = "/changedata/namasto";
+    } else if (sel1.value == "Segmen") {
+      let arraysegmen = [];
+      await fetch("/api/admin/getAllSegmen")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            arraysegmen.push(`${nama.name}|${nama.name}`);
+          });
+        });
+
+      setdata = arraysegmen;
+      document.getElementById("formedit").action = "/changedata/segmen";
+    } else if (sel1.value == "Jenis QE") {
+      let arrayjenisqe = [];
+      await fetch("/api/admin/getAllJenisQE")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            arrayjenisqe.push(`${nama.name}|${nama.name}`);
+          });
+        });
+      setdata = arrayjenisqe;
+      document.getElementById("formedit").action = "/changedata/jenisqe";
+    } else if (sel1.value == "Nama Alpro") {
+      let arraynamaalpro = [];
+      await fetch("/api/admin/getAllNamaAlpro")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            arraynamaalpro.push(`${nama.name}|${nama.name}`);
+          });
+        });
+      setdata = arraynamaalpro;
+      document.getElementById("formedit").action = "/changedata/namaalpro";
+    }
+    sel2.innerHTML = "<option >Pilih Data</option>";
+    for (let option in setdata) {
+      let pair = setdata[option].split("|");
+      let newOption = document.createElement("option");
+
+      newOption.value = pair[0];
+      newOption.innerHTML = pair[1];
+      // add the new option
+      sel2.innerHTML = sel2.innerHTML + newOption.outerHTML;
+    }
+
+    // add every data to the sel2 dropdown
+  };
+
   const hiddens = () => {
     let jenisQE = document.getElementById("QE");
     let koordinatBaru = document.getElementById("koordinat");
@@ -106,15 +276,6 @@
       koordinatBaru.classList.add("hidden");
     } else {
       koordinatBaru.classList.remove("hidden");
-    }
-  };
-
-  // when next button is clicked show the next data to table
-  const hidereport = () => {
-    // if class leftbar href is admin then hide report button
-    let pindah = document.querySelector(".leftbar").href.split("/");
-    if (pindah[pindah.length - 1] == "admin") {
-      document.getElementById("reportbutton").classList.add("hidden");
     }
   };
 
