@@ -4,6 +4,9 @@ const Proposal = mongoose.model(
   "Proposal",
   new mongoose.Schema(
     {
+      idProposal: {
+        type: String,
+      },
       namaSTO: {
         type: String,
         required: [true, "Nama STO wajib diisi"],

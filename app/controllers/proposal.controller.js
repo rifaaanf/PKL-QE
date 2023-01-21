@@ -1,3 +1,4 @@
+const { namaSTO, segmen } = require("../models");
 const db = require("../models");
 const Proposal = db.proposal;
 
@@ -39,31 +40,94 @@ exports.getProposalById = (req, res) => {
 };
 
 //create proposal
-exports.createProposal = (req, res) => {
+exports.createProposal = async (req, res) => {
   // Validate request
+  // Ambil data dari form
+  const namaSTO = req.body.namaSTO;
+  const segmen = req.body.segmen;
+  const namaAlpro = req.body.namaAlpro;
+  const jenisQE = req.body.jenisQE;
+  const koordinatODPBaru = req.body.koordinatODPBaru;
+  const keterangan = req.body.keterangan;
+  const idProposal = await createIDProposal(namaSTO, segmen);
 
-  // Create a Proposal
-  const proposal = new Proposal({
-    namaSTO: req.body.namaSTO,
-    segmen: req.body.segmen,
-    namaAlpro: req.body.namaAlpro,
-    jenisQE: req.body.jenisQE,
-    koordinatODPBaru: req.body.koordinatODPBaru,
-    keterangan: req.body.keterangan,
-    proposer: req.proposerId,
-    
-  });
+Proposal.create({
+  idProposal: idProposal,
+  namaSTO: namaSTO,
+  segmen: segmen,
+  namaAlpro: namaAlpro,
+  jenisQE: jenisQE,
+  koordinatODPBaru: koordinatODPBaru,
+  keterangan: keterangan
+}, (err, proposal) => {
+    if (err) {
+        console.log(err);
+        res.redirect('/');
+    } else {
+        res.render('layouts/main-layout-proposer', {
+            data:'proposalconfirmpage',
+            idProposal:proposal.idProposal,
+            namaSTO: proposal.namaSTO,
+            segmen: proposal.segmen,
+            namaAlpro: proposal.namaAlpro,
+            jenisQE: proposal.jenisQE,
+            koordinatODPBaru: proposal.koordinatODPBaru,
+            keterangan: proposal.keterangan,
+            pindah: req.roleName
+        });
+    }
+});
 
-  // Save Proposal in the database
-  proposal
-    .save(proposal)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Proposal.",
-      });
-    });
 };
+
+
+async function createIDProposal(namaSTO, segmen) {
+  const tahun = new Date().getFullYear();
+  const year = tahun.toString()
+
+  let segmenNumber
+  switch (segmen) {
+    case "Kabel Feeder":
+      segmenNumber = "01";
+      break;
+    case "ODC":
+      segmenNumber = "02";
+      break;
+    case "Kabel/Distribusi":
+      segmenNumber = "03";
+      break;
+    case "ODP":
+      segmenNumber = "04";
+      break;
+    case "DC":
+      segmenNumber = "05";
+      break;
+  }
+
+  const result = await Proposal
+    .find({ namaSTO: namaSTO, segmen: segmen })
+    .sort({ idProposal: -1 })
+
+  let indeks;
+  if (result.length > 0) {
+    indeks = result[0].idProposal;
+    const idArray = indeks.split("-");
+    let indexArray = idArray[3];
+    let numberIndex = parseInt(indexArray)
+
+    if (numberIndex>=1){
+      numberIndex++;
+    }
+
+    let formattedIndex = `${namaSTO}-${segmenNumber}-${year}-${numberIndex}`;
+    let x = formattedIndex.toString()
+
+    return formattedIndex;
+
+  } else {
+    indeks = 1;
+    let formattedIndex = `${namaSTO}-${segmenNumber}-${year}-${indeks}`;
+    formattedIndex.toString()
+    return formattedIndex;
+  }
+}
