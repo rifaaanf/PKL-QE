@@ -24,10 +24,9 @@ module.exports = function (app) {
   );
 
   //get all proposal
-  app.get("/proposal", 
-    [authJwt.verifyToken], 
-    controller.getAllProposal
-  );
+  app.get("/proposal", [authJwt.verifyToken], controller.getAllProposal);
+
+  app.post("/proposal/design/:id", controller.proposaldesign);
 
   app.post(
     "/proposal/:id",
@@ -41,4 +40,3 @@ module.exports = function (app) {
     controller.createProposal
   );
 };
-
