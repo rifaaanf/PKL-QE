@@ -57,9 +57,10 @@ const storage = multer.diskStorage({
 const filefilter = (req, file, cb) => {
   // kml and excel file only
   if (
-    file.mimetype === "image/png" ||
-    file.mimetype === "image/jpg" ||
-    file.mimetype === "image/jpeg"
+    file.mimetype === "application/vnd.ms-excel" ||
+    file.mimetype ===
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
+    file.mimetype === "application/vnd.google-earth.kml+xml"
   ) {
     cb(null, true);
   } else {
