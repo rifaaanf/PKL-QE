@@ -38,6 +38,12 @@ const Proposal = mongoose.model(
         enum: ["PENDING", "APPROVED", "REJECTED"],
         default: "PENDING",
       },
+      design: {
+        type: String,
+      },
+      rab: {
+        type: String,
+      },
     },
     { timestamps: true }
   )

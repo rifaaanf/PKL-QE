@@ -139,20 +139,6 @@ exports.addnamasto = (req, res) => {
   });
 };
 
-exports.addsegmen = (req, res) => {
-  // add new segmen
-  const segmen = new segmen({
-    name: req.body.namebaru,
-  });
-  segmen.save((err, data) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    res.status(200).send(data);
-  });
-};
-
 exports.addjenisqe = (req, res) => {
   // add new jenisQE
   const jenisqe = new jenisQE({
@@ -170,6 +156,20 @@ exports.addjenisqe = (req, res) => {
 exports.addnamaalpro = (req, res) => {
   // add new namaAlpro
   const namaalpro = new namaAlpro({
+    name: req.body.namebaru,
+  });
+  namaalpro.save((err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    res.status(200).send(data);
+  });
+};
+
+exports.addsegmen = (req, res) => {
+  // add new namaAlpro
+  const namaalpro = new segmen({
     name: req.body.namebaru,
   });
   namaalpro.save((err, data) => {

@@ -1,6 +1,5 @@
 require("dotenv").config();
 const path = require("path");
-const ejs = require("ejs");
 const express = require("express");
 const cors = require("cors");
 const bodyparser = require("body-parser");
@@ -17,7 +16,8 @@ const namaSTO = db.namaSTO;
 const segmen = db.segmen;
 const namaAlpro = db.namaAlpro;
 const jenisQE = db.jenisQE;
-const proposal = db.proposal;
+const multer = require("multer");
+
 var corsOptions = {
   origin: "http://localhost:3000",
 };
@@ -36,8 +36,44 @@ app.use(express.json());
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "./app/views"));
 app.use(express.static(path.join(__dirname, "./app/views")));
+app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+// multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    if (file.fieldname === "design") {
+      cb(null, "./app/views/uploads/design");
+    } else if (file.fieldname === "rab") {
+      cb(null, "./app/views/uploads/rab");
+    }
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+const filefilter = (req, file, cb) => {
+  // kml and excel file only
+  if (
+    file.mimetype === "application/vnd.ms-excel" ||
+    file.mimetype ===
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
+    file.mimetype === "application/vnd.google-earth.kml+xml"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+app.use(
+  multer({ storage: storage, fileFilter: filefilter }).fields([
+    { name: "design" },
+    { name: "rab" },
+  ])
+);
 
 db.mongoose
   .connect(MONGO_URL, {
