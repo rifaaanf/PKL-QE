@@ -103,6 +103,22 @@ exports.proposaldesign = (req, res) => {
   );
 };
 
+//reject proposal
+exports.rejectProposal = (req, res) => {
+  Proposal.findByIdAndUpdate(
+    req.params.id,
+    { status: "REJECTED" },
+    { new: true },
+    (err, data) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      res.status(200).send(data);
+    }
+  );
+};
+
 async function createIDProposal(namaSTO, segmen) {
   const tahun = new Date().getFullYear();
   const year = tahun.toString();
@@ -154,16 +170,18 @@ async function createIDProposal(namaSTO, segmen) {
 }
 
 exports.showProposal = (req, res) => {
+  Proposal.find(
+    {
+      proposer: req.proposerId,
+    },
+    (err, proposals) => {
+      if (err) throw err;
 
-  Proposal.find({
-    proposer: req.proposerId
-  },(err,proposals) => {
-    if(err) throw err;
-
-    res.render('layouts/main-layout-proposer', {
-      data: 'dashboard',
-      proposals: proposals,
-      pindah: req.roleName
-    })
-  })
-}
+      res.render("layouts/main-layout-proposer", {
+        data: "dashboard",
+        proposals: proposals,
+        pindah: req.roleName,
+      });
+    }
+  );
+};

@@ -54,25 +54,8 @@ const storage = multer.diskStorage({
   },
 });
 
-const filefilter = (req, file, cb) => {
-  // kml and excel file only
-  if (
-    file.mimetype === "application/vnd.ms-excel" ||
-    file.mimetype ===
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
-    file.mimetype === "application/vnd.google-earth.kml+xml"
-  ) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
 app.use(
-  multer({ storage: storage, fileFilter: filefilter }).fields([
-    { name: "design" },
-    { name: "rab" },
-  ])
+  multer({ storage: storage }).fields([{ name: "design" }, { name: "rab" }])
 );
 
 db.mongoose
@@ -97,6 +80,7 @@ require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/admin.routes")(app);
 require("./app/routes/proposal.routes")(app);
+require("./app/routes/designer.routes")(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

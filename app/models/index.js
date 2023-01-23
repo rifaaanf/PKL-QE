@@ -10,6 +10,7 @@ db.role = require("./role.model");
 db.approver = require("./approver.model");
 db.proposer = require("./proposer.model");
 db.proposal = require("./proposal.model");
+db.designer = require("./designer.model");
 db.admin = require("./admin.model");
 db.namaSTO = require("./namaSTO.model");
 db.segmen = require("./segmen.model");

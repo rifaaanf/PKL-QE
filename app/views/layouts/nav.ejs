@@ -14,25 +14,26 @@
   </div>
   <nav class="text-white text-base font-semibold pt-3">
     <a
-      href="/dashboard"
-      class="leftbar flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
-    >
-    <i class="fas fa-tachometer-alt mr-3"></i>
-        Dashboard
-    </a>
-    <a
       href="/<%= pindah %>"
       class="leftbar flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
     >
-    <i class="fas fa-tachometer-alt mr-3"></i>
-      Forms
+      <i class="fas fa-tachometer-alt mr-3"></i>
+      Dashboard
+    </a>
+    <a
+      id="myproposal"
+      href="/dashboard"
+      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
+    >
+      <i class="fas fa-solid fa-file mr-3"></i>
+      My Proposal
     </a>
     <!-- when menu is clicked add sub menu -->
     <a
       id="dbmenu"
       onclick="dbedit()"
-      class="leftbar cursor-pointer flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
-      ><i class="fas fa-regular fa-pen mr-3"></i>Database</a
+      class="leftbar hidden cursor-pointer flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
+      ><i class="fas fa-solid fa-database mr-3"></i>Database</a
     >
     <div class="dbedit hidden">
       <a
@@ -55,7 +56,7 @@
     <a
       id="formAdmin"
       href="/formAdmin"
-      class="leftbar flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
+      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
     >
       <i class="fas fa-align-left mr-3"></i>
       Forms

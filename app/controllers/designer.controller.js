@@ -1,0 +1,59 @@
+const db = require("../models");
+const namaSTO = db.namaSTO;
+const segmen = db.segmen;
+const jenisQE = db.jenisQE;
+const namaAlpro = db.namaAlpro;
+const Proposal = db.proposal;
+
+exports.designerProposal = (req, res) => {
+  // get role
+
+  namaSTO.find({}, (err, namasto) => {
+    segmen.find({}, (err, segmen) => {
+      jenisQE.find({}, (err, jenisqe) => {
+        var id = req.params.id;
+        Proposal.findById(id, (err, proposal) => {
+          res.render("layouts/main-layout-designer", {
+            data: "designer",
+            proposal: proposal,
+            namaSTO: namasto,
+            segmen: segmen,
+            jenisQE: jenisqe,
+            pindah: req.roleName,
+          });
+        });
+      });
+    });
+  });
+};
+
+exports.designerDetail = (req, res) => {
+  namaSTO.find({}, (err, namasto) => {
+    segmen.find({}, (err, segmen) => {
+      jenisQE.find({}, (err, jenisqe) => {
+        var id = req.params.id;
+        Proposal.findById(id, (err, proposal) => {
+          res.render("layouts/main-layout-designer", {
+            data: "designerdetail",
+            proposal: proposal,
+            namaSTO: namasto,
+            segmen: segmen,
+            jenisQE: jenisqe,
+            pindah: req.roleName,
+          });
+        });
+      });
+    });
+  });
+};
+
+exports.uploadDesign = (req, res) => {
+  var id = req.params.id;
+  Proposal.findById(id, (err, proposal) => {
+    res.render("layouts/main-layout-designer", {
+      data: "uploaddesign",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
+  });
+};

@@ -5,7 +5,7 @@ const Proposer = db.proposer;
 const Admin = db.admin;
 const Approver = db.approver;
 const bcrypt = require("bcryptjs");
-const session = require("express-session");
+const Designer = db.designer;
 const namaSTO = db.namaSTO;
 const segmen = db.segmen;
 const jenisQE = db.jenisQE;
@@ -14,7 +14,18 @@ const Proposal = db.proposal;
 const SECRET = process.env.SECRET;
 const jwt = require("jsonwebtoken");
 exports.designerBoard = (req, res) => {
-  res.status(200).send("Designer Content.");
+  Proposal.find({})
+    .sort({ createdAt: -1 })
+    .exec((err, proposal) => {
+      Proposer.find({}, (err, proposer) => {
+        res.render("layouts/main-layout-designer", {
+          data: "designer",
+          proposal: proposal,
+          proposer: proposer,
+          pindah: req.roleName,
+        });
+      });
+    });
 };
 
 exports.adminBoard = (req, res) => {
@@ -80,6 +91,11 @@ exports.signup = (req, res) => {
   });
 
   const admin = new Admin({
+    user: user._id,
+    name: req.body.name,
+  });
+
+  const designer = new Designer({
     user: user._id,
     name: req.body.name,
   });
@@ -164,6 +180,49 @@ exports.signup = (req, res) => {
               return;
             }
             approver.save((err, approver) => {
+              if (err) {
+                res.status(500).send({
+                  message: err,
+                });
+                return;
+              }
+              res.send({
+                message: "User was registered successfully!",
+              });
+            });
+          });
+        }
+      );
+    } else if (req.body.roles == "designer") {
+      Role.findOne(
+        {
+          name: "designer",
+        },
+        (err, role) => {
+          //if error then delete user
+          if (err) {
+            User.findByIdAndRemove(user._id, (err) => {
+              if (err) {
+                res.status(500).send({
+                  message: err,
+                });
+                return;
+              }
+            });
+            res.status(500).send({
+              message: err,
+            });
+            return;
+          }
+          user.roles = [role._id];
+          user.save((err) => {
+            if (err) {
+              res.status(500).send({
+                message: err,
+              });
+              return;
+            }
+            designer.save((err, designer) => {
               if (err) {
                 res.status(500).send({
                   message: err,

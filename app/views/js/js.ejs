@@ -98,12 +98,25 @@
     }
   });
 
+  const reject = () => {
+    let reject = document.getElementById("reject");
+
+    //get the second window location from behind
+    let window = window.location.href.split("/");
+    let window2 = window[window.length - 2];
+
+    //change reject action
+    reject.action = `/proposal/reject/${window2}`;
+  };
+
   const hidemenu = () => {
     // if class leftbar href is admin then hide report button
     let pindah = document.querySelector(".leftbar").href.split("/");
-    if (pindah[pindah.length - 1] != "admin") {
-      document.getElementById("dbmenu").classList.add("hidden");
-      document.getElementById("formAdmin").classList.add("hidden");
+    if (pindah[pindah.length - 1] == "admin") {
+      document.getElementById("dbmenu").classList.remove("hidden");
+      document.getElementById("formAdmin").classList.remove("hidden");
+    } else if (pindah[pindah.length - 1] == "proposer") {
+      document.getElementById("myproposal").classList.remove("hidden");
     }
   };
 
