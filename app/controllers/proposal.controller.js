@@ -152,3 +152,18 @@ async function createIDProposal(namaSTO, segmen) {
     return formattedIndex;
   }
 }
+
+exports.showProposal = (req, res) => {
+
+  Proposal.find({
+    proposer: req.proposerId
+  },(err,proposals) => {
+    if(err) throw err;
+
+    res.render('layouts/main-layout-proposer', {
+      data: 'dashboard',
+      proposals: proposals,
+      pindah: req.roleName
+    })
+  })
+}

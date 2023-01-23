@@ -39,4 +39,10 @@ module.exports = function (app) {
     [authJwt.verifyToken, authJwt.isProposer],
     controller.createProposal
   );
+
+  app.get(
+    "/dashboard",
+    [authJwt.verifyToken, authJwt.isProposer, authJwt.getProposerId], 
+    controller.showProposal
+  );
 };
