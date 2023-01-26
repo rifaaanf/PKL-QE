@@ -157,12 +157,16 @@ async function createIDProposal(namaSTO, segmen) {
       numberIndex++;
     }
 
+    if (numberIndex.toString().length < 4) {
+      numberIndex = "0".repeat(4 - numberIndex.toString().length) + numberIndex.toString();
+    }
+
     let formattedIndex = `${namaSTO}-${segmenNumber}-${year}-${numberIndex}`;
     let x = formattedIndex.toString();
 
     return formattedIndex;
   } else {
-    indeks = 1;
+    indeks = "0001";
     let formattedIndex = `${namaSTO}-${segmenNumber}-${year}-${indeks}`;
     formattedIndex.toString();
     return formattedIndex;
