@@ -1,6 +1,7 @@
 const { namaSTO, segmen } = require("../models");
 const db = require("../models");
 const Proposal = db.proposal;
+const fs = require("fs");
 
 //update proposal by id from params
 exports.updateProposal = (req, res) => {
@@ -89,18 +90,39 @@ exports.proposaldesign = (req, res) => {
   const design = req.files.design[0].path;
   const rab = req.files.rab[0].path;
 
-  Proposal.findByIdAndUpdate(
-    req.params.id,
-    { design: design, rab: rab },
-    { new: true },
-    (err, data) => {
-      if (err) {
-        res.status(500).send({ message: err });
-        return;
-      }
-      res.status(200).send(data);
+  //update proposal design and rab and when design and rab is exist in database then delete old file
+  Proposal.findById(req.params.id, (err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
     }
-  );
+    if (data.design) {
+      fs.unlink(data.design, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+    if (data.rab) {
+      fs.unlink(data.rab, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+    Proposal.findByIdAndUpdate(
+      req.params.id,
+      { design: design, rab: rab },
+      { new: true },
+      (err, data) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        res.status(200).send(data);
+      }
+    );
+  });
 };
 
 //reject proposal
@@ -158,7 +180,8 @@ async function createIDProposal(namaSTO, segmen) {
     }
 
     if (numberIndex.toString().length < 4) {
-      numberIndex = "0".repeat(4 - numberIndex.toString().length) + numberIndex.toString();
+      numberIndex =
+        "0".repeat(4 - numberIndex.toString().length) + numberIndex.toString();
     }
 
     let formattedIndex = `${namaSTO}-${segmenNumber}-${year}-${numberIndex}`;
