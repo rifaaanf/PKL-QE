@@ -20,4 +20,10 @@ module.exports = function (app) {
     [authJwt.verifyToken],
     controller.uploadDesign
   );
+
+  app.get(
+    "/completeproposal",
+    [authJwt.verifyToken],
+    controller.designerCompleteProposal
+  );
 };

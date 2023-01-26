@@ -27,6 +27,19 @@ exports.designerProposal = (req, res) => {
   });
 };
 
+exports.designerCompleteProposal = (req, res)=> {
+  Proposal.find({}, 
+    (err, proposals) => {
+      if(err) throw err;
+
+      res.render("layouts/main-layout-designer", {
+        data: "completeproposal",
+        proposals: proposals,
+        pindah: req.roleName,
+      });
+    })
+}
+
 exports.designerDetail = (req, res) => {
   namaSTO.find({}, (err, namasto) => {
     segmen.find({}, (err, segmen) => {
