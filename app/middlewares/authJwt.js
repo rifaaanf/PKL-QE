@@ -37,7 +37,7 @@ verifyToken = (req, res, next) => {
   });
 };
 
-isAdminOrDesigner = (req, res, next) => {
+isAdminDesignerApprover = (req, res, next) => {
   User.findById(req.userId).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
@@ -55,13 +55,19 @@ isAdminOrDesigner = (req, res, next) => {
         }
 
         for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "admin" || roles[i].name === "designer") {
+          if (
+            roles[i].name === "admin" ||
+            roles[i].name === "designer" ||
+            roles[i].name === "approver"
+          ) {
             next();
             return;
           }
         }
 
-        res.status(403).send({ message: "Require Admin or Designer Role!" });
+        res
+          .status(403)
+          .send({ message: "Require Admin , Designer, or Approver Role!" });
         return;
       }
     );
@@ -199,6 +205,6 @@ const authJwt = {
   isAdmin,
   isDesigner,
   getProposerId,
-  isAdminOrDesigner,
+  isAdminDesignerApprover,
 };
 module.exports = authJwt;

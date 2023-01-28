@@ -20,17 +20,24 @@ module.exports = function (app) {
   //get proposal by id
   app.get(
     "/api/admin/proposal/:id",
-    [authJwt.verifyToken, isAdminOrDesigner],
+    [authJwt.verifyToken, isAdminDesignerApprover],
     controller.getProposalById
   );
+
+  app.get("/detail/:id/design/download", controller.downloaddesign);
+
+  app.get("/detail/:id/rab/download", controller.downloadrab);
 
   //get all proposal
   app.get("/proposal", [authJwt.verifyToken], controller.getAllProposal);
 
   app.post("/detail/:id/design", controller.proposaldesign);
 
+  app.post("/proposal/approve/:id", controller.approveProposal);
   //reject proposal
   app.post("/proposal/reject/:id", controller.rejectProposal);
+
+  app.post("/proposal/redesign/:id", controller.redesignProposal);
 
   app.post(
     "/proposal/:id",

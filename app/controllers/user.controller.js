@@ -54,16 +54,18 @@ exports.adminBoard = (req, res) => {
 };
 exports.proposerBoard = (req, res) => {
   // get logged in user's role name from x-access-token on the cookie
-
-  namaSTO.find({}, (err, namasto) => {
-    segmen.find({}, (err, segmen) => {
-      jenisQE.find({}, (err, jenisqe) => {
-        res.render("layouts/main-layout-proposer", {
-          data: "proposer",
-          namaSTO: namasto,
-          segmen: segmen,
-          jenisQE: jenisqe,
-          pindah: req.roleName,
+  Proposal.find({}, (err, proposal) => {
+    namaSTO.find({}, (err, namasto) => {
+      segmen.find({}, (err, segmen) => {
+        jenisQE.find({}, (err, jenisqe) => {
+          res.render("layouts/main-layout-proposer", {
+            data: "proposer",
+            proposal: proposal,
+            namaSTO: namasto,
+            segmen: segmen,
+            jenisQE: jenisqe,
+            pindah: req.roleName,
+          });
         });
       });
     });
@@ -71,7 +73,15 @@ exports.proposerBoard = (req, res) => {
 };
 
 exports.approverBoard = (req, res) => {
-  res.status(200).send("Approver Content.");
+  Proposal.find({}, (err, proposals) => {
+    if (err) throw err;
+
+    res.render("layouts/main-layout-approver", {
+      data: "completeproposal",
+      proposals: proposals,
+      pindah: req.roleName,
+    });
+  });
 };
 
 exports.signup = (req, res) => {

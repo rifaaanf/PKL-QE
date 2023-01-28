@@ -13,15 +13,18 @@ exports.formAdmin = (req, res) => {
   //   });
   // });
   // get all namaSTO and segmen
-  namaSTO.find({}, (err, namasto) => {
-    segmen.find({}, (err, segmen) => {
-      jenisQE.find({}, (err, jenisqe) => {
-        res.render("layouts/main-layout-proposer", {
-          data: "proposer",
-          namaSTO: namasto,
-          segmen: segmen,
-          jenisQE: jenisqe,
-          pindah: req.roleName,
+  Proposal.find({}, (err, proposal) => {
+    namaSTO.find({}, (err, namasto) => {
+      segmen.find({}, (err, segmen) => {
+        jenisQE.find({}, (err, jenisqe) => {
+          res.render("layouts/main-layout-proposer", {
+            data: "proposer",
+            namaSTO: namasto,
+            segmen: segmen,
+            jenisQE: jenisqe,
+            proposal: proposal,
+            pindah: req.roleName,
+          });
         });
       });
     });
@@ -263,17 +266,20 @@ exports.deletedata = (req, res) => {
 
   // });
   // get all namaSTO and segmen
-  namaSTO.find({}, (err, namasto) => {
-    segmen.find({}, (err, segmen) => {
-      jenisQE.find({}, (err, jenisqe) => {
-        namaAlpro.find({}, (err, namaalpro) => {
-          res.render("layouts/main-layout-proposer", {
-            data: "deletedata",
-            namaSTO: namasto,
-            segmen: segmen,
-            jenisQE: jenisqe,
-            namaAlpro: namaalpro,
-            pindah: req.roleName,
+  Proposal.find({}, (err, proposal) => {
+    namaSTO.find({}, (err, namasto) => {
+      segmen.find({}, (err, segmen) => {
+        jenisQE.find({}, (err, jenisqe) => {
+          namaAlpro.find({}, (err, namaalpro) => {
+            res.render("layouts/main-layout-proposer", {
+              data: "deletedata",
+              namaSTO: namasto,
+              segmen: segmen,
+              jenisQE: jenisqe,
+              namaAlpro: namaalpro,
+              pindah: req.roleName,
+              proposal: proposal,
+            });
           });
         });
       });
@@ -286,17 +292,20 @@ exports.adddata = (req, res) => {
 
   // });
   // get all namaSTO and segmen
-  namaSTO.find({}, (err, namasto) => {
-    segmen.find({}, (err, segmen) => {
-      jenisQE.find({}, (err, jenisqe) => {
-        namaAlpro.find({}, (err, namaalpro) => {
-          res.render("layouts/main-layout-proposer", {
-            data: "adddata",
-            namaSTO: namasto,
-            segmen: segmen,
-            jenisQE: jenisqe,
-            namaAlpro: namaalpro,
-            pindah: req.roleName,
+  Proposal.find({}, (err, proposal) => {
+    namaSTO.find({}, (err, namasto) => {
+      segmen.find({}, (err, segmen) => {
+        jenisQE.find({}, (err, jenisqe) => {
+          namaAlpro.find({}, (err, namaalpro) => {
+            res.render("layouts/main-layout-proposer", {
+              data: "adddata",
+              namaSTO: namasto,
+              segmen: segmen,
+              jenisQE: jenisqe,
+              namaAlpro: namaalpro,
+              pindah: req.roleName,
+              proposal: proposal,
+            });
           });
         });
       });
@@ -309,17 +318,20 @@ exports.changedata = (req, res) => {
 
   // });
   // get all namaSTO and segmen
-  namaSTO.find({}, (err, namasto) => {
-    segmen.find({}, (err, segmen) => {
-      jenisQE.find({}, (err, jenisqe) => {
-        namaAlpro.find({}, (err, namaalpro) => {
-          res.render("layouts/main-layout-proposer", {
-            data: "changedata",
-            namaSTO: namasto,
-            segmen: segmen,
-            jenisQE: jenisqe,
-            namaAlpro: namaalpro,
-            pindah: req.roleName,
+  Proposal.find({}, (err, proposal) => {
+    namaSTO.find({}, (err, namasto) => {
+      segmen.find({}, (err, segmen) => {
+        jenisQE.find({}, (err, jenisqe) => {
+          namaAlpro.find({}, (err, namaalpro) => {
+            res.render("layouts/main-layout-proposer", {
+              data: "changedata",
+              namaSTO: namasto,
+              segmen: segmen,
+              proposal: proposal,
+              jenisQE: jenisqe,
+              namaAlpro: namaalpro,
+              pindah: req.roleName,
+            });
           });
         });
       });

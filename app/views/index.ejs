@@ -26,7 +26,7 @@
             
           </h2>
           <div class="mt-12">
-            <form action="/signin" method="post">
+            <form id="form" action="/signin" method="post">
               <div>
                 <div class="text-sm font-bold text-gray-700 tracking-wide">
                   Username
@@ -60,6 +60,7 @@
               </div>
               <div class="mt-10">
                 <input type="submit"
+                  id="submitButton"
                   class="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg"
                     value="Log In"
                   >
@@ -67,6 +68,7 @@
                 </input>
               </div>
             </form>
+            
             <div
               class="mt-12 text-sm font-display font-semibold text-gray-700 text-center"
             >

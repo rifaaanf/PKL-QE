@@ -22,7 +22,7 @@ module.exports = function (app) {
   );
 
   app.get(
-    "/completeproposal",
+    "/submittedproposal",
     [authJwt.verifyToken],
     controller.designerCompleteProposal
   );

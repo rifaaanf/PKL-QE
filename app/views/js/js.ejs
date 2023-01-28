@@ -98,15 +98,22 @@
     }
   });
 
-  const reject = () => {
-    let reject = document.getElementById("reject");
+  const rejectbutton = () => {
+    // if class leftbar href is admin then hide report button
+    let redesignreject = document.getElementById("redesignreject");
 
-    //get the second window location from behind
-    let window = window.location.href.split("/");
-    let window2 = window[window.length - 2];
+    //add href to redesign reject
 
-    //change reject action
-    reject.action = `/proposal/reject/${window2}`;
+    redesignreject.action = "/proposal/reject/<%= proposal._id %>";
+  };
+
+  const redesignbutton = () => {
+    // if class leftbar href is admin then hide report button
+    let redesignreject = document.getElementById("redesignreject");
+
+    //add href to redesign reject
+
+    redesignreject.action = "/proposal/redesign/<%= proposal._id %>";
   };
 
   const hidemenu = () => {
@@ -117,7 +124,7 @@
       document.getElementById("formAdmin").classList.remove("hidden");
     } else if (pindah[pindah.length - 1] == "proposer") {
       document.getElementById("myproposal").classList.remove("hidden");
-    } else if(pindah[pindah.length - 1] == "designer"){
+    } else if (pindah[pindah.length - 1] == "designer") {
       document.getElementById("completeproposal").classList.remove("hidden");
     }
   };

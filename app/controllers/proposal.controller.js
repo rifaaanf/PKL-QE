@@ -40,6 +40,40 @@ exports.getProposalById = (req, res) => {
   });
 };
 
+exports.downloaddesign = (req, res) => {
+  Proposal.findById(req.params.id, (err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    if (!data.design) {
+      res.status(404).send({ message: "Design not found" });
+      return;
+    }
+    const file = fs.createReadStream(data.design);
+    const filename = "DESIGN_" + data.idProposal + ".kml";
+    res.setHeader("Content-disposition", "attachment; filename=" + filename);
+    file.pipe(res);
+  });
+};
+
+exports.downloadrab = (req, res) => {
+  Proposal.findById(req.params.id, (err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    if (!data.rab) {
+      res.status(404).send({ message: "RAB not found" });
+      return;
+    }
+    const file = fs.createReadStream(data.rab);
+    const filename = "RAB_" + data.idProposal + ".xlsx";
+    res.setHeader("Content-disposition", "attachment; filename=" + filename);
+    file.pipe(res);
+  });
+};
+
 //create proposal
 exports.createProposal = async (req, res) => {
   // Validate request
@@ -129,7 +163,37 @@ exports.proposaldesign = (req, res) => {
 exports.rejectProposal = (req, res) => {
   Proposal.findByIdAndUpdate(
     req.params.id,
-    { status: "REJECTED" },
+    { status: "REJECTED", catatan: req.body.catatan },
+    { new: true },
+    (err, data) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      res.status(200).send(data);
+    }
+  );
+};
+
+exports.redesignProposal = (req, res) => {
+  Proposal.findByIdAndUpdate(
+    req.params.id,
+    { status: "REDESIGN", catatan: req.body.catatan },
+    { new: true },
+    (err, data) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      res.status(200).send(data);
+    }
+  );
+};
+
+exports.approveProposal = (req, res) => {
+  Proposal.findByIdAndUpdate(
+    req.params.id,
+    { status: "APPROVED" },
     { new: true },
     (err, data) => {
       if (err) {

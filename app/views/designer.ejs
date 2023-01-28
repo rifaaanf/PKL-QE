@@ -1,7 +1,7 @@
 <form>
   <div class="w-full mt-8">
     <p class="text-xl pb-3 flex items-center">
-      <i class="fas fa-list mr-3"></i> Latest Reports
+      <i class="fas fa-list mr-3"></i> New Proposals
     </p>
     <div class="bg-white overflow-auto">
       <table class="min-w-full bg-white">
@@ -29,7 +29,7 @@
              <!--if proposal.proposer exist in proposer then return proposer.name  -->
               
               
-            <% proposal.forEach(function(proposal) { %>
+              <% proposal.forEach(function(proposal) { if (!proposal.design && !proposal.rab) { %>
 
                 <td class="text-center py-3 px-4"><%= proposal.idProposal %></td>
                 <td class="text-center py-3 px-4"><%= proposal.namaSTO %></td>
@@ -44,11 +44,11 @@
                     href="/detail/<%= proposal._id %>/design"
                     >Detail</a
                   >
-                  
-                  
+                
                 </td>
               </tr>
-            <% }) %>
+              <% } %>
+              <% }); %>
         </tbody>
       </table>
     </div>

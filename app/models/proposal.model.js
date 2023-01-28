@@ -35,13 +35,16 @@ const Proposal = mongoose.model(
       },
       status: {
         type: String,
-        enum: ["PENDING", "APPROVED", "REJECTED"],
-        default: "PENDING",
+        enum: ["IN PROGRESS", "APPROVED", "REJECTED", "REDESIGN"],
+        default: "IN PROGRESS",
       },
       design: {
         type: String,
       },
       rab: {
+        type: String,
+      },
+      catatan: {
         type: String,
       },
     },
