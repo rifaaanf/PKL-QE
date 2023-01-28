@@ -27,18 +27,17 @@ exports.designerProposal = (req, res) => {
   });
 };
 
-exports.designerCompleteProposal = (req, res)=> {
-  Proposal.find({}, 
-    (err, proposals) => {
-      if(err) throw err;
+exports.designerCompleteProposal = (req, res) => {
+  Proposal.find({}, (err, proposal) => {
+    if (err) throw err;
 
-      res.render("layouts/main-layout-designer", {
-        data: "completeproposal",
-        proposals: proposals,
-        pindah: req.roleName,
-      });
-    })
-}
+    res.render("layouts/main-layout-designer", {
+      data: "completeproposal",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
+  });
+};
 
 exports.designerDetail = (req, res) => {
   namaSTO.find({}, (err, namasto) => {

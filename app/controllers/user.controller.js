@@ -73,12 +73,12 @@ exports.proposerBoard = (req, res) => {
 };
 
 exports.approverBoard = (req, res) => {
-  Proposal.find({}, (err, proposals) => {
+  Proposal.find({}, (err, proposal) => {
     if (err) throw err;
 
     res.render("layouts/main-layout-approver", {
-      data: "completeproposal",
-      proposals: proposals,
+      data: "approver",
+      proposal: proposal,
       pindah: req.roleName,
     });
   });

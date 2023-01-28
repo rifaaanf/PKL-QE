@@ -265,12 +265,12 @@ exports.showProposal = (req, res) => {
     {
       proposer: req.proposerId,
     },
-    (err, proposals) => {
+    (err, proposal) => {
       if (err) throw err;
 
       res.render("layouts/main-layout-proposer", {
         data: "dashboard",
-        proposals: proposals,
+        proposal: proposal,
         pindah: req.roleName,
       });
     }
