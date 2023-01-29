@@ -261,11 +261,11 @@ async function createIDProposal(namaSTO, segmen) {
 }
 
 exports.showProposal = (req, res) => {
-  Proposal.find(
-    {
-      proposer: req.proposerId,
-    },
-    (err, proposal) => {
+  Proposal.find({
+    proposer: req.proposerId,
+  })
+    .sort({ createdAt: -1 })
+    .exec((err, proposal) => {
       if (err) throw err;
 
       res.render("layouts/main-layout-proposer", {
@@ -273,6 +273,5 @@ exports.showProposal = (req, res) => {
         proposal: proposal,
         pindah: req.roleName,
       });
-    }
-  );
+    });
 };

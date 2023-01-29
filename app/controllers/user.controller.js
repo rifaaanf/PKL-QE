@@ -73,15 +73,17 @@ exports.proposerBoard = (req, res) => {
 };
 
 exports.approverBoard = (req, res) => {
-  Proposal.find({}, (err, proposal) => {
-    if (err) throw err;
+  Proposal.find({})
+    .sort({ createdAt: -1 })
+    .exec((err, proposal) => {
+      if (err) throw err;
 
-    res.render("layouts/main-layout-approver", {
-      data: "approver",
-      proposal: proposal,
-      pindah: req.roleName,
+      res.render("layouts/main-layout-approver", {
+        data: "approver",
+        proposal: proposal,
+        pindah: req.roleName,
+      });
     });
-  });
 };
 
 exports.signup = (req, res) => {
