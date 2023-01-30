@@ -26,4 +26,10 @@ module.exports = function (app) {
     [authJwt.verifyToken],
     controller.designerCompleteProposal
   );
+
+  app.get(
+    "/redesignproposal",
+    [authJwt.verifyToken],
+    controller.designerRedesignProposal
+  );
 };
