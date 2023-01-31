@@ -13,6 +13,7 @@ const namaAlpro = db.namaAlpro;
 const Proposal = db.proposal;
 const SECRET = process.env.SECRET;
 const jwt = require("jsonwebtoken");
+const Executor = db.executor
 exports.designerBoard = (req, res) => {
   Proposal.find({})
     .sort({ createdAt: -1 })
@@ -86,6 +87,21 @@ exports.approverBoard = (req, res) => {
     });
 };
 
+exports.executorBoard = (req, res) => {
+  Proposal.find({})
+    .sort({ createdAt: -1 })
+    .exec((err, proposal) => {
+      Proposer.find({}, (err, proposer) => {
+        res.render("layouts/main-layout-executor", {
+          data: "executor",
+          proposal: proposal,
+          proposer: proposer,
+          pindah: req.roleName,
+        });
+      });
+    });
+};
+
 exports.signup = (req, res) => {
   const user = new User({
     username: req.body.username,
@@ -108,6 +124,11 @@ exports.signup = (req, res) => {
   });
 
   const designer = new Designer({
+    user: user._id,
+    name: req.body.name,
+  });
+
+  const executor = new Executor({
     user: user._id,
     name: req.body.name,
   });
@@ -278,6 +299,49 @@ exports.signup = (req, res) => {
               return;
             }
             admin.save((err, admin) => {
+              if (err) {
+                res.status(500).send({
+                  message: err,
+                });
+                return;
+              }
+              res.send({
+                message: "User was registered successfully!",
+              });
+            });
+          });
+        }
+      );
+    } else if (req.body.roles == "executor") {
+      Role.findOne(
+        {
+          name: "executor",
+        },
+        (err, role) => {
+          //if error then delete user
+          if (err) {
+            User.findByIdAndRemove(user._id, (err) => {
+              if (err) {
+                res.status(500).send({
+                  message: err,
+                });
+                return;
+              }
+            });
+            res.status(500).send({
+              message: err,
+            });
+            return;
+          }
+          user.roles = [role._id];
+          user.save((err) => {
+            if (err) {
+              res.status(500).send({
+                message: err,
+              });
+              return;
+            }
+            executor.save((err, executor) => {
               if (err) {
                 res.status(500).send({
                   message: err,

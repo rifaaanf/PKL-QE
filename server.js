@@ -16,6 +16,7 @@ const namaSTO = db.namaSTO;
 const segmen = db.segmen;
 const namaAlpro = db.namaAlpro;
 const jenisQE = db.jenisQE;
+const mitra = db.mitra;
 const multer = require("multer");
 
 var corsOptions = {
@@ -82,6 +83,7 @@ require("./app/routes/admin.routes")(app);
 require("./app/routes/proposal.routes")(app);
 require("./app/routes/designer.routes")(app);
 require("./app/routes/approver.routes")(app);
+require("./app/routes/executor.routes")(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
@@ -340,6 +342,49 @@ function initial() {
         }
 
         console.log("added 'admin' to roles collection");
+      });
+
+      new Role({
+        name: "executor",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'executor' to roles collection")
+      });
+    }
+  });
+  mitra.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      new mitra({
+        name: "Mitra 1",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'Mitra 1' to mitra collection");
+      });
+
+      new mitra({
+        name: "Mitra 2",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'Mitra 2' to mitra collection");
+      });
+
+      new mitra({
+        name: "Mitra 3",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'Mitra 3' to mitra collection");
       });
     }
   });

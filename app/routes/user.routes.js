@@ -36,6 +36,11 @@ module.exports = function (app) {
     [authJwt.verifyToken, authJwt.isDesigner],
     controller.designerBoard
   );
+  app.get(
+    "/executor",
+    [authJwt.verifyToken, authJwt.isExecutor],
+    controller.executorBoard
+  );
   app.post(
     "/signup",
     [verifySignUp.checkDuplicateUsername, verifySignUp.checkRolesExisted],
