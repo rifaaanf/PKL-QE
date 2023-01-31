@@ -1,218 +1,124 @@
+<div class="flex flex-col">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full text-center">
+          <tbody>
+            <tr class="border-b bg-blue-100 border-blue-200">
+              <td
+                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+              >
+                QE ID
+              </td>
+              <td
+                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+                <%= proposal.idProposal %>
+              </td>
+            </tr>
+            <tr class="border-b bg-blue-100 border-blue-200">
+              <td
+                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+              >
+                Nama STO
+              </td>
+              <td
+                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+                <%= proposal.namaSTO %>
+              </td>
+            </tr>
+            <tr class="border-b bg-blue-100 border-blue-200">
+              <td
+                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+              >
+                Segmen
+              </td>
+              <td
+                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+                <%= proposal.segmen %>
+              </td>
+            </tr>
+            <tr class="border-b bg-blue-100 border-blue-200">
+              <td
+                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+              >
+                Nama Alpro
+              </td>
+              <td
+                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+                <%= proposal.namaAlpro %>
+              </td>
+            </tr>
+            <tr class="border-b bg-blue-100 border-blue-200">
+              <td
+                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+              >
+                Jenis QE
+              </td>
+              <td
+                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+                <%= proposal.jenisQE %>
+              </td>
+            </tr>
+            <% if (proposal.koordinatODPBaru) { %>
+            <tr class="border-b bg-blue-100 border-blue-200">
+              <td
+                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+              >
+                Koordinat ODP Baru
+              </td>
+              <td
+                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+                <%= proposal.koordinatODPBaru %>
+              </td>
+            </tr>
+            <% } %> <% if (proposal.keterangan) { %>
+            <tr class="border-b bg-blue-100 border-blue-200">
+              <td
+                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+              >
+                Keterangan
+              </td>
+              <td
+                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+              >
+                <%= proposal.keterangan %>
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 <form
+  class="mt-4"
   method="post"
   action="/proposal/reject/<%= proposal._id %>"
   id="reject"
-  class="w-full max-w-sm"
 >
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label
-        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        for="inline-full-name"
-      >
-        Nama STO
-      </label>
-    </div>
-    <div class="relative md:w-2/3">
-      <select
-        name="namaSTO"
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        id="sel1"
-        onchange="dropdown(this.id,'sel2','sel3')"
-        type="text"
-        disabled
-      >
-        <option value="">Pilih STO</option>
-        <% namaSTO.forEach(function (namasto) { %>
-        <option value="<%= namasto.name %>"><%= namasto.name %></option>
-        <% })%>
-      </select>
-      <div
-        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-      >
-        <svg
-          class="fill-current h-4 w-4"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-          />
-        </svg>
-      </div>
-    </div>
-  </div>
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label
-        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        for="inline-password"
-      >
-        Segmen
-      </label>
-    </div>
-    <div class="relative md:w-2/3">
-      <select
-        name="segmen"
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        id="sel2"
-        onchange="dropdown('sel1',this.id,'sel3')"
-        type="text"
-        disabled
-      >
-        <option value="">Pilih Segmen</option>
-        <% segmen.forEach(function (segmen) { %>
-        <option value="<%= segmen.name %>"><%= segmen.name %></option>
-        <% })%>
-      </select>
-      <div
-        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-      >
-        <svg
-          class="fill-current h-4 w-4"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-          />
-        </svg>
-      </div>
-    </div>
-  </div>
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label
-        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        for="inline-password"
-      >
-        Nama Alpro
-      </label>
-    </div>
-    <div class="relative md:w-2/3">
-      <input
-        name="namaAlpro"
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        id="textalpro"
-        type="text"
-        list="sel3"
-        placeholder="Nama Alpro"
-        disabled
-      />
-      <datalist id="sel3"> </datalist>
-      <div
-        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-      >
-        <svg
-          class="fill-current h-4 w-4"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-          />
-        </svg>
-      </div>
-    </div>
-  </div>
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label
-        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        for="inline-password"
-      >
-        Jenis QE
-      </label>
-    </div>
-    <div class="relative md:w-2/3">
-      <select
-        name="jenisQE"
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        id="QE"
-        type="text"
-        onchange="hiddens()"
-        disabled
-      >
-        <option value="">Pilih Jenis QE</option>
-        <% jenisQE.forEach(function (jenisQE) { %>
-        <option value="<%= jenisQE.name %>"><%= jenisQE.name %></option>
-        <% })%>
-      </select>
-      <div
-        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-      >
-        <svg
-          class="fill-current h-4 w-4"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-          />
-        </svg>
-      </div>
-    </div>
-  </div>
-  <div class="" id="koordinat">
-    <div class="md:flex md:items-center mb-6">
-      <div class="md:w-1/3">
-        <label
-          class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-          for="inline-password"
-        >
-          Koordinat ODP Baru
-        </label>
-      </div>
-      <div class="md:w-2/3">
-        <input
-          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-          id="koordinatODPBaru"
-          name="koordinatODPBaru"
-          type="text"
-          placeholder="Masukkan Koordinat Lokasi"
-          disabled
-        />
-      </div>
-    </div>
-  </div>
-  <div class="md:flex mb-6">
-    <div class="md:w-1/3">
-      <label
-        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        for="inline-password"
-      >
-        Keterangan
-      </label>
-    </div>
-    <div class="md:w-2/3">
-      <textarea
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        id="keterangan"
-        rows="5"
-        name="keterangan"
-        disabled
-      ></textarea>
-    </div>
-  </div>
-  <div class="md:flex md:items-center mb-1">
-    <div class="md:w-1/3"></div>
-  </div>
   <div class="md:flex md:items-center">
-    <div class="md:w-1/3"></div>
-    <div class="md:w-2/3">
+    <div class="md:w-1/2"></div>
+    <div class="md:w-1/2">
       <a href="/detail/<%= proposal._id %>/design/upload"
         ><button
-          class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+          class="shadow float-right bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
           type="button"
         >
           Lanjut
         </button></a
       >
       <input
-        onclick="reject()"
         value="Reject"
         type="submit"
-        class="shadow bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+        class="shadow float-right bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold mr-2 py-2 px-4 rounded"
       />
     </div>
   </div>

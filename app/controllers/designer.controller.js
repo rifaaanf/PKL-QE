@@ -52,21 +52,12 @@ exports.designerRedesignProposal = (req, res) => {
 };
 
 exports.designerDetail = (req, res) => {
-  namaSTO.find({}, (err, namasto) => {
-    segmen.find({}, (err, segmen) => {
-      jenisQE.find({}, (err, jenisqe) => {
-        var id = req.params.id;
-        Proposal.findById(id, (err, proposal) => {
-          res.render("layouts/main-layout-designer", {
-            data: "designerdetail",
-            proposal: proposal,
-            namaSTO: namasto,
-            segmen: segmen,
-            jenisQE: jenisqe,
-            pindah: req.roleName,
-          });
-        });
-      });
+  var id = req.params.id;
+  Proposal.findById(id, (err, proposal) => {
+    res.render("layouts/main-layout-designer", {
+      data: "designerdetail",
+      proposal: proposal,
+      pindah: req.roleName,
     });
   });
 };
