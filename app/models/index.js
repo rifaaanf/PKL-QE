@@ -16,11 +16,14 @@ db.namaSTO = require("./namaSTO.model");
 db.segmen = require("./segmen.model");
 db.namaAlpro = require("./namaAlpro.model");
 db.jenisQE = require("./jenisQE.model");
+db.executor = require("./executor.model")
+db.mitra = require("./mitra.model")
 
-db.ROLES = ["admin", "proposer", "designer", "approver"];
+db.ROLES = ["admin", "proposer", "designer", "approver", "executor"];
 db.NAMASTOS = ["SMT", "JHR", "MJB"];
 db.SEGMENS = ["Kabel Feeder", "ODC", "Kabel/Distribusi", "ODP"];
 db.JENISQES = ["Normalisasi ODP", "Box ODP", "Perapihan ODC"];
+db.MITRAS = ["Mitra 1", "Mitra 2", "Mitra 3"];
 db.NAMAALPROS = [
   "FE-01",
   "FE-02",

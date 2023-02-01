@@ -35,8 +35,8 @@ const Proposal = mongoose.model(
       },
       status: {
         type: String,
-        enum: ["IN PROGRESS", "APPROVED", "REJECTED", "REDESIGN"],
-        default: "IN PROGRESS",
+        enum: ["SUBMITTED", "APPROVED", "REJECTED", "REDESIGN", "INSTALLATION", "CLOSED"],
+        default: "SUBMITTED",
       },
       design: {
         type: String,
@@ -45,6 +45,9 @@ const Proposal = mongoose.model(
         type: String,
       },
       catatan: {
+        type: String,
+      },
+      mitra: {
         type: String,
       },
     },
