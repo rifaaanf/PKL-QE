@@ -35,7 +35,14 @@ const Proposal = mongoose.model(
       },
       status: {
         type: String,
-        enum: ["SUBMITTED", "APPROVED", "REJECTED", "REDESIGN", "INSTALLATION", "CLOSED"],
+        enum: [
+          "SUBMITTED",
+          "APPROVED",
+          "REJECTED",
+          "REDESIGN",
+          "INSTALLATION",
+          "CLOSED",
+        ],
         default: "SUBMITTED",
       },
       design: {
@@ -49,6 +56,9 @@ const Proposal = mongoose.model(
       },
       mitra: {
         type: String,
+      },
+      timeline: {
+        type: Array,
       },
     },
     { timestamps: true }

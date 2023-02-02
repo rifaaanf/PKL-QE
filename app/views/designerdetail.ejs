@@ -98,28 +98,27 @@
   </div>
 </div>
 
-<form
-  class="mt-4"
-  method="post"
-  action="/proposal/reject/<%= proposal._id %>"
-  id="reject"
->
-  <div class="md:flex md:items-center">
-    <div class="md:w-1/2"></div>
-    <div class="md:w-1/2">
-      <a href="/detail/<%= proposal._id %>/design/upload"
-        ><button
-          class="shadow float-right bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-          type="button"
-        >
-          Lanjut
-        </button></a
+<div class="md:flex md:items-center">
+  <div class="md:w-1/2"></div>
+  <div class="md:w-1/2">
+    <a href="/detail/<%= proposal._id %>/design/upload"
+      ><button
+        class="shadow float-right bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+        type="button"
       >
-      <input
+        Lanjut
+      </button></a
+    >
+    <a
+      ><button
         value="Reject"
         type="submit"
-        class="shadow float-right bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold mr-2 py-2 px-4 rounded"
-      />
-    </div>
+        onclick="designerRejectbutton()"
+        class="modal-open shadow float-right bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold mr-2 py-2 px-4 rounded"
+      >
+        Reject
+      </button></a
+    >
   </div>
-</form>
+</div>
+<%- include('modal') %>

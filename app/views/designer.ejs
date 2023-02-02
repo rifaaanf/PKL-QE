@@ -29,7 +29,7 @@
              <!--if proposal.proposer exist in proposer then return proposer.name  -->
               
               
-              <% proposal.forEach(function(proposal) { if (!proposal.design && !proposal.rab) { %>
+              <% proposal.forEach(function(proposal) { if (!proposal.design && !proposal.rab && proposal.status == "SUBMITTED")  { %>
 
                 <td class="text-center py-3 px-4"><%= proposal.idProposal %></td>
                 <td class="text-center py-3 px-4"><%= proposal.namaSTO %></td>
