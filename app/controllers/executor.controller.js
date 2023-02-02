@@ -46,3 +46,29 @@ exports.pilihMitra = (req, res) => {
         res.status(200).send(data);
     });
 }
+
+exports.executorInstallationProposal = (req, res) => {
+    Proposal.find({}, (err, proposal) => {
+      if (err) throw err;
+  
+      res.render("layouts/main-layout-executor", {
+        data: "installationproposal",
+        proposal: proposal,
+        pindah: req.roleName,
+      });
+    });
+};
+
+exports.changeMitra = (req, res) => {
+    var id = req.params.id;
+    Proposal.findById(id, (err, proposal) => {
+        Mitra.find({},(err, mitra) => {
+            res.render("layouts/main-layout-executor", {
+            data: "gantimitra",
+            proposal: proposal,
+            mitraBaru: mitra,
+            pindah: req.roleName,
+            });
+        }); 
+    });
+};
