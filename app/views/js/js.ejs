@@ -104,7 +104,15 @@
 
     //add href to redesign reject
 
-    redesignreject.action = "/proposal/reject/<%= proposal._id %>";
+    redesignreject.action = "/proposal/approver/reject/<%= proposal._id %>";
+  };
+  const designerRejectbutton = () => {
+    // if class leftbar href is admin then hide report button
+    let redesignreject = document.getElementById("redesignreject");
+
+    //add href to redesign reject
+
+    redesignreject.action = "/proposal/designer/reject/<%= proposal._id %>";
   };
 
   const redesignbutton = () => {
@@ -113,7 +121,7 @@
 
     //add href to redesign reject
 
-    redesignreject.action = "/proposal/redesign/<%= proposal._id %>";
+    redesignreject.action = "/proposal/approver/redesign/<%= proposal._id %>";
   };
 
   const hidemenu = () => {

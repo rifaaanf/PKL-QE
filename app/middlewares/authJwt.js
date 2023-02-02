@@ -1,9 +1,11 @@
 const SECRET = process.env.SECRET;
 const jwt = require("jsonwebtoken");
+const { get } = require("mongoose");
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
 const Proposer = db.proposer;
+const Designer = db.designer;
 const Proposal = db.proposal;
 const Approver = db.approver;
 
@@ -16,6 +18,45 @@ getProposerId = (req, res, next) => {
       return;
     }
     req.proposerId = proposer._id;
+    next();
+  });
+};
+
+getProposerName = (req, res, next) => {
+  Proposer.findOne({
+    user: req.userId,
+  }).exec((err, proposer) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    req.proposerName = proposer.name;
+    next();
+  });
+};
+
+getDesignerName = (req, res, next) => {
+  Designer.findOne({
+    user: req.userId,
+  }).exec((err, designer) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    req.designerName = designer.name;
+    next();
+  });
+};
+
+getApproverName = (req, res, next) => {
+  Approver.findOne({
+    user: req.userId,
+  }).exec((err, approver) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    req.approverName = approver.name;
     next();
   });
 };
@@ -237,6 +278,9 @@ const authJwt = {
   isDesigner,
   getProposerId,
   isAdminDesignerApprover,
-  isExecutor
+  isExecutor,
+  getProposerName,
+  getDesignerName,
+  getApproverName,
 };
 module.exports = authJwt;

@@ -28,27 +28,31 @@ exports.designerProposal = (req, res) => {
 };
 
 exports.designerCompleteProposal = (req, res) => {
-  Proposal.find({}, (err, proposal) => {
-    if (err) throw err;
+  Proposal.find({})
+    .sort({ updatedAt: -1 })
+    .exec((err, proposal) => {
+      if (err) throw err;
 
-    res.render("layouts/main-layout-designer", {
-      data: "completeproposal",
-      proposal: proposal,
-      pindah: req.roleName,
+      res.render("layouts/main-layout-designer", {
+        data: "completeproposal",
+        proposal: proposal,
+        pindah: req.roleName,
+      });
     });
-  });
 };
 
 exports.designerRedesignProposal = (req, res) => {
-  Proposal.find({}, (err, proposal) => {
-    if (err) throw err;
+  Proposal.find({})
+    .sort({ updatedAt: -1 })
+    .exec((err, proposal) => {
+      if (err) throw err;
 
-    res.render("layouts/main-layout-designer", {
-      data: "redesignproposal",
-      proposal: proposal,
-      pindah: req.roleName,
+      res.render("layouts/main-layout-designer", {
+        data: "redesignproposal",
+        proposal: proposal,
+        pindah: req.roleName,
+      });
     });
-  });
 };
 
 exports.designerDetail = (req, res) => {

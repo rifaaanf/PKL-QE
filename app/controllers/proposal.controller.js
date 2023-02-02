@@ -85,6 +85,7 @@ exports.createProposal = async (req, res) => {
   const koordinatODPBaru = req.body.koordinatODPBaru;
   const keterangan = req.body.keterangan;
   const proposer = req.proposerId;
+  const timeline = [[req.proposerName, Date(), "SUBMITTED"]];
   const idProposal = await createIDProposal(namaSTO, segmen);
 
   Proposal.create(
@@ -97,6 +98,7 @@ exports.createProposal = async (req, res) => {
       koordinatODPBaru: koordinatODPBaru,
       keterangan: keterangan,
       proposer: proposer,
+      timeline: timeline,
     },
     (err, proposal) => {
       if (err) {
@@ -146,7 +148,14 @@ exports.proposaldesign = (req, res) => {
     }
     Proposal.findByIdAndUpdate(
       req.params.id,
-      { design: design, rab: rab },
+      {
+        status: "SUBMITTED",
+        design: design,
+        rab: rab,
+        timeline: data.timeline.concat([
+          [req.designerName, Date(), "DESIGN UPLOADED"],
+        ]),
+      },
       { new: true },
       (err, data) => {
         if (err) {
@@ -160,49 +169,115 @@ exports.proposaldesign = (req, res) => {
 };
 
 //reject proposal
-exports.rejectProposal = (req, res) => {
-  Proposal.findByIdAndUpdate(
-    req.params.id,
-    { status: "REJECTED", catatan: req.body.catatan },
-    { new: true },
-    (err, data) => {
-      if (err) {
-        res.status(500).send({ message: err });
-        return;
-      }
-      res.status(200).send(data);
+exports.designerRejectProposal = (req, res) => {
+  Proposal.findById(req.params.id, (err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
     }
-  );
+    Proposal.findByIdAndUpdate(
+      req.params.id,
+      {
+        status: "REJECTED",
+        catatan: req.body.catatan,
+        //update timeline
+        timeline: data.timeline.concat([
+          [req.designerName, Date(), "REJECTED"],
+        ]),
+      },
+      { new: true },
+      (err, data) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        res.status(200).send(data);
+      }
+    );
+  });
+};
+
+exports.approverRejectProposal = (req, res) => {
+  Proposal.findById(req.params.id, (err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    Proposal.findByIdAndUpdate(
+      req.params.id,
+      {
+        status: "REJECTED",
+        catatan: req.body.catatan,
+        //update timeline
+        timeline: data.timeline.concat([
+          [req.approverName, Date(), "REJECTED"],
+        ]),
+      },
+      { new: true },
+      (err, data) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        res.status(200).send(data);
+      }
+    );
+  });
 };
 
 exports.redesignProposal = (req, res) => {
-  Proposal.findByIdAndUpdate(
-    req.params.id,
-    { status: "REDESIGN", catatan: req.body.catatan },
-    { new: true },
-    (err, data) => {
-      if (err) {
-        res.status(500).send({ message: err });
-        return;
-      }
-      res.status(200).send(data);
+  Proposal.findById(req.params.id, (err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
     }
-  );
+    Proposal.findByIdAndUpdate(
+      req.params.id,
+      {
+        status: "REDESIGN",
+        catatan: req.body.catatan,
+        //update timeline
+        timeline: data.timeline.concat([
+          [req.approverName, Date(), "REDESIGN"],
+        ]),
+      },
+      { new: true },
+      (err, data) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        res.status(200).send(data);
+      }
+    );
+  });
 };
 
 exports.approveProposal = (req, res) => {
-  Proposal.findByIdAndUpdate(
-    req.params.id,
-    { status: "APPROVED" },
-    { new: true },
-    (err, data) => {
-      if (err) {
-        res.status(500).send({ message: err });
-        return;
-      }
-      res.status(200).send(data);
+  Proposal.findById(req.params.id, (err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
     }
-  );
+    Proposal.findByIdAndUpdate(
+      req.params.id,
+      {
+        status: "APPROVED",
+        //update timeline
+        timeline: data.timeline.concat([
+          [req.approverName, Date(), "APPROVED"],
+        ]),
+      },
+      { new: true },
+      (err, data) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        res.status(200).send(data);
+      }
+    );
+  });
 };
 
 async function createIDProposal(namaSTO, segmen) {

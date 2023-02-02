@@ -18,6 +18,7 @@
               <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Segmen</th>
                 <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Nama Alpro</th>
                 <th class="text-center py-3 px-4 uppercase font-semibold text-sm">jenis QE</th>
+                <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Status</th>
             
           </tr>
         </thead>
@@ -25,13 +26,14 @@
              <!--if proposal.proposer exist in proposer then return proposer.name  -->
               
               
-              <% proposal.forEach(function(proposal) { if (proposal.design && proposal.rab) { %>
+              <% proposal.forEach(function(proposal) { if ((proposal.design && proposal.rab) || (proposal.status == "REJECTED")) { %>
 
                 <td class="text-center py-3 px-4"><%= proposal.idProposal %></td>
                 <td class="text-center py-3 px-4"><%= proposal.namaSTO %></td>
                 <td class="text-center py-3 px-4"><%= proposal.segmen %></td>
                 <td class="text-center py-3 px-4"><%= proposal.namaAlpro %></td>
                 <td class="text-center py-3 px-4"><%= proposal.jenisQE %></td>
+                <td class="text-center py-3 px-4"><%= proposal.status %></td>
 
               </tr>
               <% } %>

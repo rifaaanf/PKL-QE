@@ -13,7 +13,12 @@ module.exports = function (app) {
 
   app.post(
     "/proposal",
-    [authJwt.verifyToken, authJwt.isProposer, authJwt.getProposerId],
+    [
+      authJwt.verifyToken,
+      authJwt.isProposer,
+      authJwt.getProposerId,
+      authJwt.getProposerName,
+    ],
     controller.createProposal
   );
 
@@ -31,13 +36,35 @@ module.exports = function (app) {
   //get all proposal
   app.get("/proposal", [authJwt.verifyToken], controller.getAllProposal);
 
-  app.post("/detail/:id/design", controller.proposaldesign);
+  app.post(
+    "/detail/:id/design",
+    [authJwt.verifyToken, authJwt.getDesignerName],
+    controller.proposaldesign
+  );
 
-  app.post("/proposal/approve/:id", controller.approveProposal);
+  app.post(
+    "/proposal/approve/:id",
+    [authJwt.verifyToken, authJwt.isApprover, authJwt.getApproverName],
+    controller.approveProposal
+  );
   //reject proposal
-  app.post("/proposal/reject/:id", controller.rejectProposal);
+  app.post(
+    "/proposal/designer/reject/:id",
+    [authJwt.verifyToken, authJwt.isDesigner, authJwt.getDesignerName],
+    controller.designerRejectProposal
+  );
 
-  app.post("/proposal/redesign/:id", controller.redesignProposal);
+  app.post(
+    "/proposal/approver/reject/:id",
+    [authJwt.verifyToken, authJwt.isApprover, authJwt.getApproverName],
+    controller.approverRejectProposal
+  );
+
+  app.post(
+    "/proposal/approver/redesign/:id",
+    [authJwt.verifyToken, authJwt.isApprover, authJwt.getApproverName],
+    controller.redesignProposal
+  );
 
   app.post(
     "/proposal/:id",
