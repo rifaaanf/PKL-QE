@@ -149,6 +149,7 @@ exports.proposaldesign = (req, res) => {
     Proposal.findByIdAndUpdate(
       req.params.id,
       {
+        status: "SUBMITTED",
         design: design,
         rab: rab,
         timeline: data.timeline.concat([
