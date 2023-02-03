@@ -17,9 +17,21 @@ module.exports = function (app) {
     );
 
     app.get(
+        "/detail/:id/executor/gantimitra",
+        [authJwt.verifyToken],
+        controller.changeMitra
+    );
+
+    app.get(
         "/detail/:id/executor/pilihmitra",
         [authJwt.verifyToken],
         controller.pilihMitraPage
+    );
+
+    app.get(
+        "/installationproposal",
+        [authJwt.verifyToken],
+        controller.executorInstallationProposal
     );
 
     app.post(

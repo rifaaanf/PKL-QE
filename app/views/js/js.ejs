@@ -135,7 +135,9 @@
     } else if (pindah[pindah.length - 1] == "designer") {
       document.getElementById("completeproposal").classList.remove("hidden");
       document.getElementById("redesignproposal").classList.remove("hidden");
-    }
+    } else if (pindah[pindah.length - 1] == "executor") {
+      document.getElementById("installationproposal").classList.remove("hidden");
+    } 
   };
 
   const dbedit = () => {
