@@ -132,42 +132,16 @@
   </table>
 </div>
 
-<form
-  class="mt-4"
-  method="post"
-  action="/proposal/approve/<%= proposal._id %>"
-  id="reject"
->
-  <div class="md:flex md:items-center">
-    <div class="md:w-1/2"></div>
-    <div class="md:w-1/2">
-      <a
-        ><button
-          class="modal-open float-right mx-1 shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-3 rounded"
-          type="button"
-          id="redesign"
-          onclick="redesignbutton()"
-        >
-          Redesign
-        </button></a
+<div class="md:flex md:items-center">
+  <div class="md:w-1/2"></div>
+  <div class="md:w-1/2">
+    <a href="/dashboard"
+      ><button
+        class="shadow float-right bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+        type="button"
       >
-      <a
-        ><button
-          class="modal-open float-right shadow mx-1 bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-3 rounded"
-          type="button"
-          id="reject"
-          onclick="rejectbutton()"
-        >
-          Reject
-        </button></a
-      >
-      <input
-        value="Approve"
-        type="submit"
-        class="shadow bg-green-500 float-right mx-1 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-3 rounded"
-      />
-    </div>
+        OK
+      </button></a
+    >
   </div>
-</form>
-
-<%- include('modal') %>
+</div>

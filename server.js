@@ -84,6 +84,7 @@ require("./app/routes/proposal.routes")(app);
 require("./app/routes/designer.routes")(app);
 require("./app/routes/approver.routes")(app);
 require("./app/routes/executor.routes")(app);
+require("./app/routes/proposer.routes")(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
@@ -351,7 +352,7 @@ function initial() {
           console.log("error", err);
         }
 
-        console.log("added 'executor' to roles collection")
+        console.log("added 'executor' to roles collection");
       });
     }
   });

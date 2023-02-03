@@ -61,6 +61,19 @@ getApproverName = (req, res, next) => {
   });
 };
 
+getAdminName = (req, res, next) => {
+  Admin.findOne({
+    user: req.userId,
+  }).exec((err, admin) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    req.adminName = admin.name;
+    next();
+  });
+};
+
 verifyToken = (req, res, next) => {
   //get token from cookies
   let token = req.cookies["x-access-token"];
