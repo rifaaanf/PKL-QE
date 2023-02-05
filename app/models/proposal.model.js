@@ -48,8 +48,20 @@ const Proposal = mongoose.model(
       design: {
         type: String,
       },
+      designevidence: {
+        type: String,
+      },
       rab: {
         type: String,
+      },
+      rabevidence: {
+        type: String,
+      },
+      nilairab: {
+        type: Number,
+      },
+      nilairabevidence: {
+        type: Number,
       },
       catatan: {
         type: String,

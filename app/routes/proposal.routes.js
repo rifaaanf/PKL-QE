@@ -43,6 +43,12 @@ module.exports = function (app) {
   );
 
   app.post(
+    "/detail/:id/executor/upload",
+    [authJwt.verifyToken, authJwt.getExecutorName],
+    controller.proposalclose
+  );
+
+  app.post(
     "/proposal/approve/:id",
     [authJwt.verifyToken, authJwt.isApprover, authJwt.getApproverName],
     controller.approveProposal

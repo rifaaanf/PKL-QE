@@ -48,6 +48,10 @@ const storage = multer.diskStorage({
       cb(null, "./app/views/uploads/design");
     } else if (file.fieldname === "rab") {
       cb(null, "./app/views/uploads/rab");
+    } else if (file.fieldname === "designevidence") {
+      cb(null, "./app/views/uploads/designevidence");
+    } else if (file.fieldname === "rabevidence") {
+      cb(null, "./app/views/uploads/rabevidence");
     }
   },
   filename: function (req, file, cb) {
@@ -56,7 +60,12 @@ const storage = multer.diskStorage({
 });
 
 app.use(
-  multer({ storage: storage }).fields([{ name: "design" }, { name: "rab" }])
+  multer({ storage: storage }).fields([
+    { name: "design" },
+    { name: "rab" },
+    { name: "designevidence" },
+    { name: "rabevidence" },
+  ])
 );
 
 db.mongoose

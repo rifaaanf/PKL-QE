@@ -152,9 +152,56 @@ exports.proposaldesign = (req, res) => {
         status: "SUBMITTED",
         design: design,
         rab: rab,
+        nilairab: req.body.nilairab,
         timeline: data.timeline.concat([
           [req.designerName, Date(), "DESIGN UPLOADED"],
         ]),
+      },
+      { new: true },
+      (err, data) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        res.status(200).send(data);
+      }
+    );
+  });
+};
+
+exports.proposalclose = (req, res) => {
+  // get path value from req.files
+  const designevidence = req.files.designevidence[0].path;
+  const rabevidence = req.files.rabevidence[0].path;
+
+  //update proposal design and rab and when design and rab is exist in database then delete old file
+  Proposal.findById(req.params.id, (err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    if (data.designevidence) {
+      fs.unlink(data.designevidence, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+    if (data.rabevidence) {
+      fs.unlink(data.rabevidence, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+    Proposal.findByIdAndUpdate(
+      req.params.id,
+      {
+        status: "CLOSED",
+        designevidence: designevidence,
+        rabevidence: rabevidence,
+        nilairabevidence: req.body.nilairabevidence,
+        timeline: data.timeline.concat([[req.executorName, Date(), "CLOSED"]]),
       },
       { new: true },
       (err, data) => {

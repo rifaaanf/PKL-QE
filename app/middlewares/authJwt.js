@@ -8,6 +8,7 @@ const Proposer = db.proposer;
 const Designer = db.designer;
 const Proposal = db.proposal;
 const Approver = db.approver;
+const Executor = db.executor;
 
 getProposerId = (req, res, next) => {
   Proposer.findOne({
@@ -31,6 +32,19 @@ getProposerName = (req, res, next) => {
       return;
     }
     req.proposerName = proposer.name;
+    next();
+  });
+};
+
+getExecutorName = (req, res, next) => {
+  Executor.findOne({
+    user: req.userId,
+  }).exec((err, executor) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    req.executorName = executor.name;
     next();
   });
 };
@@ -295,5 +309,6 @@ const authJwt = {
   getProposerName,
   getDesignerName,
   getApproverName,
+  getExecutorName,
 };
 module.exports = authJwt;
