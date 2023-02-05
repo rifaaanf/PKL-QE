@@ -1,15 +1,20 @@
 <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
-  <div class="px-6 py-14">
+  <div class="px-6 py-0">
+    <img
+    src="https://www.telkom.co.id/data/image_upload/page/1594108255409_compress_logo%20telkom%20indonesia.png"
+    class="w-36 h-36 ml-3 mt-2"
+    />
+    <hr class="border-black border-1 my-6 mt-0" />
     <a
-      href="/<%= pindah %>"
-      class="text-white text-3xl font-semibold uppercase hover:text-gray-300"
-      ><%= pindah %></a
+    href="/<%= pindah %>"
+    class="text-black text-2xl font-semibold uppercase hover:text-gray-300 mt-n2"
+    ><%= pindah %></a
     >
   </div>
   <nav class="text-white text-base font-semibold pt-3">
     <a
       href="/<%= pindah %>"
-      class="leftbar flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
+      class="leftbar flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
       <i class="fas fa-tachometer-alt mr-3"></i>
       Dashboard
@@ -17,7 +22,7 @@
     <a
       id="myproposal"
       href="/dashboard"
-      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
+      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
       <i class="fas fa-solid fa-file mr-3"></i>
       My Proposal
@@ -25,15 +30,15 @@
     <a
       id="completeproposal"
       href="/submittedproposal"
-      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
+      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
-      <i class="fas fa-solid fa-file mr-3"></i>
+      <i class="fas fa-solid fa-file mr-4"></i>
       Submitted Proposals
     </a>
     <a
       id="redesignproposal"
       href="/redesignproposal"
-      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
+      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
       <i class="fas fa-edit mr-3"></i>
       Redesign Proposals
@@ -42,7 +47,7 @@
     <a
       id="installationproposal"
       href="/installationproposal"
-      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
+      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
       <i class="fas fa-edit mr-3"></i>
       Installation Proposals
@@ -53,23 +58,23 @@
     <a
       id="dbmenu"
       onclick="dbedit()"
-      class="leftbar hidden cursor-pointer flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
+      class="leftbar hidden cursor-pointer flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
       ><i class="fas fa-solid fa-database mr-3"></i>Database</a
     >
     <div class="dbedit hidden">
       <a
         href="/adddata"
-        class="leftbar flex items text-blue-500 bg-white py-4 pl-20 transition ease-in-out duration-150 hover:bg-slate-50"
+        class="leftbar flex items text-gray-600  py-4 pl-20 transition ease-in-out duration-150 hover:bg-red-400"
         >Add Data</a
       >
       <a
         href="/changedata"
-        class="leftbar flex items text-blue-500 bg-white py-4 pl-20 transition ease-in-out duration-150 hover:bg-slate-50"
+        class="leftbar flex items text-gray-600 py-4 pl-20 transition ease-in-out duration-150 hover:bg-red-400"
         >Edit Data</a
       >
       <a
         href="/deletedata"
-        class="leftbar flex items text-blue-500 bg-white py-4 pl-20 transition ease-in-out duration-150 hover:bg-slate-50"
+        class="leftbar flex items text-gray-600  py-4 pl-20 transition ease-in-out duration-150 hover:bg-red-400"
         >Delete Data</a
       >
     </div>
@@ -77,7 +82,7 @@
     <a
       id="formAdmin"
       href="/formAdmin"
-      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-white py-4 pl-6 nav-item"
+      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
       <i class="fas fa-align-left mr-3"></i>
       Forms
@@ -85,7 +90,7 @@
   </nav>
   <a
     href="#"
-    class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4"
+    class="absolute w-full upgrade-btn bottom-0 active-nav-link text-gray-600 flex items-center justify-center py-4"
   >
     <i class="fas fa-arrow-circle-up mr-3"></i>
   </a>
