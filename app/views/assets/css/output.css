@@ -1410,3 +1410,7 @@ video {
     line-height: 1;
   }
 }
+
+table.min-w-full {
+  min-height: 0;
+}
