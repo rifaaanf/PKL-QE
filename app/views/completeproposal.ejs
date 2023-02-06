@@ -1,48 +1,64 @@
 <form>
-  <div class="w-full">
-    <p class="text-xl pb-3 flex items-center">
-      <i class="fas fa-list mr-3"></i> Submitted Proposals
-    </p>
-    <div class="bg-white overflow-auto">
-      <table class="min-w-full bg-white">
-        <thead class="bg-gray-800 text-white">
-          <tr>
-            
-            <th
-              class="text-center py-3 px-4 uppercase font-semibold text-sm"
-            >
-              ID Project
-            </th>
-            <th
-              class="text-center py-3 px-4 uppercase font-semibold text-sm">Nama STO</th>
-              <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Segmen</th>
-                <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Nama Alpro</th>
-                <th class="text-center py-3 px-4 uppercase font-semibold text-sm">jenis QE</th>
-                <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Status</th>
-            
-          </tr>
-        </thead>
-        <tbody id="tabel" class="text-gray-700">
-             <!--if proposal.proposer exist in proposer then return proposer.name  -->
-              
-              
-              <% proposal.forEach(function(proposal) { if ((proposal.design && proposal.rab) || (proposal.status == "REJECTED")) { %>
-
-                <td class="text-center py-3 px-4"><%= proposal.idProposal %></td>
-                <td class="text-center py-3 px-4"><%= proposal.namaSTO %></td>
-                <td class="text-center py-3 px-4"><%= proposal.segmen %></td>
-                <td class="text-center py-3 px-4"><%= proposal.namaAlpro %></td>
-                <td class="text-center py-3 px-4"><%= proposal.jenisQE %></td>
-                <td class="text-center py-3 px-4"><%= proposal.status %></td>
-
-              </tr>
-              <% } %>
-              <% }); %>
-        </tbody>
-      </table>
+  <p class="text-xl pb-3 flex items-center ml-1">
+    <i class="fas fa-list mr-3"></i> Submitted Proposal
+  </p>
+  <div class="max-w-7xl rounded overflow-hidden shadow-lg bg-white">
+    <div class="flex flex-col">
+      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="overflow-hidden">
+            <table class="min-w-full text-center" style=" width: 150px;">
+              <thead class="bg-gray-800 text-white">
+                <tr>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
+                    ID Project
+                  </th>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
+                    Nama STO
+                  </th>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
+                    Segmen
+                  </th>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
+                    nama Alpro 
+                  </th>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
+                    Jenis QE
+                  </th>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% proposal.forEach(function (proposal, index) { if (proposal.design && proposal.rab) {  %>
+                  <tr class="<%= index % 2 == 0 ? 'bg-gray-100 border-b' : 'bg-white border-b' %> text-center">
+                    <td class="text-center py-3 px-4"><%= proposal.idProposal %></td>
+                    <td class="text-center py-3 px-4"><%= proposal.namaSTO %></td>
+                    <td class="text-center py-3 px-4"><%= proposal.segmen %></td>
+                    <td class="text-center py-3 px-4"><%= proposal.namaAlpro %></td>
+                    <td class="text-center py-3 px-4"><%= proposal.jenisQE %></td>
+                    <td class="text-center py-3 px-4"><%= proposal.status %></td>
+                  </tr>
+                  <% } %> 
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        </div>
+      </div>
     </div>
-    <!-- button to show the next data  -->
-    
-    
-  </div>
 </form>
