@@ -70,12 +70,16 @@ exports.changestodata = (req, res) => {
     { name: req.body.name },
     { name: req.body.namebaru },
     { new: true },
-    (err, data) => {
+    (err, proposal) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
       }
-      res.status(200).send(data);
+      res.render("layouts/main-layout-admin", {
+        data: "changedata",
+        proposal: proposal,
+        pindah: req.roleName,
+      });
     }
   );
 };
@@ -133,12 +137,12 @@ exports.addnamasto = (req, res) => {
   const namasto = new namaSTO({
     name: req.body.namebaru,
   });
-  namasto.save((err, data) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    res.status(200).send(data);
+  namasto.save((err, proposal) => {
+    res.render("layouts/main-layout-admin", {
+      data: "adddata",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
   });
 };
 
@@ -184,14 +188,19 @@ exports.addsegmen = (req, res) => {
   });
 };
 
-exports.deletenamasto = (req, res) => {
+exports.deletenamasto =  (req, res) => {
   // delete namaSTO
-  namaSTO.findOneAndDelete({ name: req.body.namebaru }, (err, data) => {
+  namaSTO.findOneAndDelete({ name: req.body.namebaru }, (err, proposal) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
-    res.status(200).send(data);
+    res.render("layouts/main-layout-admin", {
+      data: "deletedata",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
+    // res.status(200).send(data);
   });
 };
 

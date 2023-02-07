@@ -84,3 +84,15 @@ exports.uploadInstallationEvidence = (req, res) => {
     });
   });
 };
+
+exports.executorClosedProposal = (req, res) => {
+  Proposal.find({}, (err, proposal) => {
+    if (err) throw err;
+
+    res.render("layouts/main-layout-executor", {
+      data: "closedproposal",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
+  });
+};
