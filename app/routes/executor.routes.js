@@ -35,6 +35,12 @@ module.exports = function (app) {
   );
 
   app.get(
+    "/closedproposal",
+    [authJwt.verifyToken],
+    controller.executorClosedProposal
+  );
+
+  app.get(
     "/detail/:id/executor/upload",
     [authJwt.verifyToken],
     controller.uploadInstallationEvidence

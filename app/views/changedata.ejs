@@ -100,7 +100,7 @@
     <div class="md:w-1/3"></div>
     <div class="md:w-2/3">
       <input
-
+        id="change-btn"
         class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
         type="submit"
         
@@ -110,5 +110,35 @@
     </div>
   </div>
 </form>
+<script>
+  const form = document.getElementById('formedit');
+  const btn = document.getElementById('change-btn');
 
+  btn.addEventListener('click', (e) => {
+    const select1 = document.getElementById('sel1').value
+    const select2 = document.getElementById('pilihdata').value
+    const select3 = document.getElementById('sel3').value
+    e.preventDefault()
+
+    Swal.fire({
+      title: 'Change ' + select1,
+      text: "Apakah Anda Yakin Mengganti " + select2,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, change it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        form.submit();
+        Swal.fire(
+          'Changed!',
+          select1 + ' Berhasil Digganti Dari ' + select2 + " Menjadi " + select3,
+          'success'
+       )
+      }
+    })
+  })
+
+</script>
 <%- include('./js/js.ejs') %>
