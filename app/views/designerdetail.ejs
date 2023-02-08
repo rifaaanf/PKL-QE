@@ -1,104 +1,104 @@
 <p class="text-xl pb-3 flex items-center ml-1">
   <i class="fas fa-list mr-3"></i> Detail
-</p>  
-<div class="max-w-7xl rounded overflow-hidden shadow-lg bg-white">
-<div class="flex flex-col">
-  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-    <div class="inline-block min-w-full sm:px-6 lg:px-8">
-      <div class="overflow-hidden">
-        <table class="min-w-full text-center" style=" width: 150px;">
-          <tbody>
-            <tr class="bg-white border-b">
-              <td
-                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-              >
-                QE ID
-              </td>
-              <td
-                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-              >
-                <%= proposal.idProposal %>
-              </td>
-            </tr>
-            <tr class="bg-gray-100 border-b">
-              <td
-                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-              >
-                Nama STO
-              </td>
-              <td
-                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-              >
-                <%= proposal.namaSTO %>
-              </td>
-            </tr>
-            <tr class="bg-white border-b">
-              <td
-                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-              >
-                Segmen
-              </td>
-              <td
-                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-              >
-                <%= proposal.segmen %>
-              </td>
-            </tr>
-            <tr class="bg-gray-100 border-b">
-              <td
-                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-              >
-                Nama Alpro
-              </td>
-              <td
-                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-              >
-                <%= proposal.namaAlpro %>
-              </td>
-            </tr>
-            <tr class="bg-white border-b">
-              <td
-                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-              >
-                Jenis QE
-              </td>
-              <td
-                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-              >
-                <%= proposal.jenisQE %>
-              </td>
-            </tr>
-            <% if (proposal.koordinatODPBaru) { %>
-            <tr class="bg-gray-100 border-b">
-              <td
-                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-              >
-                Koordinat ODP Baru
-              </td>
-              <td
-                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-              >
-                <%= proposal.koordinatODPBaru %>
-              </td>
-            </tr>
-            <% } %> <% if (proposal.keterangan) { %>
-            <tr class="bg-white border-b">
-              <td
-                class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-              >
-                Keterangan
-              </td>
-              <td
-                class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-              >
-                <%= proposal.keterangan %>
-              </td>
-            </tr>
-            <% } %>
-          </tbody>
-        </table>
+</p>
+<div class="rounded overflow-hidden shadow-lg bg-white">
+  <div class="flex flex-col">
+    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full sm:px-6 lg:px-8">
+        <div class="overflow-hidden">
+          <table class="min-w-full text-center" style="width: 150px">
+            <tbody>
+              <tr class="bg-white border-b">
+                <td
+                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                >
+                  QE ID
+                </td>
+                <td
+                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                >
+                  <%= proposal.idProposal %>
+                </td>
+              </tr>
+              <tr class="bg-gray-100 border-b">
+                <td
+                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                >
+                  Nama STO
+                </td>
+                <td
+                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                >
+                  <%= proposal.namaSTO %>
+                </td>
+              </tr>
+              <tr class="bg-white border-b">
+                <td
+                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                >
+                  Segmen
+                </td>
+                <td
+                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                >
+                  <%= proposal.segmen %>
+                </td>
+              </tr>
+              <tr class="bg-gray-100 border-b">
+                <td
+                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                >
+                  Nama Alpro
+                </td>
+                <td
+                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                >
+                  <%= proposal.namaAlpro %>
+                </td>
+              </tr>
+              <tr class="bg-white border-b">
+                <td
+                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                >
+                  Jenis QE
+                </td>
+                <td
+                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                >
+                  <%= proposal.jenisQE %>
+                </td>
+              </tr>
+              <% if (proposal.koordinatODPBaru) { %>
+              <tr class="bg-gray-100 border-b">
+                <td
+                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                >
+                  Koordinat ODP Baru
+                </td>
+                <td
+                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                >
+                  <%= proposal.koordinatODPBaru %>
+                </td>
+              </tr>
+              <% } %> <% if (proposal.keterangan) { %>
+              <tr class="bg-white border-b">
+                <td
+                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                >
+                  Keterangan
+                </td>
+                <td
+                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                >
+                  <%= proposal.keterangan %>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
     </div>
   </div>
 </div>
@@ -106,12 +106,12 @@
 <p class="text-xl pb-3 flex items-center ml-1 mt-8">
   <i class="fas fa-list mr-3"></i> Timeline
 </p>
-<div class="max-w-7xl rounded overflow-hidden shadow-lg bg-white">
+<div class="rounded overflow-hidden shadow-lg bg-white">
   <div class="flex flex-col">
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full sm:px-6 lg:px-8">
         <div class="overflow-hidden">
-          <table class="min-w-full text-center" style=" width: 150px;">
+          <table class="min-w-full text-center" style="width: 150px">
             <thead class="bg-gray-800 text-white">
               <tr>
                 <th
@@ -133,19 +133,33 @@
             </thead>
             <tbody>
               <% proposal.timeline.forEach(function (item, index) { %>
-                <tr class="<%= index % 2 == 0 ? 'bg-gray-100 border-b' : 'bg-white border-b' %> text-center">
-                  <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"><%= item[1]%></td>
-                  <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"><%= item[0] %></td>
-                  <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"><%= item[2] %></td>
-                </tr>
+              <tr
+                class="<%= index % 2 == 0 ? 'bg-gray-100 border-b' : 'bg-white border-b' %> text-center"
+              >
+                <td
+                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                >
+                  <%= item[1]%>
+                </td>
+                <td
+                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                >
+                  <%= item[0] %>
+                </td>
+                <td
+                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                >
+                  <%= item[2] %>
+                </td>
+              </tr>
               <% }); %>
             </tbody>
           </table>
         </div>
       </div>
-      </div>
     </div>
   </div>
+</div>
 
 <div class="md:flex md:items-center mt-4">
   <div class="md:w-1/2"></div>
@@ -170,5 +184,4 @@
     >
   </div>
 </div>
-<%- include('modal') %>
-<%- include('./js/js.ejs') %>
+<%- include('modal') %> <%- include('./js/js.ejs') %>
