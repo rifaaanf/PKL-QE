@@ -85,7 +85,7 @@ module.exports = function (app) {
   );
 
   app.get(
-    "/dashboard",
+    "/showproposal",
     [authJwt.verifyToken, authJwt.isProposer, authJwt.getProposerId],
     controller.showProposal
   );

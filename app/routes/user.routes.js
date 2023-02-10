@@ -12,10 +12,21 @@ module.exports = function (app) {
   });
 
   app.get(
+    "/detail/:id/rejectedDetail",
+    [authJwt.verifyToken],
+    controller.rejectedDetail
+  );
+
+  app.get(
     "/approver",
-     [authJwt.verifyToken, authJwt.isApprover],
+    [authJwt.verifyToken, authJwt.isApprover],
     controller.approverBoard
   );
+
+  app.get("/rejected", [authJwt.verifyToken], controller.rejected);
+
+  app.get("/needapproval", [authJwt.verifyToken], controller.approverBoard);
+
   app.get(
     "/proposer",
     [authJwt.verifyToken, authJwt.isProposer],
@@ -26,11 +37,17 @@ module.exports = function (app) {
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.adminBoard
   );
+
+  app.get("/dashboard", [authJwt.verifyToken], controller.dashboard);
+
   // app.get(
   //   "/formAdmin",
   //   [authJwt.verifyToken, authJwt.isAdmin],
   //   controller.formAdmin
   // );
+
+  app.get("/submitted", [authJwt.verifyToken], controller.designerBoard);
+
   app.get(
     "/designer",
     [authJwt.verifyToken, authJwt.isDesigner],
@@ -41,6 +58,9 @@ module.exports = function (app) {
     [authJwt.verifyToken, authJwt.isExecutor],
     controller.executorBoard
   );
+
+  app.get("/approved", [authJwt.verifyToken], controller.executorBoard);
+
   app.post(
     "/signup",
     [verifySignUp.checkDuplicateUsername, verifySignUp.checkRolesExisted],

@@ -103,7 +103,7 @@ exports.createProposal = async (req, res) => {
     (err, proposal) => {
       if (err) {
         console.log(err);
-        res.redirect("/");
+        res.redirect("/proposer");
       } else {
         res.render("layouts/main-layout-proposer", {
           data: "proposalconfirmpage",
@@ -154,7 +154,7 @@ exports.proposaldesign = (req, res) => {
         rab: rab,
         nilairab: req.body.nilairab,
         timeline: data.timeline.concat([
-          [req.designerName, Date(), "DESIGN UPLOADED"],
+          [req.designerName, Date(), "NEED APPROVAL"],
         ]),
       },
       { new: true },
@@ -391,7 +391,7 @@ exports.showProposal = (req, res) => {
       if (err) throw err;
 
       res.render("layouts/main-layout-proposer", {
-        data: "dashboard",
+        data: "showproposal",
         proposal: proposal,
         pindah: req.roleName,
       });

@@ -17,6 +17,63 @@
       .font-family-karla {
         font-family: karla;
       }
+
+      .submitted {
+        background: #ff6384;
+      }
+      /* submitted hover */
+      .submitted:hover {
+        background: #ff96ac;
+      }
+
+      .needapproval {
+        background: #36a2eb;
+      }
+
+      .needapproval:hover {
+        background: #5eb4ef;
+      }
+
+      .approved {
+        background: #ffce56;
+      }
+
+      .approved:hover {
+        background: #ffd777;
+      }
+
+      .rejected {
+        background: #4bc0c0;
+      }
+
+      .rejected:hover {
+        background: #6ecccc;
+      }
+
+      .redesign {
+        background: #9966ff;
+      }
+
+      .redesign:hover {
+        background: #ad84ff;
+      }
+
+      .installation {
+        background: #ff9f40;
+      }
+
+      .installation:hover {
+        background: #ffb266;
+      }
+
+      .closed {
+        background: #824f4f;
+      }
+
+      .closed:hover {
+        background: #9b7272;
+      }
+
       .modal {
         transition: opacity 0.25s ease;
       }
@@ -49,10 +106,7 @@
       }
     </style>
   </head>
-  <body
-    onload="hidemenu();selected()"
-    class="bg-gray-100 font-family-karla flex"
-  >
+  <body onload="hidemenu();chart()" class="bg-gray-100 font-family-karla flex">
     <%- include('./nav') %>
     <div class="w-full flex flex-col h-screen overflow-y-hidden">
       <%- include('./header.ejs') %>
@@ -75,6 +129,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </body>
 </html>
 <%- include('../js/js.ejs') %>

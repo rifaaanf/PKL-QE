@@ -7,13 +7,17 @@
     <meta name="description" content="" />
 
     <!-- Tailwind -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+      rel="stylesheet"
+    />
     <!-- <link rel="stylesheet" href="../assets/css/output.css" /> -->
     <style>
       @import url("https://fonts.googleapis.com/css?family=Karla:400,700&display=swap");
       .font-family-karla {
         font-family: karla;
       }
+
       .bg-sidebar {
         background: #ffffff;
       }
@@ -40,7 +44,7 @@
     </style>
   </head>
   <body
-    onload="selected();hidemenu()"
+    onload="selected();hidemenu();chart()"
     class="bg-gray-100 font-family-karla flex"
   >
     <%- include('./nav') %>

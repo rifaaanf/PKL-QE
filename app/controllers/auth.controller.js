@@ -89,7 +89,7 @@ exports.signin = (req, res) => {
           secure: true,
           sameSite: "none",
         });
-        res.redirect(`/${req.session.user.roles.name}`);
+        res.redirect("/dashboard");
 
         // res.redirect(`/${user.roles.name}`);
       } else {
@@ -111,7 +111,7 @@ exports.signin = (req, res) => {
         // get user role from cookie
 
         //if x-access-token is set on client side then redirect to dashboard based on role
-        res.redirect(`/${req.session.user.roles.name}`);
+        res.redirect("/dashboard");
       }
     });
 };

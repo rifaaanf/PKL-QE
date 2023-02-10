@@ -13,7 +13,7 @@ const namaAlpro = db.namaAlpro;
 const Proposal = db.proposal;
 const SECRET = process.env.SECRET;
 const jwt = require("jsonwebtoken");
-const Executor = db.executor
+const Executor = db.executor;
 exports.designerBoard = (req, res) => {
   Proposal.find({})
     .sort({ createdAt: -1 })
@@ -21,6 +21,21 @@ exports.designerBoard = (req, res) => {
       Proposer.find({}, (err, proposer) => {
         res.render("layouts/main-layout-designer", {
           data: "designer",
+          proposal: proposal,
+          proposer: proposer,
+          pindah: req.roleName,
+        });
+      });
+    });
+};
+
+exports.dashboard = (req, res) => {
+  Proposal.find({})
+    .sort({ createdAt: -1 })
+    .exec((err, proposal) => {
+      Proposer.find({}, (err, proposer) => {
+        res.render("layouts/main-layout-approver", {
+          data: "dashboard",
           proposal: proposal,
           proposer: proposer,
           pindah: req.roleName,
@@ -85,6 +100,31 @@ exports.approverBoard = (req, res) => {
         pindah: req.roleName,
       });
     });
+};
+
+exports.rejected = (req, res) => {
+  Proposal.find({})
+    .sort({ createdAt: -1 })
+    .exec((err, proposal) => {
+      if (err) throw err;
+
+      res.render("layouts/main-layout-approver", {
+        data: "rejected",
+        proposal: proposal,
+        pindah: req.roleName,
+      });
+    });
+};
+
+exports.rejectedDetail = (req, res) => {
+  var id = req.params.id;
+  Proposal.findById(id, (err, proposal) => {
+    res.render("layouts/main-layout-executor", {
+      data: "rejecteddetail",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
+  });
 };
 
 exports.executorBoard = (req, res) => {

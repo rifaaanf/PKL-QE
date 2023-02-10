@@ -47,6 +47,101 @@
       });
     });
 
+  // make doughnut chart for proposal get all proposal with status APPROVED and else
+  const chart = () => {
+    fetch("/proposal")
+      .then((res) => res.json())
+      .then((data) => {
+        let submitted = 0;
+        let needapproval = 0;
+        let approved = 0;
+        let rejected = 0;
+        let redesign = 0;
+        let installation = 0;
+        let closed = 0;
+        data.forEach((proposal) => {
+          if (
+            !proposal.design &&
+            !proposal.rab &&
+            proposal.status == "SUBMITTED"
+          ) {
+            submitted++;
+          } else if (
+            proposal.design &&
+            proposal.rab &&
+            proposal.status == "SUBMITTED"
+          ) {
+            needapproval++;
+          } else if (proposal.status === "APPROVED") {
+            approved++;
+          } else if (proposal.status === "REJECTED") {
+            rejected++;
+          } else if (proposal.status === "REDESIGN") {
+            redesign++;
+          } else if (proposal.status === "INSTALLATION") {
+            installation++;
+          } else if (proposal.status === "CLOSED") {
+            closed++;
+          }
+        });
+        const ctx = document.getElementById("myChart").getContext("2d");
+        const myChart = new Chart(ctx, {
+          type: "doughnut",
+          data: {
+            labels: [
+              "SUBMITTED",
+              "NEED APPROVAL",
+              "APPROVED",
+              "REJECTED",
+              "REDESIGN",
+              "INSTALLATION",
+              "CLOSED",
+            ],
+            datasets: [
+              {
+                label: "Jumlah Proposal",
+                data: [
+                  submitted,
+                  needapproval,
+                  approved,
+                  rejected,
+                  redesign,
+                  installation,
+                  closed,
+                ],
+                backgroundColor: [
+                  "rgba(255, 99, 132)",
+                  "rgba(54, 162, 235)",
+                  "rgba(255, 206, 86)",
+                  "rgba(75, 192, 192)",
+                  "rgba(153, 102, 255)",
+                  "rgba(255, 159, 64)",
+                  "rgba(130, 79, 79)",
+                ],
+                borderColor: [
+                  "rgba(255, 99, 132, 1)",
+                  "rgba(54, 162, 235, 1)",
+                  "rgba(255, 206, 86, 1)",
+                  "rgba(75, 192, 192, 1)",
+                  "rgba(153, 102, 255, 1)",
+                  "rgba(255, 159, 64, 1)",
+                  "rgba(130, 79, 79, 1)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              legend: {
+                position: "right",
+              },
+            },
+          },
+        });
+      });
+  };
+
   const dropdown = (s1, s2, s3) => {
     let sel1 = document.getElementById(s1);
     let sel2 = document.getElementById(s2);
@@ -126,7 +221,7 @@
 
   const hidemenu = () => {
     // if class leftbar href is admin then hide report button
-    let pindah = document.querySelector(".leftbar").href.split("/");
+    let pindah = document.querySelector(".home").href.split("/");
     if (pindah[pindah.length - 1] == "admin") {
       document.getElementById("dbmenu").classList.remove("hidden");
       document.getElementById("formAdmin").classList.remove("hidden");
@@ -136,9 +231,11 @@
       document.getElementById("completeproposal").classList.remove("hidden");
       document.getElementById("redesignproposal").classList.remove("hidden");
     } else if (pindah[pindah.length - 1] == "executor") {
-      document.getElementById("installationproposal").classList.remove("hidden");
+      document
+        .getElementById("installationproposal")
+        .classList.remove("hidden");
       document.getElementById("closedproposal").classList.remove("hidden");
-    } 
+    }
   };
 
   const dbedit = () => {
