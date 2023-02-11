@@ -1,6 +1,6 @@
 const db = require("../models");
 const namaSTO = db.namaSTO;
-const segmen = db.segmen;
+const Segmen = db.segmen;
 const jenisQE = db.jenisQE;
 const namaAlpro = db.namaAlpro;
 const Proposal = db.proposal;
@@ -15,7 +15,7 @@ exports.formAdmin = (req, res) => {
   // get all namaSTO and segmen
   Proposal.find({}, (err, proposal) => {
     namaSTO.find({}, (err, namasto) => {
-      segmen.find({}, (err, segmen) => {
+      Segmen.find({}, (err, segmen) => {
         jenisQE.find({}, (err, jenisqe) => {
           res.render("layouts/main-layout-proposer", {
             data: "proposer",
@@ -35,7 +35,7 @@ exports.detailProposal = (req, res) => {
   // get role
 
   namaSTO.find({}, (err, namasto) => {
-    segmen.find({}, (err, segmen) => {
+    Segmen.find({}, (err, segmen) => {
       jenisQE.find({}, (err, jenisqe) => {
         var id = req.params.id;
         Proposal.findById(id, (err, proposal) => {
@@ -86,16 +86,20 @@ exports.changestodata = (req, res) => {
 
 exports.changesegmendata = (req, res) => {
   // change segmen data name to new name
-  segmen.findOneAndUpdate(
+  Segmen.findOneAndUpdate(
     { name: req.body.name },
     { name: req.body.namebaru },
     { new: true },
-    (err, data) => {
+    (err, proposal) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
       }
-      res.status(200).send(data);
+      res.render("layouts/main-layout-admin", {
+        data: "changedata",
+        proposal: proposal,
+        pindah: req.roleName,
+      });
     }
   );
 };
@@ -106,12 +110,16 @@ exports.changejenisqedata = (req, res) => {
     { name: req.body.name },
     { name: req.body.namebaru },
     { new: true },
-    (err, data) => {
+    (err, proposal) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
       }
-      res.status(200).send(data);
+      res.render("layouts/main-layout-admin", {
+        data: "changedata",
+        proposal: proposal,
+        pindah: req.roleName,
+      });
     }
   );
 };
@@ -122,12 +130,16 @@ exports.changenamaalprodata = (req, res) => {
     { name: req.body.name },
     { name: req.body.namebaru },
     { new: true },
-    (err, data) => {
+    (err, proposal) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
       }
-      res.status(200).send(data);
+      res.render("layouts/main-layout-admin", {
+        data: "changedata",
+        proposal: proposal,
+        pindah: req.roleName,
+      });
     }
   );
 };
@@ -151,12 +163,12 @@ exports.addjenisqe = (req, res) => {
   const jenisqe = new jenisQE({
     name: req.body.namebaru,
   });
-  jenisqe.save((err, data) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    res.status(200).send(data);
+  jenisqe.save((err, proposal) => {
+    res.render("layouts/main-layout-admin", {
+      data: "adddata",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
   });
 };
 
@@ -165,26 +177,26 @@ exports.addnamaalpro = (req, res) => {
   const namaalpro = new namaAlpro({
     name: req.body.namebaru,
   });
-  namaalpro.save((err, data) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    res.status(200).send(data);
+  namaalpro.save((err, proposal) => {
+    res.render("layouts/main-layout-admin", {
+      data: "adddata",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
   });
 };
 
 exports.addsegmen = (req, res) => {
   // add new namaAlpro
-  const namaalpro = new segmen({
+  const segmen = new Segmen({
     name: req.body.namebaru,
   });
-  namaalpro.save((err, data) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-    res.status(200).send(data);
+  segmen.save((err, proposal) => {
+    res.render("layouts/main-layout-admin", {
+      data: "adddata",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
   });
 };
 
@@ -206,34 +218,46 @@ exports.deletenamasto =  (req, res) => {
 
 exports.deletesegmen = (req, res) => {
   // delete segmen
-  segmen.findOneAndDelete({ name: req.body.namebaru }, (err, data) => {
+  Segmen.findOneAndDelete({ name: req.body.namebaru }, (err, proposal) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
-    res.status(200).send(data);
+    res.render("layouts/main-layout-admin", {
+      data: "deletedata",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
   });
 };
 
 exports.deletejenisqe = (req, res) => {
   // delete jenisQE
-  jenisQE.findOneAndDelete({ name: req.body.namebaru }, (err, data) => {
+  jenisQE.findOneAndDelete({ name: req.body.namebaru }, (err, proposal) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
-    res.status(200).send(data);
+    res.render("layouts/main-layout-admin", {
+      data: "deletedata",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
   });
 };
 
 exports.deletenamaalpro = (req, res) => {
   // delete namaAlpro
-  namaAlpro.findOneAndDelete({ name: req.body.namebaru }, (err, data) => {
+  namaAlpro.findOneAndDelete({ name: req.body.namebaru }, (err, proposal) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
     }
-    res.status(200).send(data);
+    res.render("layouts/main-layout-admin", {
+      data: "deletedata",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
   });
 };
 
@@ -250,7 +274,7 @@ exports.getnamasto = (req, res) => {
 
 //get segmen
 exports.getsegmen = (req, res) => {
-  segmen.find({}, (err, data) => {
+  Segmen.find({}, (err, data) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -277,7 +301,7 @@ exports.deletedata = (req, res) => {
   // get all namaSTO and segmen
   Proposal.find({}, (err, proposal) => {
     namaSTO.find({}, (err, namasto) => {
-      segmen.find({}, (err, segmen) => {
+      Segmen.find({}, (err, segmen) => {
         jenisQE.find({}, (err, jenisqe) => {
           namaAlpro.find({}, (err, namaalpro) => {
             res.render("layouts/main-layout-proposer", {
@@ -303,7 +327,7 @@ exports.adddata = (req, res) => {
   // get all namaSTO and segmen
   Proposal.find({}, (err, proposal) => {
     namaSTO.find({}, (err, namasto) => {
-      segmen.find({}, (err, segmen) => {
+      Segmen.find({}, (err, segmen) => {
         jenisQE.find({}, (err, jenisqe) => {
           namaAlpro.find({}, (err, namaalpro) => {
             res.render("layouts/main-layout-proposer", {
@@ -329,7 +353,7 @@ exports.changedata = (req, res) => {
   // get all namaSTO and segmen
   Proposal.find({}, (err, proposal) => {
     namaSTO.find({}, (err, namasto) => {
-      segmen.find({}, (err, segmen) => {
+      Segmen.find({}, (err, segmen) => {
         jenisQE.find({}, (err, jenisqe) => {
           namaAlpro.find({}, (err, namaalpro) => {
             res.render("layouts/main-layout-proposer", {
