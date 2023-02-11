@@ -16,7 +16,7 @@
         onchange="deletedata()"
         type="text"
       >
-        <option value="">Pilih Jenis</option>
+        <option value="" disabled selected hidden>Pilih Jenis</option>
         <option value="Nama STO">Nama STO</option>
         <option value="Segmen">Segmen</option>
         <option value="Nama Alpro">Nama Alpro</option>
@@ -53,7 +53,7 @@
         id="pilihdata"
         type="text"
       > 
-        <option value="">Pilih Data</option>
+        <option value="" disabled selected hidden>Pilih Data</option>
         
 
 
@@ -102,9 +102,18 @@
     const select2 = document.getElementById('pilihdata').value
     e.preventDefault()
 
+    if ( select1 === "" || select2 === "" ) {
+        Swal.fire({
+            title: "Error",
+            text: "Semua field harus diisi!",
+            icon: "error",
+        });
+        return;
+    }
+
     Swal.fire({
       title: 'Delete ' + select1,
-      text: "Apakah Anda Yakin Menghapus? " + select2,
+      text: "Apakah Anda Yakin Menghapus " + select2 + " ?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -112,12 +121,13 @@
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        form.submit();
         Swal.fire(
           'Deleted!',
-          select2 + 'Berhasil Dihapus Dari ' + select1,
+          select2 + ' Berhasil Dihapus Dari ' + select1,
           'success'
-       )
+       ).then(() => {
+        form.submit();
+       })
       }
     })
   })

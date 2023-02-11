@@ -253,13 +253,13 @@
     let adddata = document.getElementById("formadd");
 
     if (sel1.value == "Nama STO") {
-      adddata.action = "/adddata/namasto";
+      // adddata.action = "/adddata/namasto";
     } else if (sel1.value == "Segmen") {
-      adddata.action = "/adddata/segmen";
+      // adddata.action = "/adddata/segmen";
     } else if (sel1.value == "Nama Alpro") {
-      adddata.action = "/adddata/alpro";
-    } else {
-      adddata.action = "/adddata/jenisqe";
+      // adddata.action = "/adddata/alpro";
+    } else if (sel1.value == "Jenis QE") {
+      // adddata.action = "/adddata/jenisqe";
     }
   };
 
@@ -281,7 +281,7 @@
       setdata = arraysto;
 
       // change form action to "/api/admin/editNamaSTO"
-      document.getElementById("formedit").action = "/deletedata/namasto";
+      // document.getElementById("formedit").action = "/deletedata/namasto";
     } else if (sel1.value == "Segmen") {
       let arraysegmen = [];
       await fetch("/api/admin/getAllSegmen")
@@ -293,7 +293,7 @@
         });
 
       setdata = arraysegmen;
-      document.getElementById("formedit").action = "/deletedata/segmen";
+      // document.getElementById("formedit").action = "/deletedata/segmen";
     } else if (sel1.value == "Jenis QE") {
       let arrayjenisqe = [];
       await fetch("/api/admin/getAllJenisQE")
@@ -304,7 +304,7 @@
           });
         });
       setdata = arrayjenisqe;
-      document.getElementById("formedit").action = "/deletedata/jenisqe";
+      // document.getElementById("formedit").action = "/deletedata/jenisqe";
     } else if (sel1.value == "Nama Alpro") {
       let arraynamaalpro = [];
       await fetch("/api/admin/getAllNamaAlpro")
@@ -315,9 +315,9 @@
           });
         });
       setdata = arraynamaalpro;
-      document.getElementById("formedit").action = "/deletedata/namaalpro";
+      // document.getElementById("formedit").action = "/deletedata/namaalpro";
     }
-    sel2.innerHTML = "<option >Pilih Data</option>";
+    sel2.innerHTML = "<option class='disabled selected hidden' value = ''>Pilih Data</option>";
     for (let option in setdata) {
       let pair = setdata[option].split("|");
       let newOption = document.createElement("option");
@@ -349,7 +349,7 @@
       setdata = arraysto;
 
       // change form action to "/api/admin/editNamaSTO"
-      document.getElementById("formedit").action = "/changedata/namasto";
+      // document.getElementById("formedit").action = "/changedata/namasto";
     } else if (sel1.value == "Segmen") {
       let arraysegmen = [];
       await fetch("/api/admin/getAllSegmen")
@@ -361,7 +361,7 @@
         });
 
       setdata = arraysegmen;
-      document.getElementById("formedit").action = "/changedata/segmen";
+      // document.getElementById("formedit").action = "/changedata/segmen";
     } else if (sel1.value == "Jenis QE") {
       let arrayjenisqe = [];
       await fetch("/api/admin/getAllJenisQE")
@@ -372,7 +372,7 @@
           });
         });
       setdata = arrayjenisqe;
-      document.getElementById("formedit").action = "/changedata/jenisqe";
+      // document.getElementById("formedit").action = "/changedata/jenisqe";
     } else if (sel1.value == "Nama Alpro") {
       let arraynamaalpro = [];
       await fetch("/api/admin/getAllNamaAlpro")
@@ -383,9 +383,9 @@
           });
         });
       setdata = arraynamaalpro;
-      document.getElementById("formedit").action = "/changedata/namaalpro";
+      // document.getElementById("formedit").action = "/changedata/namaalpro";
     }
-    sel2.innerHTML = "<option >Pilih Data</option>";
+    sel2.innerHTML = "<option class='disabled selected hidden' value = ''>Pilih Data</option>";
     for (let option in setdata) {
       let pair = setdata[option].split("|");
       let newOption = document.createElement("option");
