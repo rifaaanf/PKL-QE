@@ -94,7 +94,20 @@
                   <%= proposal.keterangan %>
                 </td>
               </tr>
-              <% } %>
+              <% } %> <% if (proposal.catatan) {%>
+              <tr class="bg-gray-100 border-b">
+                <td
+                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                >
+                  Catatan
+                </td>
+                <td
+                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                >
+                  <%= proposal.catatan %>
+                </td>
+                <% } %>
+              </tr>
             </tbody>
           </table>
         </div>
