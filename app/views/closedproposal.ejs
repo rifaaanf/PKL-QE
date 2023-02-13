@@ -43,24 +43,44 @@
                 </tr>
               </thead>
               <tbody>
-                <% proposal.forEach(function (proposal, index) { if
-                (proposal.status === "CLOSED") { %>
-                <tr
-                  class="<%= index % 2 == 0 ? 'bg-gray-100 border-b' : 'bg-white border-b' %> text-center"
-                >
-                  <td class="text-center py-3 px-4">
-                    <%= proposal.idProposal %>
-                  </td>
-                  <td class="text-center py-3 px-4"><%= proposal.namaSTO %></td>
-                  <td class="text-center py-3 px-4"><%= proposal.segmen %></td>
-                  <td class="text-center py-3 px-4">
-                    <%= proposal.namaAlpro %>
-                  </td>
-                  <td class="text-center py-3 px-4"><%= proposal.jenisQE %></td>
-                  <td class="text-center py-3 px-4"><%= proposal.status %></td>
-                </tr>
-                <% } %> <% }); %>
-              </tbody>
+                <%
+                  var isDataAvailable = false;
+                  proposal.forEach(function (proposal, index) {
+                    if(proposal.status === 'CLOSED'){
+                      isDataAvailable = true;
+                %>
+                  <tr class="bg-white border-b text-center">
+                    <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                      <%= proposal.idProposal %>
+                    </td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <%= proposal.namaSTO %>
+                    </td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <%= proposal.segmen %>
+                    </td>
+                    <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                      <%= proposal.namaAlpro %>
+                    </td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <%= proposal.jenisQE %>
+                    </td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <%= proposal.status%>
+                    </td>
+                  </tr>
+                <%
+                   }
+                    });
+                  if (!isDataAvailable) {
+                %>
+                  <tr>
+                    <td colspan="6" class="text-center py-3 px-4">No data available</td>
+                  </tr>
+                <%
+                  }
+                %>
+              </tbody>  
             </table>
           </div>
         </div>
