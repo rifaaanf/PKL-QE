@@ -147,7 +147,7 @@
     let sel2 = document.getElementById(s2);
     let sel3 = document.getElementById(s3);
 
-    sel3.innerHTML = "";
+    sel3.innerHTML = "<option class='disabled selected hidden' value = ''></option>";
 
     if (sel2.value === "Kabel Feeder") {
       var optionArray = fearray;
@@ -317,7 +317,7 @@
       setdata = arraynamaalpro;
       // document.getElementById("formedit").action = "/deletedata/namaalpro";
     }
-    sel2.innerHTML = "<option class='disabled selected hidden' value = ''>Pilih Data</option>";
+    sel2.innerHTML = "";
     for (let option in setdata) {
       let pair = setdata[option].split("|");
       let newOption = document.createElement("option");
@@ -435,4 +435,6 @@
         sel6.value = data.keterangan;
       });
   };
+
+
 </script>

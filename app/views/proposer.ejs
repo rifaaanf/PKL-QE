@@ -16,24 +16,12 @@
         onchange="dropdown(this.id,'sel2','sel3')"
         type="text"
       >
-        <option value="">Pilih STO</option>
+        <option value=""disabled selected hidden>Pilih STO</option>
         <% namaSTO.forEach(function (namasto) { %>
         <option value="<%= namasto.name %>"><%= namasto.name %></option>
         <% })%>
       </select>
-      <div
-        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-      >
-        <svg
-          class="fill-current h-4 w-4"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-          />
-        </svg>
-      </div>
+
     </div>
   </div>
   <div class="md:flex md:items-center mb-6">
@@ -53,24 +41,11 @@
         onchange="dropdown('sel1',this.id,'sel3')"
         type="text"
       > 
-        <option value="">Pilih Segmen</option>
+        <option value=""disabled selected hidden>Pilih Segmen</option>
         <% segmen.forEach(function (segmen) { %>
         <option value="<%= segmen.name %>"><%= segmen.name %></option>
         <% })%>
       </select>
-      <div
-        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-      >
-        <svg
-          class="fill-current h-4 w-4"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-          />
-        </svg>
-      </div>
     </div>
   </div>
   <div class="md:flex md:items-center mb-6">
@@ -83,23 +58,14 @@
       </label>
     </div>
     <div class="relative md:w-2/3">
-      <input required name="namaAlpro" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" type="text" list="sel3" placeholder="Nama Alpro">
-      <datalist id="sel3">
-        
-      </datalist>
-      <div
-        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-      >
-        <svg
-          class="fill-current h-4 w-4"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-          />
-        </svg>
-      </div>
+      <select required
+        name="namaAlpro"
+        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+        id="sel3"
+        type="text"
+      > 
+      </select>
+      
     </div>
   </div>
   <div class="md:flex md:items-center mb-6">
@@ -119,24 +85,11 @@
         type="text"
         onchange="hiddens()"
       >
-        <option value="">Pilih QE</option>
+        <option value=""disabled selected hidden>Pilih QE</option>
         <% jenisQE.forEach(function (jenisQE) { %>
         <option value="<%= jenisQE.name %>"><%= jenisQE.name %></option>
         <% })%>
       </select>
-      <div
-        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-      >
-        <svg
-          class="fill-current h-4 w-4"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-          />
-        </svg>
-      </div>
     </div>
   </div>
   <div class="hidden" id="koordinat">
@@ -195,5 +148,32 @@
     </div>
   </div>
 </form>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+  $('#sel1').select2(
+    {
+      placeholder: 'Pilih Nama STO',
+      allowClear: true
+    }
+  );
+  $('#sel2').select2(
+    {
+      placeholder: 'Pilih Segmen',
+      allowClear: true
+    }
+  );
+  $('#sel3').select2(
+    {
+      placeholder: 'Pilih Nama Alpro',
+      allowClear: true
+    }
+  );
+  $('#QE').select2(
+    {
+      placeholder: 'Pilih Jenis QE',
+      allowClear: true
+    }
+  );
+</script>
 <%- include('./js/js.ejs') %>
