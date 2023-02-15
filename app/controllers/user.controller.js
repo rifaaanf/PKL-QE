@@ -73,14 +73,17 @@ exports.proposerBoard = (req, res) => {
   Proposal.find({}, (err, proposal) => {
     namaSTO.find({}, (err, namasto) => {
       segmen.find({}, (err, segmen) => {
-        jenisQE.find({}, (err, jenisqe) => {
-          res.render("layouts/main-layout-proposer", {
-            data: "proposer",
-            proposal: proposal,
-            namaSTO: namasto,
-            segmen: segmen,
-            jenisQE: jenisqe,
-            pindah: req.roleName,
+        namaAlpro.find({},(err, namaAlpro) => {
+          jenisQE.find({}, (err, jenisqe) => {
+            res.render("layouts/main-layout-proposer", {
+              data: "proposer",
+              proposal: proposal,
+              namaSTO: namasto,
+              segmen: segmen,
+              namaAlpro: namaAlpro,
+              jenisQE: jenisqe,
+              pindah: req.roleName,
+            });
           });
         });
       });
