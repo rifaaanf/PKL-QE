@@ -15,4 +15,11 @@ module.exports = function (app) {
     [authJwt.verifyToken, authJwt.isProposer],
     controller.proposerDetail
   );
+
+  app.post(
+    "/getDataTable", (req,res) => {
+      let payload = req.body.payload;
+      console.log(payload);
+    }
+  )
 };
