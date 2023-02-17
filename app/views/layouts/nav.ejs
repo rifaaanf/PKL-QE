@@ -21,11 +21,20 @@
       Dashboard
     </a>
     <a
-      href="/<%= pindah %>"
-      class="leftbar home flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
+      id="proposer"
+      href="/proposer"
+      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
-      <i class="fas fa-solid fa-house-user mr-3"></i>
-      Home
+      <i class="fas fa-align-left mr-3"></i>
+      New Proposal
+    </a>
+    <a
+      href="/<%= pindah %>"
+      id="inbox"
+      class="leftbar inbox hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
+    >
+      <i class="fas fa-solid fa-envelope mr-3"></i>
+      Inbox
     </a>
     <a
       id="myproposal"
@@ -41,15 +50,7 @@
       class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
       <i class="fas fa-solid fa-file mr-4"></i>
-      Submitted Proposals
-    </a>
-    <a
-      id="redesignproposal"
-      href="/redesignproposal"
-      class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
-    >
-      <i class="fas fa-edit mr-3"></i>
-      Redesign Proposals
+      My Design
     </a>
 
     <a

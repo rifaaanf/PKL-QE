@@ -25,7 +25,7 @@ module.exports = function (app) {
 
   app.get("/rejected", [authJwt.verifyToken], controller.rejected);
 
-  app.get("/needapproval", [authJwt.verifyToken], controller.approverBoard);
+  app.get("/needapproval", [authJwt.verifyToken], controller.needapproval);
 
   app.get(
     "/proposer",
@@ -46,7 +46,7 @@ module.exports = function (app) {
   //   controller.formAdmin
   // );
 
-  app.get("/submitted", [authJwt.verifyToken], controller.designerBoard);
+  app.get("/submitted", [authJwt.verifyToken], controller.submitted);
 
   app.get(
     "/designer",
@@ -59,7 +59,7 @@ module.exports = function (app) {
     controller.executorBoard
   );
 
-  app.get("/approved", [authJwt.verifyToken], controller.executorBoard);
+  app.get("/approved", [authJwt.verifyToken], controller.approved);
 
   app.post(
     "/signup",

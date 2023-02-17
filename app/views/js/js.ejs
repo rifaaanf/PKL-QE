@@ -147,7 +147,8 @@
     let sel2 = document.getElementById(s2);
     let sel3 = document.getElementById(s3);
 
-    sel3.innerHTML = "<option class='disabled selected hidden' value = ''></option>";
+    sel3.innerHTML =
+      "<option class='disabled selected hidden' value = ''></option>";
 
     if (sel2.value === "Kabel Feeder") {
       var optionArray = fearray;
@@ -221,20 +222,24 @@
 
   const hidemenu = () => {
     // if class leftbar href is admin then hide report button
-    let pindah = document.querySelector(".home").href.split("/");
+    let pindah = document.querySelector(".inbox").href.split("/");
     if (pindah[pindah.length - 1] == "admin") {
       document.getElementById("dbmenu").classList.remove("hidden");
       document.getElementById("formAdmin").classList.remove("hidden");
     } else if (pindah[pindah.length - 1] == "proposer") {
       document.getElementById("myproposal").classList.remove("hidden");
+      document.getElementById("proposer").classList.remove("hidden");
     } else if (pindah[pindah.length - 1] == "designer") {
+      document.getElementById("inbox").classList.remove("hidden");
       document.getElementById("completeproposal").classList.remove("hidden");
-      document.getElementById("redesignproposal").classList.remove("hidden");
     } else if (pindah[pindah.length - 1] == "executor") {
       document
         .getElementById("installationproposal")
         .classList.remove("hidden");
+      document.getElementById("inbox").classList.remove("hidden");
       document.getElementById("closedproposal").classList.remove("hidden");
+    } else if (pindah[pindah.length - 1] == "approver") {
+      document.getElementById("inbox").classList.remove("hidden");
     }
   };
 
@@ -385,7 +390,8 @@
       setdata = arraynamaalpro;
       // document.getElementById("formedit").action = "/changedata/namaalpro";
     }
-    sel2.innerHTML = "<option class='disabled selected hidden' value = ''>Pilih Data</option>";
+    sel2.innerHTML =
+      "<option class='disabled selected hidden' value = ''>Pilih Data</option>";
     for (let option in setdata) {
       let pair = setdata[option].split("|");
       let newOption = document.createElement("option");
@@ -435,6 +441,4 @@
         sel6.value = data.keterangan;
       });
   };
-
-
 </script>

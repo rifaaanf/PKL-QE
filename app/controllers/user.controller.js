@@ -16,11 +16,26 @@ const jwt = require("jsonwebtoken");
 const Executor = db.executor;
 exports.designerBoard = (req, res) => {
   Proposal.find({})
-    .sort({ createdAt: -1 })
+    .sort({ updatedAt: -1 })
     .exec((err, proposal) => {
       Proposer.find({}, (err, proposer) => {
         res.render("layouts/main-layout-designer", {
           data: "designer",
+          proposal: proposal,
+          proposer: proposer,
+          pindah: req.roleName,
+        });
+      });
+    });
+};
+
+exports.submitted = (req, res) => {
+  Proposal.find({})
+    .sort({ createdAt: -1 })
+    .exec((err, proposal) => {
+      Proposer.find({}, (err, proposer) => {
+        res.render("layouts/main-layout-designer", {
+          data: "submitted",
           proposal: proposal,
           proposer: proposer,
           pindah: req.roleName,
@@ -73,7 +88,7 @@ exports.proposerBoard = (req, res) => {
   Proposal.find({}, (err, proposal) => {
     namaSTO.find({}, (err, namasto) => {
       segmen.find({}, (err, segmen) => {
-        namaAlpro.find({},(err, namaAlpro) => {
+        namaAlpro.find({}, (err, namaAlpro) => {
           jenisQE.find({}, (err, jenisqe) => {
             res.render("layouts/main-layout-proposer", {
               data: "proposer",
@@ -99,6 +114,20 @@ exports.approverBoard = (req, res) => {
 
       res.render("layouts/main-layout-approver", {
         data: "approver",
+        proposal: proposal,
+        pindah: req.roleName,
+      });
+    });
+};
+
+exports.needapproval = (req, res) => {
+  Proposal.find({})
+    .sort({ createdAt: -1 })
+    .exec((err, proposal) => {
+      if (err) throw err;
+
+      res.render("layouts/main-layout-approver", {
+        data: "needapproval",
         proposal: proposal,
         pindah: req.roleName,
       });
@@ -137,6 +166,21 @@ exports.executorBoard = (req, res) => {
       Proposer.find({}, (err, proposer) => {
         res.render("layouts/main-layout-executor", {
           data: "executor",
+          proposal: proposal,
+          proposer: proposer,
+          pindah: req.roleName,
+        });
+      });
+    });
+};
+
+exports.approved = (req, res) => {
+  Proposal.find({})
+    .sort({ createdAt: -1 })
+    .exec((err, proposal) => {
+      Proposer.find({}, (err, proposer) => {
+        res.render("layouts/main-layout-executor", {
+          data: "approved",
           proposal: proposal,
           proposer: proposer,
           pindah: req.roleName,
