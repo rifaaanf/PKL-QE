@@ -50,7 +50,8 @@
               <tbody>
                 <% var isDataAvailable = false; proposal.forEach(function
                 (proposal, index) { if (proposal.status === "REDESIGN" ||
-                proposal.status === "SUBMITTED") { isDataAvailable = true; %>
+                (!proposal.design && !proposal.rab && proposal.status ===
+                "SUBMITTED")) { isDataAvailable = true; %>
                 <tr class="bg-white border-b text-center">
                   <td
                     class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"

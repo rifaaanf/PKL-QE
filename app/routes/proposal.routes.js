@@ -1,6 +1,6 @@
 const authJwt = require("../middlewares/authJwt");
 const controller = require("../controllers/proposal.controller");
-const { isAdminOrDesigner } = require("../middlewares/authJwt");
+const { isAdminOrDesigner, getDesignerId } = require("../middlewares/authJwt");
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -38,7 +38,7 @@ module.exports = function (app) {
 
   app.post(
     "/detail/:id/design",
-    [authJwt.verifyToken, authJwt.getDesignerName],
+    [authJwt.verifyToken, authJwt.getDesignerName, authJwt.getDesignerId],
     controller.proposaldesign
   );
 

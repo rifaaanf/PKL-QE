@@ -28,7 +28,9 @@ exports.designerProposal = (req, res) => {
 };
 
 exports.designerCompleteProposal = (req, res) => {
-  Proposal.find({})
+  Proposal.find({
+    designer: req.designerId,
+  })
     .sort({ updatedAt: -1 })
     .exec((err, proposal) => {
       if (err) throw err;

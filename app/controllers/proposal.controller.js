@@ -152,6 +152,7 @@ exports.proposaldesign = (req, res) => {
         status: "SUBMITTED",
         design: design,
         rab: rab,
+        designer: req.designerId,
         nilairab: req.body.nilairab,
         timeline: data.timeline.concat([
           [req.designerName, Date(), "NEED APPROVAL"],

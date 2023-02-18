@@ -33,6 +33,10 @@ const Proposal = mongoose.model(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Proposer",
       },
+      designer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Designer",
+      },
       status: {
         type: String,
         enum: [
