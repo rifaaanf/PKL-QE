@@ -10,14 +10,14 @@
   </div>
 </div>
 <select id="status-proposal" name="status" class="mt-1 block w-48 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-  <option value=""disabled selected hidden>Filter By Status</option>
+  <!-- <option value=""disabled selected hidden>Filter By Status</option> -->
   <option value="all">ALL</option>
   <option value="submitted">SUBMITTED</option>
   <option value="approved">APPROVED</option>
   <option value="redesign">REDESIGN</option>
   <option value="rejected">REJECTED</option>
-  <option value="closed">CLOSED</option>
   <option value="installation">INSTALLATION</option>
+  <option value="closed">CLOSED</option>
 </select>
 <div class="max-w rounded overflow-hidden shadow-lg bg-white mt-2">
   <div class="flex flex-col">
@@ -83,7 +83,8 @@
               (proposal, index) { isDataAvailable = true; %>
               <tr class="bg-white border-b text-center">
                 <td
-                  class="list text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                  id="qeIdInput"
+                  class="qe-id list text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
                   <%= proposal.idProposal %>
                 </td>
@@ -136,7 +137,7 @@
               </tr>
               <% }); if (!isDataAvailable) { %>
               <tr>
-                <td  colspan="9" class="text-center py-3 px-4">
+                <td id="td9" colspan="9" class="text-center py-3 px-4">
                   No data available
                 </td>
               </tr>
@@ -163,51 +164,56 @@
   document
     .querySelector("#exampleSearch")
     .addEventListener("input", filterList);
-
+    
   function filterList() {
     const searchInput = document.querySelector("#exampleSearch");
     const filter = searchInput.value.toLowerCase();
-
     const table = document.querySelector("table");
     const list = document.querySelectorAll(".list");
     const noData = table.querySelector("tfoot tr");
 
     let matchFound = false;
+    const select = document.getElementById('status-proposal');
+    const selectedStatus = select.value;
     list.forEach((item) => {
       let text = item.textContent;
-      if (text.toLocaleLowerCase().includes(filter.toLocaleLowerCase())) {
-        item.parentElement.style.display = "";
-        matchFound = true;
+      let status = item.parentElement.querySelector("#td7").textContent.trim().toLowerCase();
+      if (status === selectedStatus || selectedStatus === 'all') {
+        if (text.toLocaleLowerCase().includes(filter)) {
+          item.parentElement.style.display = "";
+          matchFound = true;
+        } else {
+          item.parentElement.style.display = "none";
+        }
       } else {
         item.parentElement.style.display = "none";
       }
     });
-
     if (matchFound) {
       noData.style.display = "none";
     } else {
       noData.style.display = "";
     }
   }
-
-const select = document.getElementById('status-proposal');
-const tableRows = document.querySelectorAll('#proposalTable tbody tr');
-
-select.addEventListener('change', () => {
-  const selectedStatus = select.value;
-
-  tableRows.forEach((row) => {
-    const statusCell = row.querySelector('#td7');
-    const statusText = statusCell.textContent.trim().toLocaleLowerCase();
-    if (statusText === selectedStatus || selectedStatus === 'all') {
-      row.style.display = '';
-    } else {
-      row.style.display = 'none';
-    }
+  
+  const select = document.getElementById('status-proposal');
+  const tableRows = document.querySelectorAll('#proposalTable tbody tr');
+  select.addEventListener('change', () => {
+    const selectedStatus = select.value;
+    tableRows.forEach((row) => {
+      const statusCell = row.querySelector('#td7');
+      const noDataAvailable = row.querySelector("#td9");
+      const statusText = statusCell.textContent.trim().toLocaleLowerCase();
+      if (statusText === selectedStatus || selectedStatus === 'all') {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+    filterList();
   });
-
-});
-
 </script>
+
+
 
 <%- include('./js/js.ejs') %>
