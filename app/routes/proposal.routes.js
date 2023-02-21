@@ -42,6 +42,18 @@ module.exports = function (app) {
     controller.proposaldesign
   );
 
+  // app.post(
+  //   "/designer",
+  //   [authJwt.verifyToken, authJwt.isDesigner],
+  //   controller.proposaldesign
+  // );
+
+  app.post(
+    "/detail/:id/design/upload",
+    [authJwt.verifyToken],
+    controller.proposaldesign
+  );
+
   app.post(
     "/detail/:id/executor/upload",
     [authJwt.verifyToken, authJwt.getExecutorName],
