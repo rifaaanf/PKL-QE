@@ -1,5 +1,5 @@
 
-<form action="/detail/<%= proposal._id %>/design" method="post" enctype="multipart/form-data" class="w-full max-w-sm">
+<form id="formuploaddesign" action="" method="post" enctype="multipart/form-data" class="w-full max-w-sm">
   <div class="md:flex md:items-center mb-6">
     <div class="md:w-1/3">
       <label
@@ -11,7 +11,7 @@
     </div>
     <div class="relative md:w-2/3">
         <!-- accept kml file -->
-        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" accept=".kml" name="design" type="file">
+        <input id="design" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" accept=".kml" name="design" type="file">
     <div
         class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
       >
@@ -29,7 +29,7 @@
       </label>
     </div>
     <div class="relative md:w-2/3">
-        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" accept=".xlsx,.xls,.csv" name="rab" type="file">
+        <input id="rab" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" accept=".xlsx,.xls,.csv" name="rab" type="file">
       <div
         class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
       >
@@ -47,7 +47,7 @@
       </label>
     </div>
     <div class="relative md:w-2/3">
-        <input type="text" name="nilairab" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="inline-password" placeholder="Nilai RAB">
+        <input id="nilairab" type="text" name="nilairab" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="inline-password" placeholder="Nilai RAB">
 
     </div>
   </div>
@@ -56,7 +56,7 @@
     <div class="md:w-1/3"></div>
     <div class="md:w-2/3">
       <input
-
+        id="submit-btn"
         class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
         type="submit"
         
@@ -66,5 +66,50 @@
     </div>
   </div>
 </form>
+
+<script>
+  const form = document.getElementById('formuploaddesign');
+  const btn = document.getElementById('submit-btn');
+
+  btn.addEventListener('click', (e) => {
+    const design = document.getElementById('design').value
+    const rab = document.getElementById('rab').value
+    const nilairab = document.getElementById('nilairab').value
+    e.preventDefault()
+
+    if (design === "" || rab === "" || nilairab === "") {
+        Swal.fire({
+            title: "Error",
+            text: "Semua field harus diisi!",
+            icon: "error",
+        });
+        return;
+    }
+
+    Swal.fire({
+      title: 'Upload Design & RAB',
+      text: "Apakah Anda Yakin Untuk Melakukan Upload Design dan RAB Terlampir?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Upload it!',
+      
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // e.preventDefault()
+        // form.submit()
+        Swal.fire({
+          title: 'Success!',
+          text: 'Berhasil Melakukan Upload Design dan RAB',
+          icon: 'success',
+        }).then(() => {
+          form.submit();
+        })
+      }
+    })
+  })
+
+</script>
 
 
