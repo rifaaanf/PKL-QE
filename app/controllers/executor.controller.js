@@ -38,12 +38,29 @@ exports.pilihMitra = (req, res) => {
     req.params.id,
     { status: "INSTALLATION", mitra: newMitra },
     { new: true },
-    (err, data) => {
+    (err, proposal) => {
       if (err) {
         res.status(500).send({ message: err });
         return;
       }
-      res.status(200).send(data);
+      res.redirect("/executor");
+    }
+  );
+};
+
+exports.gantiMitra = (req, res) => {
+  const newMitra = req.body.mitra;
+
+  Proposal.findByIdAndUpdate(
+    req.params.id,
+    { status: "INSTALLATION", mitra: newMitra },
+    { new: true },
+    (err, proposal) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      res.redirect("/installationproposal");
     }
   );
 };

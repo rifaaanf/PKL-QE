@@ -205,12 +205,12 @@ exports.proposalclose = (req, res) => {
         timeline: data.timeline.concat([[req.executorName, Date(), "CLOSED"]]),
       },
       { new: true },
-      (err, data) => {
+      (err, proposal) => {
         if (err) {
           res.status(500).send({ message: err });
           return;
         }
-        res.status(200).send(data);
+        res.redirect("/closedproposal");
       }
     );
   });
@@ -234,12 +234,12 @@ exports.designerRejectProposal = (req, res) => {
         ]),
       },
       { new: true },
-      (err, data) => {
+      (err, proposal) => {
         if (err) {
           res.status(500).send({ message: err });
           return;
         }
-        res.status(200).send(data);
+        res.redirect("/designer");
       }
     );
   });
@@ -317,12 +317,12 @@ exports.approveProposal = (req, res) => {
         ]),
       },
       { new: true },
-      (err, data) => {
+      (err, proposal) => {
         if (err) {
           res.status(500).send({ message: err });
           return;
         }
-        res.status(200).send(data);
+        res.redirect("/approver");
       }
     );
   });

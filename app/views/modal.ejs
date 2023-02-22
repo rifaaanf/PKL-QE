@@ -36,12 +36,14 @@
           id="catatan"
           rows="5"
           name="catatan"
+          required
         ></textarea>
 
         <!--Footer-->
         <div class="flex justify-end pt-2">
           <a
             ><button
+              id="btn"
               class="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2"
             >
               Submit
@@ -90,4 +92,38 @@
     modal.classList.toggle("pointer-events-none");
     body.classList.toggle("modal-active");
   }
+
+  // const form = document.getElementById('redesignreject');
+  // const btn = document.getElementById('reject-btn');
+
+  // btn.addEventListener('click', (e) => {
+  //   e.preventDefault()
+  //   const reject = document.getElementById('catatan');
+  //   if(reject !== ""){
+      
+
+  //     Swal.fire({
+  //       title: 'Reject Proposal',
+  //       text: "Are You Sure Want To Reject This Proposal?",
+  //       icon: 'warning',
+  //       showCancelButton: true,
+  //       confirmButtonColor: '#3085d6',
+  //       cancelButtonColor: '#d33',
+  //       confirmButtonText: 'Yes, Reject it!',
+        
+  //     }).then((result) => {
+  //       if (result.isConfirmed) {
+  //         // e.preventDefault()
+  //         // form.submit()
+  //         Swal.fire({
+  //           title: 'Success!',
+  //           text: 'Proposal Has Been Successfully Rejected',
+  //           icon: 'success',
+  //         }).then(() => {
+  //           form.submit();
+  //         })
+  //       }
+  //     })
+  //   }
+  // })
 </script>
