@@ -1,4 +1,4 @@
-<form action="/proposal" method="post" class="w-full max-w-sm">
+<form id ="formproposal" action="/proposal" method="post" class="w-full max-w-sm">
   <div class="md:flex md:items-center mb-6">
     <div class="md:w-1/3">
       <label
@@ -21,6 +21,7 @@
         <option value="<%= namasto.name %>"><%= namasto.name %></option>
         <% })%>
       </select>
+      <p id="namastodiisi" class="text-red-500 text-xs italic "></p>
 
     </div>
   </div>
@@ -46,6 +47,7 @@
         <option value="<%= segmen.name %>"><%= segmen.name %></option>
         <% })%>
       </select>
+      <p id="segmendiisi" class="text-red-500 text-xs italic "></p>
     </div>
   </div>
   <div class="md:flex md:items-center mb-6">
@@ -65,6 +67,7 @@
         type="text"
       > 
       </select>
+      <p id="alprodiisi" class="text-red-500 text-xs italic "></p>
       
     </div>
   </div>
@@ -90,6 +93,7 @@
         <option value="<%= jenisQE.name %>"><%= jenisQE.name %></option>
         <% })%>
       </select>
+      <p id="qediisi" class="text-red-500 text-xs italic "></p>
     </div>
   </div>
   <div class="hidden" id="koordinat">
@@ -138,6 +142,7 @@
     <div class="md:w-1/3"></div>
     <div class="md:w-2/3">
       <input
+        id="submitproposal"
 
         class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
         type="submit"
@@ -151,6 +156,47 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
+  var submitproposal = document.getElementById("submitproposal");
+  // if textarea catatan is empty, prevent submit
+  submitproposal.addEventListener("click", function (event) {
+    event.preventDefault();
+    var sel1 = document.getElementById("sel1").value;
+    var sel2 = document.getElementById("sel2").value;
+    var sel3 = document.getElementById("sel3").value;
+    var QE = document.getElementById("QE").value;
+    if (sel1 == "") {
+      //type catatan tidak boleh kosong under textarea with red color
+      document.getElementById("namastodiisi").innerText =
+        "Nama STO tidak boleh kosong";
+    } else {
+      document.getElementById("namastodiisi").innerText = "";
+    } 
+    
+    if(sel2 == ""){
+      document.getElementById("segmendiisi").innerText =
+        "Segmen tidak boleh kosong";
+    } else {
+      document.getElementById("segmendiisi").innerText = "";
+    } 
+    
+    if(sel3 == ""){
+      document.getElementById("alprodiisi").innerText =
+        "Nama Alpro tidak boleh kosong";
+    } else {
+      document.getElementById("alprodiisi").innerText = "";
+    } 
+    
+    if(QE == ""){
+      document.getElementById("qediisi").innerText =
+        "Jenis QE tidak boleh kosong";
+    } else {
+      document.getElementById("qediisi").innerText = "";
+    } 
+    
+    if (sel1 != "" && sel2 != "" && sel3 != "" && QE != "") {
+      document.getElementById("formproposal").submit();
+    }
+  });
   $('#sel1').select2(
     {
       placeholder: 'Pilih Nama STO',
