@@ -22,10 +22,22 @@ module.exports = function (app) {
     controller.changeMitra
   );
 
+  app.post(
+    "/detail/:id/executor/gantimitra",
+    [authJwt.verifyToken, authJwt.isExecutor, authJwt.getExecutorName],
+    controller.gantiMitra
+  );
+
   app.get(
     "/detail/:id/executor/pilihmitra",
     [authJwt.verifyToken],
     controller.pilihMitraPage
+  );
+
+  app.post(
+    "/detail/:id/executor/pilihmitra",
+    [authJwt.verifyToken, authJwt.isExecutor, authJwt.getExecutorName],
+    controller.pilihMitra
   );
 
   app.get(

@@ -50,7 +50,7 @@ module.exports = function (app) {
 
   app.post(
     "/detail/:id/design/upload",
-    [authJwt.verifyToken],
+    [authJwt.verifyToken, authJwt.getDesignerName, authJwt.getDesignerId],
     controller.proposaldesign
   );
 
@@ -62,6 +62,12 @@ module.exports = function (app) {
 
   app.post(
     "/proposal/approve/:id",
+    [authJwt.verifyToken, authJwt.isApprover, authJwt.getApproverName],
+    controller.approveProposal
+  );
+
+  app.post(
+    "/detail/:id/approver",
     [authJwt.verifyToken, authJwt.isApprover, authJwt.getApproverName],
     controller.approveProposal
   );

@@ -192,8 +192,8 @@
 <form
   class="mt-4"
   method="post"
-  action="/proposal/approve/<%= proposal._id %>"
-  id="reject"
+  action=""
+  id="rejectform"
 >
   <div class="md:flex md:items-center">
     <div class="md:w-1/2"></div>
@@ -229,6 +229,7 @@
         </button></a
       >
       <input
+        id="approve-btn"
         value="Approve"
         type="submit"
         class="shadow bg-green-500 float-right mx-1 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-3 rounded"
@@ -237,5 +238,37 @@
     <% } %>
   </div>
 </form>
+<script>
+  const form = document.getElementById('rejectform');
+  const btn = document.getElementById('approve-btn');
 
+  btn.addEventListener('click', (e) => {
+
+      e.preventDefault()
+
+      Swal.fire({
+        title: 'Approve Proposal',
+        text: "Are You Sure Want To Approve This Proposal?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Approve it!',
+        
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // e.preventDefault()
+          // form.submit()
+          Swal.fire({
+            title: 'Success!',
+            text: 'Proposal Has Been Successfully Approved',
+            icon: 'success',
+          }).then(() => {
+            form.submit();
+          })
+        }
+      })
+
+  })
+</script>
 <%- include('modal') %>
