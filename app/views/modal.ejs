@@ -38,13 +38,15 @@
           name="catatan"
           required
         ></textarea>
+        <!-- red small text -->
+        <p id="harusdiisi" class="text-red-500 harusdiisi text-xs italic"></p>
 
         <!--Footer-->
         <div class="flex justify-end pt-2">
           <a
             ><button
-              id="btn"
-              class="px-4 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2"
+              id="submitmodal"
+              class="px-4 submitmodal bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2"
             >
               Submit
             </button></a
@@ -57,12 +59,27 @@
 
 <script>
   var openmodal = document.querySelectorAll(".modal-open");
+
   for (var i = 0; i < openmodal.length; i++) {
     openmodal[i].addEventListener("click", function (event) {
       event.preventDefault();
       toggleModal();
     });
   }
+
+  var submitmodal = document.getElementById("submitmodal");
+  // if textarea catatan is empty, prevent submit
+  submitmodal.addEventListener("click", function (event) {
+    event.preventDefault();
+    var catatan = document.getElementById("catatan").value;
+    if (catatan == "") {
+      //type catatan tidak boleh kosong under textarea with red color
+      document.getElementById("harusdiisi").innerText +=
+        "Catatan tidak boleh kosong";
+    } else {
+      document.getElementById("redesignreject").submit();
+    }
+  });
 
   const overlay = document.querySelector(".modal-overlay");
   overlay.addEventListener("click", toggleModal);
