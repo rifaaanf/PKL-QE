@@ -210,6 +210,7 @@
       <% } else { %>
       <a
         ><button
+          value="Redesign"
           class="modal-open float-right mx-1 shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-3 rounded"
           type="button"
           id="redesign"
@@ -220,6 +221,7 @@
       >
       <a
         ><button
+          value="Reject"
           class="modal-open float-right shadow mx-1 bg-red-500 hover:bg-red-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-3 rounded"
           type="button"
           id="reject"
@@ -239,10 +241,10 @@
   </div>
 </form>
 <script>
-  const form = document.getElementById('rejectform');
-  const btn = document.getElementById('approve-btn');
+  const formrReject = document.getElementById('rejectform');
+  const button = document.getElementById('approve-btn');
 
-  btn.addEventListener('click', (e) => {
+  button.addEventListener('click', (e) => {
 
       e.preventDefault()
 
@@ -264,7 +266,7 @@
             text: 'Proposal Has Been Successfully Approved',
             icon: 'success',
           }).then(() => {
-            form.submit();
+            formrReject.submit();
           })
         }
       })
