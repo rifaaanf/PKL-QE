@@ -18,6 +18,11 @@
                   <th
                     class="text-center py-3 px-4 uppercase font-semibold text-sm"
                   >
+                    Time
+                  </th>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
                     Nama STO
                   </th>
                   <th
@@ -35,7 +40,11 @@
                   >
                     Jenis QE
                   </th>
-
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
+                    Status
+                  </th>
                   <th
                     class="text-center py-3 px-4 uppercase font-semibold text-sm"
                   >
@@ -52,6 +61,11 @@
                     class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                   >
                     <%= proposal.idProposal %>
+                  </td>
+                  <td
+                    class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                  >
+                    <%= proposal.timeline[proposal.timeline.length-1][1] %>
                   </td>
                   <td
                     class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
@@ -73,6 +87,11 @@
                   >
                     <%= proposal.jenisQE %>
                   </td>
+                  <td
+                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                  >
+                    <%= proposal.status %>
+                  </td>
 
                   <td class="text-center py-3 px-4">
                     <a
@@ -85,7 +104,7 @@
                 </tr>
                 <% } }); if (!isDataAvailable) { %>
                 <tr>
-                  <td colspan="7" class="text-center py-3 px-4">
+                  <td colspan="8" class="text-center py-3 px-4">
                     No data available
                   </td>
                 </tr>

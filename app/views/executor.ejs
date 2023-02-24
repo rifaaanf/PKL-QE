@@ -1,6 +1,8 @@
 <form>
   <div class="flex justify-between">
-    <p class="text-xl pb-3"><i class="fas fa-list mr-3"></i> Approved Proposal</p>
+    <p class="text-xl pb-3">
+      <i class="fas fa-list mr-3"></i> Approved Proposal
+    </p>
     <div class="mb-3 xl:w-96">
       <input
         type="search"
@@ -26,6 +28,11 @@
                   <th
                     class="text-center py-3 px-4 uppercase font-semibold text-sm"
                   >
+                    Time
+                  </th>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
                     Nama STO
                   </th>
                   <th
@@ -42,6 +49,11 @@
                     class="text-center py-3 px-4 uppercase font-semibold text-sm"
                   >
                     Jenis QE
+                  </th>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
+                    Status
                   </th>
 
                   <th
@@ -62,6 +74,11 @@
                     <%= proposal.idProposal %>
                   </td>
                   <td
+                    class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                  >
+                    <%= proposal.timeline[proposal.timeline.length-1][1] %>
+                  </td>
+                  <td
                     class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                   >
                     <%= proposal.namaSTO %>
@@ -80,6 +97,11 @@
                     class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                   >
                     <%= proposal.jenisQE %>
+                  </td>
+                  <td
+                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                  >
+                    <%= proposal.status %>
                   </td>
 
                   <td class="text-center py-3 px-4">
@@ -104,7 +126,7 @@
                   <td
                     colspan="7"
                     class="text-center text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                    >
+                  >
                     Data Not Found
                   </td>
                 </tr>
