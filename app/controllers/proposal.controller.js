@@ -267,7 +267,7 @@ exports.approverRejectProposal = (req, res) => {
           res.status(500).send({ message: err });
           return;
         }
-        res.status(200).send(data);
+        res.redirect("/approver");
       }
     );
   });
@@ -295,7 +295,7 @@ exports.redesignProposal = (req, res) => {
           res.status(500).send({ message: err });
           return;
         }
-        res.status(200).send(data);
+        res.redirect("/approver");
       }
     );
   });
