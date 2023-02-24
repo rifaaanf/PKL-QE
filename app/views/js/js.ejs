@@ -322,7 +322,8 @@
       setdata = arraynamaalpro;
       // document.getElementById("formedit").action = "/deletedata/namaalpro";
     }
-    sel2.innerHTML = "";
+    sel2.innerHTML =
+      "<option class='disabled selected hidden' value = ''>Pilih Data</option>";
     for (let option in setdata) {
       let pair = setdata[option].split("|");
       let newOption = document.createElement("option");
@@ -340,7 +341,8 @@
     const sel1 = document.getElementById("sel1");
     const sel2 = document.getElementById("pilihdata");
     let setdata = [];
-
+    sel2.innerHTML =
+      "<option class='disabled selected hidden' value = ''>Pilih Data</option>";
     if (sel1.value == "Nama STO") {
       // await fetch data from "/api/admin/getAllNamaSTO"
       let arraysto = [];
@@ -390,8 +392,7 @@
       setdata = arraynamaalpro;
       // document.getElementById("formedit").action = "/changedata/namaalpro";
     }
-    sel2.innerHTML =
-      "<option class='disabled selected hidden' value = ''>Pilih Data</option>";
+
     for (let option in setdata) {
       let pair = setdata[option].split("|");
       let newOption = document.createElement("option");

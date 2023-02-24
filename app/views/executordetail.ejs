@@ -8,95 +8,98 @@
         <div class="overflow-hidden">
           <table class="min-w-full text-center" style="width: 150px">
             <tbody>
-              <tr class="bg-white border-b">
-                <td
-                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-                >
+              <% var counter = 0; %>
+              <% if (proposal.idProposal) { %>
+              <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                   QE ID
                 </td>
-                <td
-                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                >
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   <%= proposal.idProposal %>
                 </td>
               </tr>
-              <tr class="bg-gray-100 border-b">
-                <td
-                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-                >
+              <% counter++; %>
+              <% } %>
+              <% if (proposal.namaSTO) { %>
+              <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                   Nama STO
                 </td>
-                <td
-                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                >
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   <%= proposal.namaSTO %>
                 </td>
               </tr>
-              <tr class="bg-white border-b">
-                <td
-                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-                >
+              <% counter++; %>
+              <% } %>
+              <% if (proposal.segmen) { %>
+              <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                   Segmen
                 </td>
-                <td
-                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                >
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   <%= proposal.segmen %>
                 </td>
               </tr>
-              <tr class="bg-gray-100 border-b">
-                <td
-                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-                >
+              <% counter++; %>
+              <% } %>
+              <% if (proposal.namaAlpro) { %>
+              <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                   Nama Alpro
                 </td>
-                <td
-                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                >
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   <%= proposal.namaAlpro %>
                 </td>
               </tr>
-              <tr class="bg-white border-b">
-                <td
-                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-                >
+              <% counter++; %>
+              <% } %>
+              <% if (proposal.jenisQE) { %>
+              <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                   Jenis QE
                 </td>
-                <td
-                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                >
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   <%= proposal.jenisQE %>
                 </td>
               </tr>
-              <% if (proposal.koordinatODPBaru) { %>
-              <tr class="bg-gray-100 border-b">
-                <td
-                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-                >
-                  Koordinat ODP Baru
-                </td>
-                <td
-                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                >
-                  <%= proposal.koordinatODPBaru %>
-                </td>
-              </tr>
-              <% } %> <% if (proposal.keterangan) { %>
-              <tr class="bg-white border-b">
-                <td
-                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-                >
-                  Keterangan
-                </td>
-                <td
-                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                >
-                  <%= proposal.keterangan %>
-                </td>
-              </tr>
+              <% counter++; %>
               <% } %>
-              <tr class="bg-gray-100 border-b">
-                <td
+              <% if (proposal.koordinatODPBaru) { %>
+                <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                  <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                    koordinat ODP Baru
+                  </td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <%= proposal.koordinatODPBaru %>
+                  </td>
+                </tr>
+                <% counter++ %>
+                <% } %>
+              <% if (proposal.keterangan) { %>
+                <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                  <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                    Keterangan
+                  </td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <%= proposal.keterangan %>
+                  </td>
+                </tr>
+                <% counter++ %>
+                <% } %>
+              <% if (proposal.catatan) { %>
+                <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                  <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                    Catatan
+                  </td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <%= proposal.catatan %>
+                  </td>
+                </tr>
+                <% counter++ %>
+                <% } %>
+              <% if (proposal.design && proposal.rab) { %>
+                <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                  <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
                   Lampiran
@@ -122,36 +125,30 @@
                     </button></a
                   >
                 </td>
-              </tr>
-              <% if (proposal.mitra) { %>
-              <tr class="bg-white border-b">
-                <td
-                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-                >
-                  Nama Mitra
-                </td>
-                <td
-                  id="detailMitra"
-                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                >
-                  <%= proposal.mitra %>
-                </td>
-              </tr>
-              <% } else { %>
-              <tr class="bg-white border-b">
-                <td
-                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
-                >
-                  Nama Mitra
-                </td>
-                <td
-                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                >
-                  Belum ada mitra
-                </td>
-              </tr>
-              <% } %>
-            </tbody>
+                </tr>
+                <% counter++ %>
+                <% } %>
+                <% if (proposal.mitra) { %>
+                  <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                    <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                      Nama Mitra
+                    </td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <%= proposal.mitra %>
+                    </td>
+                  </tr>
+                  <% } else { %>
+                    <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                      <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                        Nama Mitra
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        Belum Ada Mitra
+                      </td>
+                  </tr>
+                  <% } %>
+                  <% counter++ %>
+              </tbody>
           </table>
         </div>
       </div>

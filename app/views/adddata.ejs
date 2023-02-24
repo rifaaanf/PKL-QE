@@ -78,13 +78,13 @@
   </div>
 </form>
 <script>
-  const form = document.getElementById("form-add");
+  // const form = document.getElementById("form-add");
   const btn = document.getElementById("add-btn");
   
   btn.addEventListener("click", (e) => {
     const select1 = document.getElementById('sel1').value
     const select3 = document.getElementById('sel3').value
-    e.preventDefault()
+    // e.preventDefault()
 
     if (select1 === "" || select3 === "") {
         Swal.fire({
@@ -94,16 +94,6 @@
         });
         return;
     }
-
-    Swal.fire({
-        title: "Add " + select1,
-        text: select1 + " " + select3 + " Berhasil Ditambahkan!",
-        icon: "success",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        form.submit();
-      }
-    })
 });
 
 
