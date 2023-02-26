@@ -1,6 +1,6 @@
 <form>
   <div class="flex justify-between">
-    <p class="text-xl pb-3"><i class="fas fa-list mr-3"></i> Inbox </p>
+    <p class="text-xl pb-3"><i class="fas fa-list mr-3"></i> Inbox</p>
     <div class="mb-3 xl:w-96">
       <input
         type="search"
@@ -22,6 +22,11 @@
                     class="text-center py-3 px-4 uppercase font-semibold text-sm"
                   >
                     QE ID
+                  </th>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
+                    Time
                   </th>
                   <th
                     class="text-center py-3 px-4 uppercase font-semibold text-sm"
@@ -67,6 +72,11 @@
                     <%= proposal.idProposal %>
                   </td>
                   <td
+                    class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                  >
+                    <%= proposal.timeline[proposal.timeline.length-1][1] %>
+                  </td>
+                  <td
                     class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                   >
                     <%= proposal.namaSTO %>
@@ -104,29 +114,29 @@
                 </tr>
                 <% } }); if (!isDataAvailable) { %>
                 <tr>
-                  <td colspan="7" class="text-center py-3 px-4">
+                  <td colspan="8" class="text-center py-3 px-4">
                     No data available
                   </td>
                 </tr>
                 <% } %>
               </tbody>
               <tfoot>
-              <tr style="display: none">
+                <tr style="display: none">
                   <td
-                    colspan="7"
+                    colspan="8"
                     class="text-center text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                    >
+                  >
                     Data Not Found
                   </td>
                 </tr>
               </tfoot>
-              </table>
-            </div>
+            </table>
           </div>
         </div>
       </div>
     </div>
-  </form>
+  </div>
+</form>
 
 <script>
   document

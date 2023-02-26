@@ -45,6 +45,11 @@
                   QE ID
                 </th>
                 <th
+                  class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                >
+                  Time
+                </th>
+                <th
                   class="text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap"
                 >
                   Nama STO
@@ -64,16 +69,7 @@
                 >
                   Jenis QE
                 </th>
-                <th
-                  class="text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap"
-                >
-                  koordinat ODP Baru
-                </th>
-                <th
-                  class="text-center py-3 px-4 uppercase font-semibold text-sm"
-                >
-                  Keterangan
-                </th>
+
                 <th
                   class="text-center py-3 px-4 uppercase font-semibold text-sm"
                 >
@@ -97,6 +93,11 @@
                   <%= proposal.idProposal %>
                 </td>
                 <td
+                  class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                >
+                  <%= proposal.timeline[proposal.timeline.length-1][1] %>
+                </td>
+                <td
                   class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                 >
                   <%= proposal.namaSTO %>
@@ -116,16 +117,7 @@
                 >
                   <%= proposal.jenisQE %>
                 </td>
-                <td
-                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                >
-                  <%= proposal.koordinatODPBaru %>
-                </td>
-                <td
-                  class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                >
-                  <%= proposal.keterangan %>
-                </td>
+
                 <td
                   id="td7"
                   class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
@@ -145,7 +137,7 @@
               </tr>
               <% }); if (!isDataAvailable) { %>
               <tr>
-                <td id="td9" colspan="9" class="text-center py-3 px-4">
+                <td id="td9" colspan="8" class="text-center py-3 px-4">
                   No data available
                 </td>
               </tr>
@@ -154,7 +146,7 @@
             <tfoot>
               <tr style="display: none">
                 <td
-                  colspan="9"
+                  colspan="8"
                   class="text-center text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                 >
                   Data Not Found

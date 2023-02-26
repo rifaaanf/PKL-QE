@@ -1,5 +1,6 @@
 const authJwt = require("../middlewares/authJwt");
 const controller = require("../controllers/admin.controller");
+const verifyData = require("../middlewares/verifyData");
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -10,12 +11,6 @@ module.exports = function (app) {
     next();
   });
 
-  app.get(
-    "/formAdmin",
-    [authJwt.verifyToken, authJwt.isAdmin],
-    controller.formAdmin
-  );
-
   app.get("/api/admin/getAllNamaAlpro", controller.getAllNamaAlpro);
   app.get("/api/admin/getAllNamaSTO", controller.getnamasto);
   app.get("/api/admin/getAllSegmen", controller.getsegmen);
@@ -23,95 +18,49 @@ module.exports = function (app) {
 
   app.get("/detail/:id", [authJwt.verifyToken], controller.detailProposal);
 
-  
   app.get(
     "/changedata",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.changedata
-    );
+  );
 
   app.post(
     "/changedata",
-    [authJwt.verifyToken, authJwt.isAdmin],
+    [authJwt.verifyToken, authJwt.isAdmin, verifyData.checkDuplicateData],
     (req, res) => {
       if (req.body.jenis === "Jenis QE") {
-        controller.changejenisqedata(req, res)
+        controller.changejenisqedata(req, res);
       } else if (req.body.jenis === "Nama STO") {
-        controller.changestodata(req, res)
+        controller.changestodata(req, res);
       } else if (req.body.jenis === "Segmen") {
-        controller.changesegmendata(req, res)
+        controller.changesegmendata(req, res);
       } else if (req.body.jenis === "Nama Alpro") {
-        controller.changenamaalprodata(req, res)
+        controller.changenamaalprodata(req, res);
       }
-    });
-  
-    
-  // app.post(
-  //   "/changedata",
-  //   [authJwt.verifyToken, authJwt.isAdmin],
-  //   controller.changestodata, controller.changenamaalprodata, controller.changesegmendata, controller.changejenisqedata
-  // );
+    }
+  );
 
   app.get(
     "/adddata",
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.adddata
   );
-    
+
   app.post(
     "/adddata",
-    [authJwt.verifyToken, authJwt.isAdmin],
+    [authJwt.verifyToken, authJwt.isAdmin, verifyData.checkDuplicateData],
     (req, res) => {
       if (req.body.jenis === "Jenis QE") {
-        controller.addjenisqe(req, res)
+        controller.addjenisqe(req, res);
       } else if (req.body.jenis === "Nama STO") {
-        controller.addnamasto(req, res)
+        controller.addnamasto(req, res);
       } else if (req.body.jenis === "Segmen") {
-        controller.addsegmen(req, res)
+        controller.addsegmen(req, res);
       } else if (req.body.jenis === "Nama Alpro") {
-        controller.addnamaalpro(req, res)
+        controller.addnamaalpro(req, res);
       }
-    });
-
-
-
-
-  // app.post(
-  //   "/changedata/namaalpro",
-  //   [authJwt.verifyToken, authJwt.isAdmin],
-  //   controller.changenamaalprodata
-  // );
-
-  // app.post(
-  //   "/changedata/segmen",
-  //   [authJwt.verifyToken, authJwt.isAdmin],
-  //   controller.changesegmendata
-  // );
-
-  // app.post(
-  //   "/changedata/jenisqe",
-  //   [authJwt.verifyToken, authJwt.isAdmin],
-  //   controller.changejenisqedata
-  // );
-
-
-  // app.post(
-  //   "/adddata/alpro",
-  //   [authJwt.verifyToken, authJwt.isAdmin],
-  //   controller.addnamaalpro
-  // );
-
-  // app.post(
-  //   "/adddata/segmen",
-  //   [authJwt.verifyToken, authJwt.isAdmin],
-  //   controller.addsegmen
-  // );
-
-  // app.post(
-  //   "/adddata",
-  //   [authJwt.verifyToken, authJwt.isAdmin],
-  //   controller.addjenisqe
-  // );
+    }
+  );
 
   app.get(
     "/deletedata",
@@ -124,37 +73,38 @@ module.exports = function (app) {
     [authJwt.verifyToken, authJwt.isAdmin],
     (req, res) => {
       if (req.body.jenis === "Jenis QE") {
-        controller.deletejenisqe(req, res)
+        controller.deletejenisqe(req, res);
       } else if (req.body.jenis === "Nama STO") {
-        controller.deletenamasto(req, res)
+        controller.deletenamasto(req, res);
       } else if (req.body.jenis === "Segmen") {
-        controller.deletesegmen(req, res)
+        controller.deletesegmen(req, res);
       } else if (req.body.jenis === "Nama Alpro") {
-        controller.deletenamaalpro(req, res)
+        controller.deletenamaalpro(req, res);
       }
-    });
+    }
+  );
 
-//   app.post(
-//     "/deletedata/namasto",
-//     [authJwt.verifyToken, authJwt.isAdmin],
-//     controller.deletenamasto
-//   );
+  //   app.post(
+  //     "/deletedata/namasto",
+  //     [authJwt.verifyToken, authJwt.isAdmin],
+  //     controller.deletenamasto
+  //   );
 
-//   app.post(
-//     "/deletedata/namaalpro",
-//     [authJwt.verifyToken, authJwt.isAdmin],
-//     controller.deletenamaalpro
-//   );
+  //   app.post(
+  //     "/deletedata/namaalpro",
+  //     [authJwt.verifyToken, authJwt.isAdmin],
+  //     controller.deletenamaalpro
+  //   );
 
-//   app.post(
-//     "/deletedata/segmen",
-//     [authJwt.verifyToken, authJwt.isAdmin],
-//     controller.deletesegmen
-//   );
+  //   app.post(
+  //     "/deletedata/segmen",
+  //     [authJwt.verifyToken, authJwt.isAdmin],
+  //     controller.deletesegmen
+  //   );
 
-//   app.post(
-//     "/deletedata/jenisqe",
-//     [authJwt.verifyToken, authJwt.isAdmin],
-//     controller.deletejenisqe
-//   );
+  //   app.post(
+  //     "/deletedata/jenisqe",
+  //     [authJwt.verifyToken, authJwt.isAdmin],
+  //     controller.deletejenisqe
+  //   );
 };

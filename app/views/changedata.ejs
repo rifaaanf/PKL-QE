@@ -116,13 +116,14 @@
   const form = document.getElementById('formedit');
   const btn = document.getElementById('change-btn');
 
-  btn.addEventListener('click', (e) => {
+  form.addEventListener('submit', (e) => {
     const select1 = document.getElementById('sel1').value
     const select2 = document.getElementById('pilihdata').value
     const select3 = document.getElementById('sel3').value
     e.preventDefault()
-
-    if (select1 === "" || select2 === "" || select3 === "") {
+    const data = new FormData(form);
+    const xhr = new XMLHttpRequest();
+        if (select1 === "" || select2 === "" || select3 === "") {
         Swal.fire({
             title: "Error",
             text: "Semua field harus diisi!",
@@ -130,30 +131,34 @@
         });
         return;
     }
-
-    Swal.fire({
-      title: 'Change ' + select1,
-      text: "Apakah Anda Yakin Mengganti " + select2,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, change it!',
-      
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // e.preventDefault()
-        // form.submit()
+    xhr.open('POST', '/changedata');
+    xhr.onload = () => {
+      if (xhr.status === 200) {
         Swal.fire({
           title: 'Changed!',
           text: select1 + ' Berhasil Digganti Dari ' + select2 + " Menjadi " + select3,
           icon: 'success',
-        }).then(() => {
-          form.submit();
-        })
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = '/changedata';
+          }
+        });
+
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "Gagal Mengganti Data",
+          icon: "error",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = '/changedata';
+          }
+        });
       }
-    })
+    }
+    xhr.send(data)
   })
+
 
 </script>
 <%- include('./js/js.ejs') %>

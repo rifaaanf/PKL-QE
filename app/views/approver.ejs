@@ -1,6 +1,6 @@
 <form action="/needapproval" method="get">
   <div class="flex justify-between">
-    <p class="text-xl pb-3"><i class="fas fa-list mr-3"></i> Need Approval </p>
+    <p class="text-xl pb-3"><i class="fas fa-list mr-3"></i> Need Approval</p>
     <div class="mb-3 xl:w-96">
       <input
         type="search"
@@ -26,6 +26,11 @@
                   <th
                     class="text-center py-3 px-4 uppercase font-semibold text-sm"
                   >
+                    Time
+                  </th>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
                     Nama STO
                   </th>
                   <th
@@ -46,6 +51,11 @@
                   <th
                     class="text-center py-3 px-4 uppercase font-semibold text-sm"
                   >
+                    Status
+                  </th>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
                     Action
                   </th>
                 </tr>
@@ -60,6 +70,12 @@
                   >
                     <%= proposal.idProposal %>
                   </td>
+                  <td
+                    class="list text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                  >
+                    <%= proposal.timeline[proposal.timeline.length-1][1] %>
+                  </td>
+
                   <td
                     class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                   >
@@ -80,6 +96,11 @@
                   >
                     <%= proposal.jenisQE %>
                   </td>
+                  <td
+                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                  >
+                    <%= proposal.status %>
+                  </td>
                   <td class="text-center py-3 px-4">
                     <a
                       type="button"
@@ -91,18 +112,18 @@
                 </tr>
                 <% } }); if (!isDataAvailable) { %>
                 <tr>
-                  <td colspan="6" class="text-center py-3 px-4">
+                  <td colspan="8" class="text-center py-3 px-4">
                     No data available
                   </td>
                 </tr>
                 <% } %>
               </tbody>
               <tfoot>
-              <tr style="display: none">
+                <tr style="display: none">
                   <td
-                    colspan="6"
+                    colspan="8"
                     class="text-center text-gray-900 font-light px-6 py-4 whitespace-nowrap"
-                    >
+                  >
                     Data Not Found
                   </td>
                 </tr>

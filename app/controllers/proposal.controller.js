@@ -387,7 +387,7 @@ exports.showProposal = (req, res) => {
   Proposal.find({
     proposer: req.proposerId,
   })
-    .sort({ createdAt: -1 })
+    .sort({ updatedAt: -1 })
     .exec((err, proposal) => {
       if (err) throw err;
 

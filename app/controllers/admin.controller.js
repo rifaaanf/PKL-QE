@@ -168,7 +168,7 @@ exports.addsegmen = (req, res) => {
   });
 };
 
-exports.deletenamasto =  (req, res) => {
+exports.deletenamasto = (req, res) => {
   // delete namaSTO
   namaSTO.findOneAndDelete({ name: req.body.namebaru }, (err, proposal) => {
     if (err) {
