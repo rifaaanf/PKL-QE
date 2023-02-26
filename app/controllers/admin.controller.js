@@ -75,11 +75,7 @@ exports.changestodata = (req, res) => {
         res.status(500).send({ message: err });
         return;
       }
-      res.render("layouts/main-layout-admin", {
-        data: "changedata",
-        proposal: proposal,
-        pindah: req.roleName,
-      });
+      res.redirect("/changedata");
     }
   );
 };
@@ -95,11 +91,7 @@ exports.changesegmendata = (req, res) => {
         res.status(500).send({ message: err });
         return;
       }
-      res.render("layouts/main-layout-admin", {
-        data: "changedata",
-        proposal: proposal,
-        pindah: req.roleName,
-      });
+      res.redirect("/changedata");
     }
   );
 };
@@ -115,11 +107,7 @@ exports.changejenisqedata = (req, res) => {
         res.status(500).send({ message: err });
         return;
       }
-      res.render("layouts/main-layout-admin", {
-        data: "changedata",
-        proposal: proposal,
-        pindah: req.roleName,
-      });
+      res.redirect("/changedata");
     }
   );
 };
@@ -135,11 +123,7 @@ exports.changenamaalprodata = (req, res) => {
         res.status(500).send({ message: err });
         return;
       }
-      res.render("layouts/main-layout-admin", {
-        data: "changedata",
-        proposal: proposal,
-        pindah: req.roleName,
-      });
+      res.redirect("/changedata");
     }
   );
 };
@@ -150,11 +134,7 @@ exports.addnamasto = (req, res) => {
     name: req.body.namebaru,
   });
   namasto.save((err, proposal) => {
-    res.render("layouts/main-layout-admin", {
-      data: "adddata",
-      proposal: proposal,
-      pindah: req.roleName,
-    });
+    res.redirect("/adddata");
   });
 };
 
@@ -164,11 +144,7 @@ exports.addjenisqe = (req, res) => {
     name: req.body.namebaru,
   });
   jenisqe.save((err, proposal) => {
-    res.render("layouts/main-layout-admin", {
-      data: "adddata",
-      proposal: proposal,
-      pindah: req.roleName,
-    });
+    res.redirect("/adddata");
   });
 };
 
@@ -178,11 +154,7 @@ exports.addnamaalpro = (req, res) => {
     name: req.body.namebaru,
   });
   namaalpro.save((err, proposal) => {
-    res.render("layouts/main-layout-admin", {
-      data: "adddata",
-      proposal: proposal,
-      pindah: req.roleName,
-    });
+    res.redirect("/adddata");
   });
 };
 
@@ -192,11 +164,7 @@ exports.addsegmen = (req, res) => {
     name: req.body.namebaru,
   });
   segmen.save((err, proposal) => {
-    res.render("layouts/main-layout-admin", {
-      data: "adddata",
-      proposal: proposal,
-      pindah: req.roleName,
-    });
+    res.redirect("/adddata");
   });
 };
 
@@ -207,11 +175,7 @@ exports.deletenamasto = (req, res) => {
       res.status(500).send({ message: err });
       return;
     }
-    res.render("layouts/main-layout-admin", {
-      data: "deletedata",
-      proposal: proposal,
-      pindah: req.roleName,
-    });
+    res.redirect("/deletedata");
     // res.status(200).send(data);
   });
 };
@@ -223,11 +187,7 @@ exports.deletesegmen = (req, res) => {
       res.status(500).send({ message: err });
       return;
     }
-    res.render("layouts/main-layout-admin", {
-      data: "deletedata",
-      proposal: proposal,
-      pindah: req.roleName,
-    });
+    res.redirect("/deletedata");
   });
 };
 
@@ -238,11 +198,7 @@ exports.deletejenisqe = (req, res) => {
       res.status(500).send({ message: err });
       return;
     }
-    res.render("layouts/main-layout-admin", {
-      data: "deletedata",
-      proposal: proposal,
-      pindah: req.roleName,
-    });
+    res.redirect("/deletedata");
   });
 };
 
@@ -253,11 +209,7 @@ exports.deletenamaalpro = (req, res) => {
       res.status(500).send({ message: err });
       return;
     }
-    res.render("layouts/main-layout-admin", {
-      data: "deletedata",
-      proposal: proposal,
-      pindah: req.roleName,
-    });
+    res.redirect("/deletedata");
   });
 };
 

@@ -120,25 +120,13 @@
     if(reject !== ""){
     
       Swal.fire({
-        title: 'Submit Proposal',
-        text: "Are You Sure Want To Submit",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Submit it!',
-        
+        title: "Success!",
+        text: "",
+        icon: "success",
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire({
-            title: 'Success!',
-            text: 'Proposal Has Been Successfully Submitted',
-            icon: 'success',
-          }).then(() => {
-            toggleModal();
-            form.submit();
-            console.log("aaaa")
-          })
+          toggleModal();
+          form.submit();
         }
       })
     }
