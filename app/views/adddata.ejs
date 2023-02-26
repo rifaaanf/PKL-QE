@@ -81,29 +81,42 @@
   const form = document.getElementById("form-add");
   const btn = document.getElementById("add-btn");
   
-  btn.addEventListener("click", (e) => {
+  
+    // ajax request
+  form.addEventListener("submit", (e) => {
     const select1 = document.getElementById('sel1').value
     const select3 = document.getElementById('sel3').value
-    e.preventDefault()
-
-    if (select1 === "" || select3 === "") {
+    e.preventDefault();
+    const data = new FormData(form);
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "/adddata");
+    xhr.onload = () => {
+      if (xhr.status === 200) {
         Swal.fire({
-            title: "Error",
-            text: "Semua field harus diisi!",
-            icon: "error",
-        });
-        return;
-    }
-
-    Swal.fire({
         title: "Add " + select1,
         text: select1 + " " + select3 + " Berhasil Ditambahkan!",
         icon: "success",
     }).then((result) => {
       if (result.isConfirmed) {
-        form.submit();
+        window.location.href = "/adddata";
       }
     })
+        
+      } else {
+        Swal.fire({
+        title: "Add " + select1,
+        text: select1 + " " + select3 + " Gagal Ditambahkan!",
+        icon: "error",
+      }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/adddata";
+      }
+    })
+      }
+    };
+    xhr.send(data);
+
+
 });
 
 

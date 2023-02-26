@@ -189,6 +189,16 @@ exports.approved = (req, res) => {
     });
 };
 
+exports.adduser = (req, res) => {
+  Proposal.find({}, (err, proposal) => {
+    res.render("layouts/main-layout-admin", {
+      data: "adduser",
+      pindah: req.roleName,
+      proposal: proposal,
+    });
+  });
+};
+
 exports.signup = (req, res) => {
   const user = new User({
     username: req.body.username,

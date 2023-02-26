@@ -40,12 +40,6 @@ module.exports = function (app) {
 
   app.get("/dashboard", [authJwt.verifyToken], controller.dashboard);
 
-  // app.get(
-  //   "/formAdmin",
-  //   [authJwt.verifyToken, authJwt.isAdmin],
-  //   controller.formAdmin
-  // );
-
   app.get("/submitted", [authJwt.verifyToken], controller.submitted);
 
   app.get(
@@ -62,8 +56,14 @@ module.exports = function (app) {
   app.get("/approved", [authJwt.verifyToken], controller.approved);
 
   app.post(
-    "/signup",
+    "/adduser",
     [verifySignUp.checkDuplicateUsername, verifySignUp.checkRolesExisted],
     controller.signup
+  );
+
+  app.get(
+    "/adduser",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.adduser
   );
 };

@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="assets/css/output.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" />
   </head>
   <body class>
     <div class="lg:flex">
@@ -57,7 +57,10 @@
                   placeholder="Enter your password"
                   name="password"
                 />
+
               </div>
+                  <div id="error" class="text-red-500 text-sm italic">
+                  </div>
               <div class="mt-10">
                 <input type="submit"
                   id="submitButton"
@@ -95,5 +98,25 @@
         </div>
       </div>
     </div>
+    <script>
+      const form = document.getElementById('form');
+      const submitButton = document.getElementById('submitButton');
+      const error = document.getElementById('error');
+     form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const data = new FormData(form);
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/signin');
+
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            window.location.href = '/dashboard';
+          } else {
+            error.innerText = "Username or password is incorrect";
+          }
+        };
+        xhr.send(data);
+      });
+    </script>
   </body>
 </html>
