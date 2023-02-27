@@ -38,6 +38,30 @@ module.exports = function (app) {
     controller.adminBoard
   );
 
+  app.get(
+    "/qereport",
+    [authJwt.verifyToken],
+    controller.qeReport
+  );
+
+  app.post(
+    "/qereport",
+    [authJwt.verifyToken],
+    controller.qeReport
+  );
+
+  app.get(
+    "/qereportlist",
+    [authJwt.verifyToken],
+    controller.qeReportList
+  );
+
+  app.post(
+    "/qereportlist",
+    [authJwt.verifyToken],
+    controller.qeReportList
+  );
+
   app.get("/dashboard", [authJwt.verifyToken], controller.dashboard);
 
   app.get("/submitted", [authJwt.verifyToken], controller.submitted);

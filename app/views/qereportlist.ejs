@@ -1,0 +1,158 @@
+<form>
+    <div class="flex justify-between">
+      <p class="text-xl pb-3"><i class="fas fa-list mr-3"></i> Closed Proposal</p>
+      <div class="mb-3 xl:w-96">
+        <input
+          type="search"
+          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          id="exampleSearch"
+          placeholder="Search By QE ID"
+        />
+      </div>
+    </div>
+    <div class="rounded overflow-hidden shadow-lg bg-white">
+      <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+              <table class="min-w-full text-center" style="width: 150px">
+                <thead class="bg-gray-800 text-white">
+                  <tr>
+                    <th
+                      class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                    >
+                      QE ID
+                    </th>
+                    <th
+                      class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                    >
+                      Time
+                    </th>
+                    <th
+                      class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                    >
+                      Nama STO
+                    </th>
+                    <th
+                      class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                    >
+                      Segmen
+                    </th>
+                    <th
+                      class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                    >
+                      nama Alpro
+                    </th>
+                    <th
+                      class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                    >
+                      Jenis QE
+                    </th>
+                    <th
+                      class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                    >
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% var isDataAvailable = false; proposal.forEach(function
+                  (proposal, index) { if(proposal.status === 'CLOSED'){
+                  isDataAvailable = true; %>
+                  <tr class="bg-white border-b text-center">
+                    <td
+                      class="list text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                    >
+                      <%= proposal.idProposal %>
+                    </td>
+                    <td
+                      class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                    >
+                      <%= proposal.timeline[proposal.timeline.length-1][1] %>
+                    </td>
+                    <td
+                      class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                    >
+                      <%= proposal.namaSTO %>
+                    </td>
+                    <td
+                      class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                    >
+                      <%= proposal.segmen %>
+                    </td>
+                    <td
+                      class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                    >
+                      <%= proposal.namaAlpro %>
+                    </td>
+                    <td
+                      class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                    >
+                      <%= proposal.jenisQE %>
+                    </td>
+                    <td
+                      class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                    >
+                      <%= proposal.status%>
+                    </td>
+                  </tr>
+                  <% } }); if (!isDataAvailable) { %>
+                  <tr>
+                    <td colspan="7" class="text-center py-3 px-4">
+                      Data Not Found
+                    </td>
+                  </tr>
+                  <% } %>
+                </tbody>
+                <tfoot>
+                  <tr style="display: none">
+                    <td
+                      colspan="7"
+                      class="text-center text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                    >
+                      Data Not Found
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  
+  <script>
+    document
+      .querySelector("#exampleSearch")
+      .addEventListener("input", filterList);
+  
+    function filterList() {
+      const searchInput = document.querySelector("#exampleSearch");
+      const filter = searchInput.value.toLowerCase();
+  
+      const table = document.querySelector("table");
+      const list = document.querySelectorAll(".list");
+      const noData = table.querySelector("tfoot tr");
+  
+      let matchFound = false;
+  
+      list.forEach((item) => {
+        let text = item.textContent;
+        if (text.toLocaleLowerCase().includes(filter.toLocaleLowerCase())) {
+          item.parentElement.style.display = "";
+          matchFound = true;
+        } else {
+          item.parentElement.style.display = "none";
+        }
+      });
+  
+      if (matchFound) {
+        noData.style.display = "none";
+      } else {
+        noData.style.display = "";
+      }
+    }
+  </script>
+  <%- include('./js/js.ejs') %>
+  

@@ -1,0 +1,187 @@
+<form id ="formproposal" action="/qereportlist" method="post" class="w-full max-w-sm">
+    <div class="md:flex md:items-center mb-6">
+      <div class="md:w-1/3">
+        <label
+          class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+          for="inline-full-name"
+        >
+          Nama STO
+        </label>
+      </div>
+      <div class="relative md:w-2/3">
+        <select required
+          name="namaSTO"
+          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+          id="sel1"
+          onchange="dropdown(this.id,'sel2','sel3')"
+          type="text"
+        >
+          <option value=""disabled selected hidden>Pilih STO</option>
+          <% namaSTO.forEach(function (namasto) { %>
+          <option value="<%= namasto.name %>"><%= namasto.name %></option>
+          <% })%>
+        </select>
+        <p id="namastodiisi" class="text-red-500 text-xs italic "></p>
+  
+      </div>
+    </div>
+    <div class="md:flex md:items-center mb-6">
+      <div class="md:w-1/3">
+        <label
+          class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+          for="inline-password"
+        >
+          Segmen
+        </label>
+      </div>
+      <div class="relative md:w-2/3">
+        <select required
+          name="segmen"
+          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+          id="sel2"
+          onchange="dropdown('sel1',this.id,'sel3')"
+          type="text"
+        > 
+          <option value=""disabled selected hidden>Pilih Segmen</option>
+          <% segmen.forEach(function (segmen) { %>
+          <option value="<%= segmen.name %>"><%= segmen.name %></option>
+          <% })%>
+        </select>
+        <p id="segmendiisi" class="text-red-500 text-xs italic "></p>
+      </div>
+    </div>
+    <div class="md:flex md:items-center mb-6">
+      <div class="md:w-1/3">
+        <label
+          class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+          for="inline-password"
+        >
+          Nama Alpro
+        </label>
+      </div>
+      <div class="relative md:w-2/3">
+        <select 
+          name="namaAlpro"
+          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+          id="sel3"
+          type="text"
+        > 
+        </select>
+        <p id="alprodiisi" class="text-red-500 text-xs italic "></p>
+        
+      </div>
+    </div>
+    <div class="md:flex md:items-center mb-6">
+      <div class="md:w-1/3">
+        <label
+          class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+          for="inline-password"
+        >
+          Jenis QE
+        </label>
+      </div>
+      <div class="relative md:w-2/3">
+        <select required
+          name="jenisQE"
+          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+          id="jenisQE"
+          type="text"
+        >
+          <option value=""disabled selected hidden>Pilih QE</option>
+          <% jenisQE.forEach(function (jenisQE) { %>
+          <option value="<%= jenisQE.name %>"><%= jenisQE.name %></option>
+          <% })%>
+        </select>
+        <p id="qediisi" class="text-red-500 text-xs italic "></p>
+      </div>
+    </div>
+
+    <div class="md:flex md:items-center mb-1">
+      <div class="md:w-1/3"></div>
+    </div>
+    <div class="md:flex md:items-center">
+      <div class="md:w-1/3"></div>
+      <div class="md:w-2/3">
+        <input
+          id="submitproposal"
+  
+          class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+          type="submit"
+          
+        >
+          
+      </input>
+      </div>
+    </div>
+  </form>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script>
+    var submitproposal = document.getElementById("submitproposal");
+    // if textarea catatan is empty, prevent submit
+    submitproposal.addEventListener("click", function (event) {
+      event.preventDefault();
+      var sel1 = document.getElementById("sel1").value;
+      var sel2 = document.getElementById("sel2").value;
+      var sel3 = document.getElementById("sel3").value;
+      var jenisQE = document.getElementById("jenisQE").value;
+      if (sel1 == "") {
+        //type catatan tidak boleh kosong under textarea with red color
+        document.getElementById("namastodiisi").innerText =
+          "Nama STO tidak boleh kosong";
+      } else {
+        document.getElementById("namastodiisi").innerText = "";
+      } 
+      
+      if(sel2 == ""){
+        document.getElementById("segmendiisi").innerText =
+          "Segmen tidak boleh kosong";
+      } else {
+        document.getElementById("segmendiisi").innerText = "";
+      } 
+      
+    //   if(sel3 == ""){
+    //     document.getElementById("alprodiisi").innerText =
+    //       "Nama Alpro tidak boleh kosong";
+    //   } else {
+    //     document.getElementById("alprodiisi").innerText = "";
+    //   } 
+      
+      if(jenisQE == ""){
+        document.getElementById("qediisi").innerText =
+          "Jenis QE tidak boleh kosong";
+      } else {
+        document.getElementById("qediisi").innerText = "";
+      } 
+      
+      if (sel1 != "" && sel2 != "" && jenisQE != "") {
+        document.getElementById("formproposal").submit();
+      }
+    });
+    $('#sel1').select2(
+      {
+        placeholder: 'Pilih Nama STO',
+        allowClear: true
+      }
+    );
+    $('#sel2').select2(
+      {
+        placeholder: 'Pilih Segmen',
+        allowClear: true
+      }
+    );
+    $('#sel3').select2(
+      {
+        placeholder: 'Pilih Nama Alpro',
+        allowClear: true
+      }
+    );
+    $('#jenisQE').select2(
+      {
+        placeholder: 'Pilih Jenis QE',
+        allowClear: true
+      }
+    );
+  </script>
+  <%- include('./js/js.ejs') %>
+  

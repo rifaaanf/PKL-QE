@@ -106,6 +106,50 @@ exports.proposerBoard = (req, res) => {
   });
 };
 
+exports.qeReport = (req, res) => {
+  // get logged in user's role name from x-access-token on the cookie
+  Proposal.find({}, (err, proposal) => {
+    namaSTO.find({}, (err, namasto) => {
+      segmen.find({}, (err, segmen) => {
+        namaAlpro.find({}, (err, namaAlpro) => {
+          jenisQE.find({}, (err, jenisqe) => {
+            res.render("layouts/main-layout-proposer", {
+              data: "qereport",
+              proposal: proposal,
+              namaSTO: namasto,
+              segmen: segmen,
+              namaAlpro: namaAlpro,
+              jenisQE: jenisqe,
+              pindah: req.roleName,
+            });
+          });
+        });
+      });
+    });
+  });
+};
+
+exports.qeReportList = (req, res) => {
+  var namaSTO = req.body.namaSTO;
+  var segmen = req.body.segmen;
+  var namaAlpro = req.body.namaAlpro;
+  var jenisQE = req.body.jenisQE;
+  Proposal.find({
+    namaSTO,
+    segmen,
+    namaAlpro,
+    jenisQE,
+  }, (err, proposal) => {
+    if (err) throw err;
+
+    res.render("layouts/main-layout-proposer", {
+      data: "qereportlist",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
+  });
+};
+
 exports.approverBoard = (req, res) => {
   Proposal.find({})
     .sort({ createdAt: -1 })
