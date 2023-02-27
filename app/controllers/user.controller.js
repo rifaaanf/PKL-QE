@@ -130,16 +130,20 @@ exports.qeReport = (req, res) => {
 };
 
 exports.qeReportList = (req, res) => {
-  var namaSTO = req.body.namaSTO;
-  var segmen = req.body.segmen;
-  var namaAlpro = req.body.namaAlpro;
-  var jenisQE = req.body.jenisQE;
-  Proposal.find({
+
+  let namaSTO = req.body.namaSTO;
+  let segmen = req.body.segmen;
+  let namaAlpro = req.body.namaAlpro;
+  let jenisQE = req.body.jenisQE;
+
+  let query = {
     namaSTO,
     segmen,
     namaAlpro,
-    jenisQE,
-  }, (err, proposal) => {
+    jenisQE: jenisQE ? jenisQE : { $exists: true },
+  };
+
+  Proposal.find(query, (err, proposal) => {
     if (err) throw err;
 
     res.render("layouts/main-layout-proposer", {
@@ -149,6 +153,7 @@ exports.qeReportList = (req, res) => {
     });
   });
 };
+
 
 exports.approverBoard = (req, res) => {
   Proposal.find({})

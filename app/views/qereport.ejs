@@ -65,6 +65,7 @@
           class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
           id="sel3"
           type="text"
+          required
         > 
         </select>
         <p id="alprodiisi" class="text-red-500 text-xs italic "></p>
@@ -81,7 +82,7 @@
         </label>
       </div>
       <div class="relative md:w-2/3">
-        <select required
+        <select
           name="jenisQE"
           class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
           id="jenisQE"
@@ -140,21 +141,21 @@
         document.getElementById("segmendiisi").innerText = "";
       } 
       
-    //   if(sel3 == ""){
-    //     document.getElementById("alprodiisi").innerText =
-    //       "Nama Alpro tidak boleh kosong";
-    //   } else {
-    //     document.getElementById("alprodiisi").innerText = "";
-    //   } 
-      
-      if(jenisQE == ""){
-        document.getElementById("qediisi").innerText =
-          "Jenis QE tidak boleh kosong";
+      if(sel3 == ""){
+        document.getElementById("alprodiisi").innerText =
+          "Nama Alpro tidak boleh kosong";
       } else {
-        document.getElementById("qediisi").innerText = "";
+        document.getElementById("alprodiisi").innerText = "";
       } 
       
-      if (sel1 != "" && sel2 != "" && jenisQE != "") {
+      // if(jenisQE == ""){
+      //   document.getElementById("qediisi").innerText =
+      //     "Jenis QE tidak boleh kosong";
+      // } else {
+      //   document.getElementById("qediisi").innerText = "";
+      // } 
+      
+      if (sel1 != "" && sel2 != "" && sel3 != "") {
         document.getElementById("formproposal").submit();
       }
     });
