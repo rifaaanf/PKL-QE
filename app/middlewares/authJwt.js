@@ -23,6 +23,19 @@ getProposerId = (req, res, next) => {
   });
 };
 
+getExecutorId = (req, res, next) => {
+  Executor.findOne({
+    user: req.userId,
+  }).exec((err, executor) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    req.executorId = executor._id;
+    next();
+  });
+};
+
 getDesignerId = (req, res, next) => {
   Designer.findOne({
     user: req.userId,
@@ -318,6 +331,7 @@ const authJwt = {
   isDesigner,
   getProposerId,
   getDesignerId,
+  getExecutorId,
   isAdminDesignerApprover,
   isExecutor,
   getProposerName,

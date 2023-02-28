@@ -17,6 +17,12 @@ module.exports = function (app) {
   );
 
   app.get(
+    "/detail/:id/closeddetail",
+    [authJwt.verifyToken],
+    controller.closedDetail
+  );
+
+  app.get(
     "/detail/:id/executor/gantimitra",
     [authJwt.verifyToken],
     controller.changeMitra
@@ -24,7 +30,7 @@ module.exports = function (app) {
 
   app.post(
     "/detail/:id/executor/gantimitra",
-    [authJwt.verifyToken, authJwt.isExecutor, authJwt.getExecutorName],
+    [authJwt.verifyToken, authJwt.isExecutor, authJwt.getExecutorName, authJwt.getExecutorId],
     controller.gantiMitra
   );
 
@@ -36,19 +42,31 @@ module.exports = function (app) {
 
   app.post(
     "/detail/:id/executor/pilihmitra",
-    [authJwt.verifyToken, authJwt.isExecutor, authJwt.getExecutorName],
+    [authJwt.verifyToken, authJwt.isExecutor, authJwt.getExecutorName, authJwt.getExecutorId],
     controller.pilihMitra
   );
 
   app.get(
     "/installationproposal",
-    [authJwt.verifyToken],
+    [authJwt.verifyToken, authJwt.isExecutor, authJwt.getExecutorId],
     controller.executorInstallationProposal
   );
 
   app.get(
-    "/closedproposal",
+    "/allinstallationproposal",
     [authJwt.verifyToken],
+    controller.allExecutorInstallationProposal
+  );
+
+  app.get(
+    "/allclosedproposal",
+    [authJwt.verifyToken],
+    controller.allExecutorClosedProposal
+  );
+
+  app.get(
+    "/closedproposal",
+    [authJwt.verifyToken, authJwt.isExecutor, authJwt.getExecutorId],
     controller.executorClosedProposal
   );
 

@@ -1,0 +1,227 @@
+<p class="text-xl pb-3 flex items-center ml-1">
+    <i class="fas fa-list mr-3"></i> Detail
+  </p>
+  <div class="rounded overflow-hidden shadow-lg bg-white">
+    <div class="flex flex-col">
+      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="overflow-hidden">
+            <table class="min-w-full text-center" style="width: 150px">
+              <tbody>
+                <% var counter = 0; %>
+                <% if (proposal.idProposal) { %>
+                <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                  <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                    QE ID
+                  </td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <%= proposal.idProposal %>
+                  </td>
+                </tr>
+                <% counter++; %>
+                <% } %>
+                <% if (proposal.namaSTO) { %>
+                <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                  <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                    Nama STO
+                  </td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <%= proposal.namaSTO %>
+                  </td>
+                </tr>
+                <% counter++; %>
+                <% } %>
+                <% if (proposal.segmen) { %>
+                <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                  <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                    Segmen
+                  </td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <%= proposal.segmen %>
+                  </td>
+                </tr>
+                <% counter++; %>
+                <% } %>
+                <% if (proposal.namaAlpro) { %>
+                <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                  <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                    Nama Alpro
+                  </td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <%= proposal.namaAlpro %>
+                  </td>
+                </tr>
+                <% counter++; %>
+                <% } %>
+                <% if (proposal.jenisQE) { %>
+                <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                  <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                    Jenis QE
+                  </td>
+                  <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <%= proposal.jenisQE %>
+                  </td>
+                </tr>
+                <% counter++; %>
+                <% } %>
+                <% if (proposal.koordinatODPBaru) { %>
+                  <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                    <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                      koordinat ODP Baru
+                    </td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <%= proposal.koordinatODPBaru %>
+                    </td>
+                  </tr>
+                  <% counter++ %>
+                  <% } %>
+                <% if (proposal.keterangan) { %>
+                  <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                    <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                      Keterangan
+                    </td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <%= proposal.keterangan %>
+                    </td>
+                  </tr>
+                  <% counter++ %>
+                  <% } %>
+                <% if (proposal.catatan) { %>
+                  <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                    <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                      Catatan
+                    </td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <%= proposal.catatan %>
+                    </td>
+                  </tr>
+                  <% counter++ %>
+                  <% } %>
+                <% if (proposal.design && proposal.rab) { %>
+                  <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                    <td
+                    class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                  >
+                    Lampiran
+                  </td>
+                  <td
+                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                  >
+                    <a href="/detail/<%= proposal._id %>/design/download"
+                      ><button
+                        class="shadow mr-1 bg-gray-500 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                        type="button"
+                      >
+                        <i class="fas fa-download" aria-hidden="true"></i>
+                        Design
+                      </button></a
+                    ><a href="/detail/<%= proposal._id %>/rab/download"
+                      ><button
+                        class="shadow bg-gray-500 hover:bg-gray-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                        type="button"
+                      >
+                        <i class="fas fa-download" aria-hidden="true"></i>
+                        RAB
+                      </button></a
+                    >
+                  </td>
+                  </tr>
+                  <% counter++ %>
+                  <% } %>
+                  <% if (proposal.mitra) { %>
+                    <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                      <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                        Nama Mitra
+                      </td>
+                      <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <%= proposal.mitra %>
+                      </td>
+                    </tr>
+                    <% } else { %>
+                      <tr class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b">
+                        <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                          Nama Mitra
+                        </td>
+                        <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          Belum Ada Mitra
+                        </td>
+                    </tr>
+                    <% } %>
+                    <% counter++ %>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <p class="text-xl pb-3 flex items-center ml-1 mt-8">
+    <i class="fas fa-list mr-3"></i> Timeline
+  </p>
+  <div class="rounded overflow-hidden shadow-lg bg-white">
+    <div class="flex flex-col">
+      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full sm:px-6 lg:px-8">
+          <div class="overflow-hidden">
+            <table class="min-w-full text-center" style="width: 150px">
+              <thead class="bg-gray-800 text-white">
+                <tr>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
+                    Waktu
+                  </th>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
+                    Nama
+                  </th>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% proposal.timeline.forEach(function (item, index) { %>
+                <tr
+                  class="<%= index % 2 == 0 ? 'bg-gray-100 border-b' : 'bg-white border-b' %> text-center"
+                >
+                  <td
+                    class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                  >
+                    <%= item[1]%>
+                  </td>
+                  <td
+                    class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                  >
+                    <%= item[0] %>
+                  </td>
+                  <td
+                    class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                  >
+                    <%= item[2] %>
+                  </td>
+                </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mt-4">
+    <a href="/closedproposal"
+      ><button
+        class="shadow float-right bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+        type="button"
+      >
+        Back
+      </button></a
+    >
+  </div>
+  
