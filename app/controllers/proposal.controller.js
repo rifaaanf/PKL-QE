@@ -202,6 +202,7 @@ exports.proposalclose = (req, res) => {
         designevidence: designevidence,
         rabevidence: rabevidence,
         nilairabevidence: req.body.nilairabevidence,
+        executor: req.executorId,
         timeline: data.timeline.concat([[req.executorName, Date(), "CLOSED"]]),
       },
       { new: true },

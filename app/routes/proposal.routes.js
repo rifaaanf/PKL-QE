@@ -56,7 +56,7 @@ module.exports = function (app) {
 
   app.post(
     "/detail/:id/executor/upload",
-    [authJwt.verifyToken, authJwt.getExecutorName],
+    [authJwt.verifyToken, authJwt.getExecutorName, authJwt.getExecutorId],
     controller.proposalclose
   );
 

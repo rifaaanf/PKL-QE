@@ -37,6 +37,10 @@ const Proposal = mongoose.model(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Designer",
       },
+      executor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Executor",
+      },
       status: {
         type: String,
         enum: [

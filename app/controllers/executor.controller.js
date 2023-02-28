@@ -17,6 +17,17 @@ exports.executorDetail = (req, res) => {
   });
 };
 
+exports.closedDetail = (req, res) => {
+  var id = req.params.id;
+  Proposal.findById(id, (err, proposal) => {
+    res.render("layouts/main-layout-executor", {
+      data: "closeddetail",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
+  });
+};
+
 exports.pilihMitraPage = (req, res) => {
   var id = req.params.id;
   Proposal.findById(id, (err, proposal) => {
@@ -36,7 +47,7 @@ exports.pilihMitra = (req, res) => {
 
   Proposal.findByIdAndUpdate(
     req.params.id,
-    { status: "INSTALLATION", mitra: newMitra },
+    { status: "INSTALLATION", mitra: newMitra, executor: req.executorId },
     { new: true },
     (err, proposal) => {
       if (err) {
@@ -53,7 +64,7 @@ exports.gantiMitra = (req, res) => {
 
   Proposal.findByIdAndUpdate(
     req.params.id,
-    { status: "INSTALLATION", mitra: newMitra },
+    { status: "INSTALLATION", mitra: newMitra, executor: req.executorId },
     { new: true },
     (err, proposal) => {
       if (err) {
@@ -66,7 +77,11 @@ exports.gantiMitra = (req, res) => {
 };
 
 exports.executorInstallationProposal = (req, res) => {
-  Proposal.find({}, (err, proposal) => {
+  Proposal.find({
+    executor: req.executorId,
+  })
+    .sort({updatedAt: -1})
+    .exec((err, proposal) => {
     if (err) throw err;
 
     res.render("layouts/main-layout-executor", {
@@ -103,11 +118,39 @@ exports.uploadInstallationEvidence = (req, res) => {
 };
 
 exports.executorClosedProposal = (req, res) => {
-  Proposal.find({}, (err, proposal) => {
+  Proposal.find({
+    executor: req.executorId,
+  })
+    .sort({updatedAt: -1})
+    .exec((err, proposal) => {
     if (err) throw err;
 
     res.render("layouts/main-layout-executor", {
       data: "closedproposal",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
+  });
+};
+
+exports.allExecutorInstallationProposal = (req, res) => {
+  Proposal.find({}, (err, proposal) => {
+    if (err) throw err;
+
+    res.render("layouts/main-layout-executor", {
+      data: "allinstallationproposal",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
+  });
+};
+
+exports.allExecutorClosedProposal = (req, res) => {
+  Proposal.find({}, (err, proposal) => {
+    if (err) throw err;
+
+    res.render("layouts/main-layout-executor", {
+      data: "allclosedproposal",
       proposal: proposal,
       pindah: req.roleName,
     });
