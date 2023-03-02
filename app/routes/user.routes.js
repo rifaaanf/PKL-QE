@@ -1,6 +1,7 @@
 const authJwt = require("../middlewares/authJwt");
 const controller = require("../controllers/user.controller");
 const verifySignUp = require("../middlewares/verifySignUp");
+const xlsx = require("xlsx");
 
 module.exports = function (app) {
   app.use(function (req, res, next) {
@@ -38,29 +39,15 @@ module.exports = function (app) {
     controller.adminBoard
   );
 
-  app.get(
-    "/qereport",
-    [authJwt.verifyToken],
-    controller.qeReport
-  );
+  app.get("/qereport", [authJwt.verifyToken], controller.qeReport);
 
-  app.post(
-    "/qereport",
-    [authJwt.verifyToken],
-    controller.qeReport
-  );
+  app.post("/qereport", [authJwt.verifyToken], controller.qeReport);
 
-  app.get(
-    "/qereportlist",
-    [authJwt.verifyToken],
-    controller.qeReportList
-  );
+  app.post("/exportdata", [authJwt.verifyToken], controller.exportdata);
 
-  app.post(
-    "/qereportlist",
-    [authJwt.verifyToken],
-    controller.qeReportList
-  );
+  app.get("/qereportlist", [authJwt.verifyToken], controller.qeReportList);
+
+  app.post("/qereportlist", [authJwt.verifyToken], controller.qeReportList);
 
   app.get("/dashboard", [authJwt.verifyToken], controller.dashboard);
 

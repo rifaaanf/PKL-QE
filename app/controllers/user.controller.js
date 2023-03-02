@@ -11,8 +11,8 @@ const segmen = db.segmen;
 const jenisQE = db.jenisQE;
 const namaAlpro = db.namaAlpro;
 const Proposal = db.proposal;
-const SECRET = process.env.SECRET;
-const jwt = require("jsonwebtoken");
+const xlsx = require("xlsx");
+const { exists } = require("../models/user.model");
 const Executor = db.executor;
 exports.designerBoard = (req, res) => {
   Proposal.find({})
@@ -59,6 +59,44 @@ exports.dashboard = (req, res) => {
     });
 };
 
+exports.exportdata = (req, res) => {
+  var wb = xlsx.utils.book_new();
+  Proposal.find(
+    {
+      namaSTO: req.query.namaSTO,
+      segmen: req.query.segmen,
+      namaAlpro: req.query.namaAlpro || { $exists: true },
+      jenisQE: req.query.jenisQE || { $exists: true },
+      status: "CLOSED",
+    },
+    (err, proposal) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      } else {
+        //get only the fields you want to export
+        var data = proposal.map((item) => {
+          return {
+            "QE ID": item.idProposal,
+            namaSTO: item.namaSTO,
+            segmen: item.segmen,
+            namaAlpro: item.namaAlpro,
+            jenisQE: item.jenisQE,
+            status: item.status,
+            keterangan: item.keterangan,
+            "Jumlah Biaya": item.nilairab,
+          };
+        });
+        var temp = JSON.stringify(data);
+        temp = JSON.parse(temp);
+        var ws = xlsx.utils.json_to_sheet(temp);
+        xlsx.utils.book_append_sheet(wb, ws, "Proposal");
+        xlsx.writeFile(wb, "Proposal.xlsx");
+        res.download("Proposal.xlsx");
+      }
+    }
+  );
+};
 exports.adminBoard = (req, res) => {
   Proposal.find({})
     .sort({ createdAt: -1 })
@@ -72,16 +110,6 @@ exports.adminBoard = (req, res) => {
         });
       });
     });
-
-  // Proposal.find({}, (err, proposal) => {
-  //   Proposer.find({}, (err, proposer) => {
-  //     res.render("layouts/main-layout-admin", {
-  //       data: "admin",
-  //       proposal: proposal,
-  //       proposer: proposer,
-  //     });
-  //   });
-  // });
 };
 exports.proposerBoard = (req, res) => {
   // get logged in user's role name from x-access-token on the cookie
@@ -130,7 +158,6 @@ exports.qeReport = (req, res) => {
 };
 
 exports.qeReportList = (req, res) => {
-
   let namaSTO = req.body.namaSTO;
   let segmen = req.body.segmen;
   let namaAlpro = req.body.namaAlpro;
@@ -139,21 +166,23 @@ exports.qeReportList = (req, res) => {
   let query = {
     namaSTO,
     segmen,
-    namaAlpro,
+    namaAlpro: namaAlpro ? namaAlpro : { $exists: true },
     jenisQE: jenisQE ? jenisQE : { $exists: true },
   };
 
   Proposal.find(query, (err, proposal) => {
     if (err) throw err;
-
     res.render("layouts/main-layout-proposer", {
       data: "qereportlist",
       proposal: proposal,
       pindah: req.roleName,
+      namaSTO: namaSTO,
+      segmen: segmen,
+      namaAlpro: namaAlpro,
+      jenisQE: jenisQE,
     });
   });
 };
-
 
 exports.approverBoard = (req, res) => {
   Proposal.find({})

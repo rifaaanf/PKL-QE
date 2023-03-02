@@ -114,6 +114,7 @@ exports.createProposal = async (req, res) => {
           jenisQE: proposal.jenisQE,
           koordinatODPBaru: proposal.koordinatODPBaru,
           keterangan: proposal.keterangan,
+          proposal: proposal,
           pindah: req.roleName,
         });
       }
@@ -349,6 +350,9 @@ async function createIDProposal(namaSTO, segmen) {
       break;
     case "DC":
       segmenNumber = "05";
+      break;
+    case "Tiang":
+      segmenNumber = "06";
       break;
   }
 

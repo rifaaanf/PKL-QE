@@ -19,6 +19,7 @@
   const odpsmt = [];
   const odpjhr = [];
   const odpmjb = [];
+  const tiang = [];
   fetch("/api/admin/getAllNamaAlpro")
     .then((res) => res.json())
     .then((data) => {
@@ -43,9 +44,66 @@
           odpjhr.push(`${namaalpro.name}|${namaalpro.name}`);
         } else if (namaalpro.name.startsWith("ODP-MJB-FB")) {
           odpmjb.push(`${namaalpro.name}|${namaalpro.name}`);
+        } else if (namaalpro.name.startsWith("Tiang")) {
+          tiang.push(`${namaalpro.name}|${namaalpro.name}`);
         }
       });
     });
+
+  const changeexportlink = () => {
+    if (document.getElementById("namaAlprolink").innerText == "") {
+      document
+        .getElementById("exportdata")
+        .setAttribute(
+          "action",
+          "/exportdata?namaSTO=" +
+            document.getElementById("namaSTOlink").innerText +
+            "&segmen=" +
+            document.getElementById("segmenlink").innerText +
+            "&jenisQE=" +
+            document.getElementById("jenisQElink").innerText
+        );
+    } else if (document.getElementById("jenisQElink").innerText == "") {
+      document
+        .getElementById("exportdata")
+        .setAttribute(
+          "action",
+          "/exportdata?namaSTO=" +
+            document.getElementById("namaSTOlink").innerText +
+            "&segmen=" +
+            document.getElementById("segmenlink").innerText +
+            "&namaAlpro=" +
+            document.getElementById("namaAlprolink").innerText
+        );
+    } else if (
+      document.getElementById("namaAlprolink").innerText == "" &&
+      document.getElementById("jenisQElink".innerText == "")
+    ) {
+      document
+        .getElementById("exportdata")
+        .setAttribute(
+          "action",
+          "/exportdata?namaSTO=" +
+            document.getElementById("namaSTOlink").innerText +
+            "&segmen=" +
+            document.getElementById("segmenlink").innerText
+        );
+    } else {
+      document
+        .getElementById("exportdata")
+        .setAttribute(
+          "action",
+          "/exportdata/" +
+            document.getElementById("namaSTOlink").innerText +
+            "/" +
+            document.getElementById("segmenlink").innerText +
+            "/" +
+            document.getElementById("namaAlprolink").innerText +
+            "/" +
+            document.getElementById("jenisQElink").innerText
+        );
+    }
+  };
 
   // make doughnut chart for proposal get all proposal with status APPROVED and else
   const chart = () => {
@@ -170,6 +228,8 @@
       var optionArray = odpjhr;
     } else if (sel1.value === "MJB" && sel2.value === "ODP") {
       var optionArray = odpmjb;
+    } else if (sel1.value != "" && sel2.value === "Tiang") {
+      var optionArray = tiang;
     }
 
     for (let option in optionArray) {
