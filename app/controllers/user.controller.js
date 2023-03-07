@@ -91,8 +91,8 @@ exports.exportdata = (req, res) => {
         temp = JSON.parse(temp);
         var ws = xlsx.utils.json_to_sheet(temp);
         xlsx.utils.book_append_sheet(wb, ws, "Proposal");
-        xlsx.writeFile(wb, "Proposal.xlsx");
-        res.download("Proposal.xlsx");
+        xlsx.writeFile(wb, "QE Report.xlsx");
+        res.download("QE Report.xlsx");
       }
     }
   );

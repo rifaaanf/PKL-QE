@@ -51,8 +51,23 @@ exports.downloaddesign = (req, res) => {
       return;
     }
     const file = fs.createReadStream(data.design);
-    const filename = "DESIGN_" + data.idProposal + ".kml";
-    res.setHeader("Content-disposition", "attachment; filename=" + filename);
+    //if data design filename is .kml then change the filename to DESIGN_IDPROPOSAL.kml
+    if (data.design.split(".")[1] === "kml") {
+      const filename = "DESIGN_" + data.idProposal + ".kml";
+      res.setHeader("Content-disposition", "attachment; filename=" + filename);
+    }
+    //if data design filename is png then change the filename to DESIGN_IDPROPOSAL.png
+    else if (data.design.split(".")[1] === "png") {
+      const filename = "DESIGN_" + data.idProposal + ".png";
+      res.setHeader("Content-disposition", "attachment; filename=" + filename);
+    } else if (data.design.split(".")[1] === "jpg") {
+      const filename = "DESIGN_" + data.idProposal + ".jpg";
+      res.setHeader("Content-disposition", "attachment; filename=" + filename);
+    } else if (data.design.split(".")[1] === "jpeg") {
+      const filename = "DESIGN_" + data.idProposal + ".jpeg";
+      res.setHeader("Content-disposition", "attachment; filename=" + filename);
+    }
+
     file.pipe(res);
   });
 };
