@@ -397,6 +397,28 @@
     // add every data to the sel2 dropdown
   };
 
+  const jenisqematch = async () => {
+    const sel2 = document.getElementById("sel2");
+    const QE = document.getElementById("QE");
+    QE.innerHTML =
+      "<option class='disabled selected hidden' value = ''>Pilih Data</option>";
+    fetch("/api/admin/getAllJenisQE")
+      .then((res) => res.json())
+      .then((data) => {
+        data.forEach((jenisQE) => {
+          if (jenisQE.name.match(`${sel2.value}`)) {
+            //make option for QE
+
+            let newOption = document.createElement("option");
+            newOption.value = jenisQE.name;
+            newOption.innerHTML = jenisQE.name;
+            // add the new option
+            QE.innerHTML = QE.innerHTML + newOption.outerHTML;
+          }
+        });
+      });
+  };
+
   const changedata = async () => {
     const sel1 = document.getElementById("sel1");
     const sel2 = document.getElementById("pilihdata");
@@ -470,7 +492,7 @@
     let jenisQE = document.getElementById("QE");
     let koordinatBaru = document.getElementById("koordinat");
 
-    if (jenisQE.value != "Normalisasi ODP") {
+    if (!jenisQE.value.match("Normalisasi")) {
       koordinatBaru.classList.add("hidden");
     } else {
       koordinatBaru.classList.remove("hidden");

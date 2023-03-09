@@ -78,12 +78,11 @@ exports.exportdata = (req, res) => {
         var data = proposal.map((item) => {
           return {
             "QE ID": item.idProposal,
-            namaSTO: item.namaSTO,
-            segmen: item.segmen,
-            namaAlpro: item.namaAlpro,
-            jenisQE: item.jenisQE,
-            status: item.status,
-            keterangan: item.keterangan,
+            "Nama STO": item.namaSTO,
+            "Waktu ": item.timeline[item.timeline.length - 1][1],
+            "Segmen ": item.segmen,
+            "Nama Alpro": item.namaAlpro,
+            "Jenis QE": item.jenisQE,
             "Jumlah Biaya": item.nilairab,
           };
         });
