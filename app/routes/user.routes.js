@@ -43,8 +43,6 @@ module.exports = function (app) {
 
   app.post("/qereport", [authJwt.verifyToken], controller.qeReport);
 
-  app.post("/exportdata", [authJwt.verifyToken], controller.exportdata);
-
   app.get("/qereportlist", [authJwt.verifyToken], controller.qeReportList);
 
   app.post("/qereportlist", [authJwt.verifyToken], controller.qeReportList);
@@ -52,6 +50,20 @@ module.exports = function (app) {
   app.get("/dashboard", [authJwt.verifyToken], controller.dashboard);
 
   app.get("/submitted", [authJwt.verifyToken], controller.submitted);
+
+  app.post("/batch", [authJwt.verifyToken, authJwt.isAdmin], (req, res) => {
+    if (req.body.jenis === "Jenis QE") {
+      controller.batchjenisqe(req, res);
+    } else if (req.body.jenis === "Nama STO") {
+      controller.batchnamasto(req, res);
+    } else if (req.body.jenis === "Segmen") {
+      controller.batchsegmen(req, res);
+    } else if (req.body.jenis === "Nama Alpro") {
+      controller.batchnamaalpro(req, res);
+    }
+  });
+
+  app.get("/batch", [authJwt.verifyToken], controller.uploadBatch);
 
   app.get(
     "/designer",

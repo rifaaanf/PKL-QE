@@ -52,6 +52,8 @@ const storage = multer.diskStorage({
       cb(null, "./app/views/uploads/designevidence");
     } else if (file.fieldname === "rabevidence") {
       cb(null, "./app/views/uploads/rabevidence");
+    } else if (file.fieldname === "batch") {
+      cb(null, "./app/views/uploads/batch");
     }
   },
   filename: function (req, file, cb) {
@@ -65,6 +67,7 @@ app.use(
     { name: "rab" },
     { name: "designevidence" },
     { name: "rabevidence" },
+    { name: "batch" },
   ])
 );
 

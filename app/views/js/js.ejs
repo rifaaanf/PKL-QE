@@ -50,61 +50,6 @@
       });
     });
 
-  const changeexportlink = () => {
-    if (document.getElementById("namaAlprolink").innerText == "") {
-      document
-        .getElementById("exportdata")
-        .setAttribute(
-          "action",
-          "/exportdata?namaSTO=" +
-            document.getElementById("namaSTOlink").innerText +
-            "&segmen=" +
-            document.getElementById("segmenlink").innerText +
-            "&jenisQE=" +
-            document.getElementById("jenisQElink").innerText
-        );
-    } else if (document.getElementById("jenisQElink").innerText == "") {
-      document
-        .getElementById("exportdata")
-        .setAttribute(
-          "action",
-          "/exportdata?namaSTO=" +
-            document.getElementById("namaSTOlink").innerText +
-            "&segmen=" +
-            document.getElementById("segmenlink").innerText +
-            "&namaAlpro=" +
-            document.getElementById("namaAlprolink").innerText
-        );
-    } else if (
-      document.getElementById("namaAlprolink").innerText == "" &&
-      document.getElementById("jenisQElink".innerText == "")
-    ) {
-      document
-        .getElementById("exportdata")
-        .setAttribute(
-          "action",
-          "/exportdata?namaSTO=" +
-            document.getElementById("namaSTOlink").innerText +
-            "&segmen=" +
-            document.getElementById("segmenlink").innerText
-        );
-    } else {
-      document
-        .getElementById("exportdata")
-        .setAttribute(
-          "action",
-          "/exportdata/" +
-            document.getElementById("namaSTOlink").innerText +
-            "/" +
-            document.getElementById("segmenlink").innerText +
-            "/" +
-            document.getElementById("namaAlprolink").innerText +
-            "/" +
-            document.getElementById("jenisQElink").innerText
-        );
-    }
-  };
-
   // make doughnut chart for proposal get all proposal with status APPROVED and else
   const chart = () => {
     fetch("/proposal")

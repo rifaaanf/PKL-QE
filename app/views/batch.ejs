@@ -1,4 +1,4 @@
-<form id="form-add" action="" method="post" class="w-full max-w-sm">
+<form id="form-batch" action="" method="post" enctype="multipart/form-data" class="w-full max-w-sm">
   <div class="md:flex md:items-center mb-6">
     <div class="md:w-1/3">
       <label
@@ -13,11 +13,10 @@
         name="jenis"
         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
         id="sel1"
-        onchange="adddata()"
         type="text"
         required
       >
-        <option value=""disabled selected hidden>Pilih Jenis</option>
+        <option value="" selected hidden>Pilih Jenis</option>
         <option value="Nama STO">Nama STO</option>
         <option value="Segmen">Segmen</option>
         <option value="Nama Alpro">Nama Alpro</option>
@@ -45,88 +44,68 @@
         class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
         for="inline-password"
       >
-        Data Baru
+        Batch
       </label>
     </div>
     <div class="relative md:w-2/3">
-      <input
-        name="namebaru"
-        id="sel3"
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        type="text"
-        placeholder="Masukkan Data Baru"
-        required
-
-      />
-      
-      <div
+        <!-- accept kml file -->
+        <input id="batch" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" accept=".csv " name="batch" type="file">
+    <div
         class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-      ></div>
+      >
+        
+      </div>
     </div>
   </div>
 
   <div class="md:flex md:items-center mb-1">
-    <div class="md:w-1/3">
-
-    </div>
+    <div class="md:w-1/3"></div>
   </div>
   <div class="md:flex md:items-center">
-    <div class="md:w-1/3">
-
-    </div>
+    <div class="md:w-1/3"></div>
     <div class="md:w-2/3">
       <input
         id="add-btn"
-        class="shadow bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+        class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
         type="submit"
       ></input>
-<input
-        class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-        type="button"
-        value="Add with Batch"
-        onclick="window.location.href='/batch'"
-      ></input>
-
     </div>
-
-    
   </div>
 </form>
-
 <script>
   // const form = document.getElementById("form-add");
   const btn = document.getElementById("add-btn");
-  const form = document.getElementById("form-add");
+  const form = document.getElementById("form-batch");
   
     // ajax request
   form.addEventListener("submit", (e) => {
     const select1 = document.getElementById('sel1').value
-    const select3 = document.getElementById('sel3').value
+
 
     e.preventDefault();
     const data = new FormData(form);
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/adddata");
+    xhr.open("POST", "/batch");
     xhr.onload = () => {
       if (xhr.status === 200) {
         Swal.fire({
         title: "Add " + select1,
-        text: select1 + " " + select3 + " Berhasil Ditambahkan!",
+        text: "Data Batch Berhasil Ditambahkan!",
         icon: "success",
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = "/adddata";
+        window.location.href = "/batch";
       }
     })
         
       } else {
         Swal.fire({
         title: "Add " + select1,
-        text: select1 + " " + select3 + " Gagal Ditambahkan!",
+        text:  "Data Batch Gagal Ditambahkan!",
         icon: "error",
       }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = "/adddata";
+        window.location.href = "/batch";
       }
     })
       }

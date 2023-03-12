@@ -1,4 +1,4 @@
-<form id="exportdata" method="POST">
+<form>
   <div class="flex justify-between">
     <p class="text-xl pb-3"><i class="fas fa-list mr-3"></i> Closed Proposal</p>
 
@@ -16,9 +16,18 @@
       <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full sm:px-6 lg:px-8">
           <div class="overflow-hidden">
-            <table class="min-w-full text-center" style="width: 150px">
+            <table
+              id="datatable"
+              class="min-w-full text-center"
+              style="width: 150px"
+            >
               <thead class="bg-gray-800 text-white">
                 <tr>
+                  <th
+                    class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                  >
+                    No
+                  </th>
                   <th
                     class="text-center py-3 px-4 uppercase font-semibold text-sm"
                   >
@@ -42,7 +51,7 @@
                   <th
                     class="text-center py-3 px-4 uppercase font-semibold text-sm"
                   >
-                    nama Alpro
+                    Nama Alpro
                   </th>
                   <th
                     class="text-center py-3 px-4 uppercase font-semibold text-sm"
@@ -52,7 +61,7 @@
                   <th
                     class="text-center py-3 px-4 uppercase font-semibold text-sm"
                   >
-                    Status
+                    Jumlah Biaya
                   </th>
                   <th
                     class="text-center py-3 px-4 uppercase font-semibold text-sm"
@@ -63,9 +72,14 @@
               </thead>
               <tbody>
                 <% var isDataAvailable = false; proposal.forEach(function
-                (proposal, index) { if(proposal.status === 'CLOSED'){
-                isDataAvailable = true; %>
+                (proposal, index) { if(proposal.status == 'CLOSED'){
+                isDataAvailable = true; index %>
                 <tr class="bg-white border-b text-center">
+                  <td
+                    class="list text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                  >
+                    <%= index+1 %>
+                  </td>
                   <td
                     class="list text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                   >
@@ -99,7 +113,7 @@
                   <td
                     class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                   >
-                    <%= proposal.status%>
+                    <%= proposal.nilairabevidence%>
                   </td>
                   <td class="text-center py-3 px-4">
                     <a
@@ -119,12 +133,19 @@
                 <% } %>
               </tbody>
               <tfoot>
-                <tr style="display: none">
+                <tr style="">
                   <td
                     colspan="7"
                     class="text-center text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                   >
-                    Data Not Found
+                    Total
+                  </td>
+                  <td
+                    class="text-center text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                  >
+                    <% var totalBiaya = 0; proposal.forEach(function (proposal,
+                    index) { if(proposal.status == 'CLOSED'){ totalBiaya +=
+                    proposal.nilairabevidence; } }); %> <%= totalBiaya %>
                   </td>
                 </tr>
               </tfoot>
@@ -146,20 +167,27 @@
     >
     <button
       class="shadow float-right bg-green-500 hover:bg-green-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded mr-2"
-      type="submit"
+      type="button"
+      id="exportdata"
     >
       Export Data to Excel
     </button>
   </div>
 </form>
-<div>
-  <p id="namaSTOlink" hidden><%= namaSTO %></p>
-  <p id="segmenlink" hidden><%= segmen %></p>
-  <p id="namaAlprolink" hidden><%= namaAlpro %></p>
-  <p id="jenisQElink" hidden><%= jenisQE %></p>
-</div>
 
 <script>
+  document.getElementById("exportdata").addEventListener("click", function () {
+    /* Create worksheet from HTML DOM TABLE */
+    var wb = XLSX.utils.table_to_book(document.getElementById("datatable"));
+
+    // delete H column
+    wb.Sheets.Sheet1["!ref"] =
+      "A1:H" + wb.Sheets.Sheet1["!ref"].split(":")[1][1];
+
+    /* Export to file (start a download) */
+    XLSX.writeFile(wb, "QE Report.xlsx");
+  });
+
   document
     .querySelector("#exampleSearch")
     .addEventListener("input", filterList);

@@ -2,6 +2,7 @@ const db = require("../models");
 const User = db.user;
 const Role = db.role;
 const Proposer = db.proposer;
+const fs = require("fs");
 const Admin = db.admin;
 const Approver = db.approver;
 const bcrypt = require("bcryptjs");
@@ -11,8 +12,7 @@ const segmen = db.segmen;
 const jenisQE = db.jenisQE;
 const namaAlpro = db.namaAlpro;
 const Proposal = db.proposal;
-const xlsx = require("xlsx");
-const { exists } = require("../models/user.model");
+const csv = require("csvtojson");
 const Executor = db.executor;
 exports.designerBoard = (req, res) => {
   Proposal.find({})
@@ -44,6 +44,90 @@ exports.submitted = (req, res) => {
     });
 };
 
+exports.batchnamasto = (req, res) => {
+  // create namasto from csv file
+  csv()
+    .fromFile(req.files.batch[0].path)
+    .then((jsonObj) => {
+      jsonObj.forEach((row) => {
+        new namaSTO({
+          name: row.name,
+        }).save((err) => {
+          if (err) {
+            res.status(500).send({ message: err });
+            return;
+          }
+        });
+      });
+      //send res status then delete file
+      res.status(200).send({ message: "Nama STO added successfully" });
+      fs.unlinkSync(req.files.batch[0].path);
+    });
+};
+
+exports.batchsegmen = (req, res) => {
+  // create namasto from csv file
+  csv()
+    .fromFile(req.files.batch[0].path)
+    .then((jsonObj) => {
+      jsonObj.forEach((row) => {
+        new segmen({
+          name: row.name,
+        }).save((err) => {
+          if (err) {
+            res.status(500).send({ message: err });
+            return;
+          }
+        });
+      });
+      //send res status then delete file
+      res.status(200).send({ message: "Segmen added successfully" });
+      fs.unlinkSync(req.files.batch[0].path);
+    });
+};
+
+exports.batchnamaalpro = (req, res) => {
+  // create namasto from csv file
+  csv()
+    .fromFile(req.files.batch[0].path)
+    .then((jsonObj) => {
+      jsonObj.forEach((row) => {
+        new namaAlpro({
+          name: row.name,
+        }).save((err) => {
+          if (err) {
+            res.status(500).send({ message: err });
+            return;
+          }
+        });
+      });
+      //send res status then delete file
+      res.status(200).send({ message: "Nama Alpro added successfully" });
+      fs.unlinkSync(req.files.batch[0].path);
+    });
+};
+
+exports.batchjenisqe = (req, res) => {
+  // create namasto from csv file
+  csv()
+    .fromFile(req.files.batch[0].path)
+    .then((jsonObj) => {
+      jsonObj.forEach((row) => {
+        new jenisQE({
+          name: row.name,
+        }).save((err) => {
+          if (err) {
+            res.status(500).send({ message: err });
+            return;
+          }
+        });
+      });
+      //send res status then delete file
+      res.status(200).send({ message: "Jenis QE added successfully" });
+      fs.unlinkSync(req.files.batch[0].path);
+    });
+};
+
 exports.dashboard = (req, res) => {
   Proposal.find({})
     .sort({ createdAt: -1 })
@@ -59,43 +143,6 @@ exports.dashboard = (req, res) => {
     });
 };
 
-exports.exportdata = (req, res) => {
-  var wb = xlsx.utils.book_new();
-  Proposal.find(
-    {
-      namaSTO: req.query.namaSTO,
-      segmen: req.query.segmen,
-      namaAlpro: req.query.namaAlpro || { $exists: true },
-      jenisQE: req.query.jenisQE || { $exists: true },
-      status: "CLOSED",
-    },
-    (err, proposal) => {
-      if (err) {
-        res.status(500).send({ message: err });
-        return;
-      } else {
-        //get only the fields you want to export
-        var data = proposal.map((item) => {
-          return {
-            "QE ID": item.idProposal,
-            "Nama STO": item.namaSTO,
-            "Waktu ": item.timeline[item.timeline.length - 1][1],
-            "Segmen ": item.segmen,
-            "Nama Alpro": item.namaAlpro,
-            "Jenis QE": item.jenisQE,
-            "Jumlah Biaya": item.nilairab,
-          };
-        });
-        var temp = JSON.stringify(data);
-        temp = JSON.parse(temp);
-        var ws = xlsx.utils.json_to_sheet(temp);
-        xlsx.utils.book_append_sheet(wb, ws, "Proposal");
-        xlsx.writeFile(wb, "QE Report.xlsx");
-        res.download("QE Report.xlsx");
-      }
-    }
-  );
-};
 exports.adminBoard = (req, res) => {
   Proposal.find({})
     .sort({ createdAt: -1 })
@@ -161,12 +208,20 @@ exports.qeReportList = (req, res) => {
   let segmen = req.body.segmen;
   let namaAlpro = req.body.namaAlpro;
   let jenisQE = req.body.jenisQE;
+  let bulan = req.body.bulan;
+  let regek = new RegExp(bulan, "i");
 
   let query = {
     namaSTO,
     segmen,
     namaAlpro: namaAlpro ? namaAlpro : { $exists: true },
     jenisQE: jenisQE ? jenisQE : { $exists: true },
+    timeline: {
+      $elemMatch: {
+        1: regek,
+        2: /CLOSED/,
+      },
+    },
   };
 
   Proposal.find(query, (err, proposal) => {
@@ -179,6 +234,7 @@ exports.qeReportList = (req, res) => {
       segmen: segmen,
       namaAlpro: namaAlpro,
       jenisQE: jenisQE,
+      bulan: bulan,
     });
   });
 };
@@ -230,6 +286,16 @@ exports.rejectedDetail = (req, res) => {
   Proposal.findById(id, (err, proposal) => {
     res.render("layouts/main-layout-executor", {
       data: "rejecteddetail",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
+  });
+};
+
+exports.uploadBatch = (req, res) => {
+  Proposal.find({}, (err, proposal) => {
+    res.render("layouts/main-layout-executor", {
+      data: "batch",
       proposal: proposal,
       pindah: req.roleName,
     });
