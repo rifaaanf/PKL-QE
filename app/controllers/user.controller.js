@@ -560,3 +560,59 @@ exports.signup = (req, res) => {
     }
   });
 };
+
+exports.changePasswordUserPage = (req, res) => {
+  Proposal.find({}, (err, proposal) => {
+    if (err) throw err;
+
+    res.render("layouts/main-layout-executor", {
+      data: "changepassworduserpage",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
+  });
+};
+
+exports.changePasswordUser = (req, res) => {
+  const oldPassword = req.body.passwordlama;
+  const newPassword = req.body.passwordbaru;
+  const confirmPassword = req.body.konfirmasipasswordbaru;
+
+  const hashedPassword = bcrypt.hashSync(newPassword, 8); 
+
+  User.findById(req.userId, (err, user) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+
+    const isOldPasswordValid = bcrypt.compareSync(oldPassword, user.password);
+    if (!isOldPasswordValid) {
+      const errorMessage = "Password Lama Tidak Sesuai";
+      res.redirect(400,'/changepassworduserpage?error=' + encodeURIComponent(errorMessage));
+      return;
+    }
+
+    // if (newPassword !== confirmPassword) {
+    //   res.status(400).send({ message: "konfirmasi password baru tidak sama dengan password baru" });
+    //   return;
+    // }
+
+    User.findByIdAndUpdate(
+      req.userId,
+      { password: hashedPassword },
+      { new: true },
+      (err, user) => {
+        if (err) {
+          res.status(500).send({ message: err });
+          return;
+        }
+        res.redirect("/changepassworduserpage");
+      }
+    );
+  });
+};
+
+
+
+

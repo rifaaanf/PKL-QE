@@ -1,9 +1,11 @@
 const db = require("../models");
+const User = db.user;
 const namaSTO = db.namaSTO;
 const Segmen = db.segmen;
 const jenisQE = db.jenisQE;
 const namaAlpro = db.namaAlpro;
 const Proposal = db.proposal;
+const bcrypt = require("bcryptjs");
 
 exports.formAdmin = (req, res) => {
   // namaSTO.find({}, (err, namasto) => {
@@ -323,3 +325,56 @@ exports.changedata = (req, res) => {
     });
   });
 };
+
+exports.editPasswordPage = (req, res) => {
+  Proposal.find({}, (err, proposal) => {
+    User.find({}, (err, user) => {
+        res.render("layouts/main-layout-proposer", {
+        data: "admineditpasswordpage",
+        proposal: proposal,
+        user: user,
+        pindah: req.roleName,
+      });
+    });
+  });
+};
+
+// exports.editPassword = (req, res) => {
+
+//   const user = req.body.user
+//   const newPassword = req.body.passwordbaru
+
+//   const hashedPassword = bcrypt.hashSync(newPassword, 8); 
+//   User.findByIdAndUpdate(
+//     { username: user },
+//     { password: hashedPassword },
+//     { new: true },
+//     (err, user) => {
+//       if (err) {
+//         res.status(500).send({ message: err });
+//         return;
+//       }
+//       res.redirect("/admineditpasswordpage");
+//     }
+//   );
+// };
+
+exports.editPassword = (req, res) => {
+  const { user, passwordbaru } = req.body;
+
+  const hashedPassword = bcrypt.hashSync(passwordbaru, 8); 
+
+  User.findOneAndUpdate(
+    { username: user }, // pencarian user berdasarkan username
+    { password: hashedPassword },
+    { new: true },
+    (err, user) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      res.redirect("/admineditpasswordpage");
+    }
+  );
+};
+

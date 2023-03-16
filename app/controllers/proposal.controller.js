@@ -66,6 +66,12 @@ exports.downloaddesign = (req, res) => {
     } else if (data.design.split(".")[1] === "jpeg") {
       const filename = "DESIGN_" + data.idProposal + ".jpeg";
       res.setHeader("Content-disposition", "attachment; filename=" + filename);
+    } else if (data.design.split(".")[1] === "pdf") {
+      const filename = "DESIGN_" + data.idProposal + ".pdf";
+      res.setHeader("Content-disposition", "attachment; filename=" + filename);
+    } else if (data.design.split(".")[1] === "docx") {
+      const filename = "DESIGN_" + data.idProposal + ".docx";
+      res.setHeader("Content-disposition", "attachment; filename=" + filename);
     }
 
     file.pipe(res);

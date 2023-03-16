@@ -77,4 +77,14 @@ module.exports = function (app) {
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.adduser
   );
+
+  app.get("/changepassworduserpage",
+    [authJwt.verifyToken], 
+    controller.changePasswordUserPage
+  );
+  // app.post("/changepassworduser", controller.changePasswordUser);
+  app.post('/changepassworduserpage',
+    [authJwt.verifyToken], 
+    controller.changePasswordUser
+  );
 };

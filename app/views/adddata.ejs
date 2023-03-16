@@ -97,11 +97,11 @@
         title: "Add " + select1,
         text: select1 + " " + select3 + " Berhasil Ditambahkan!",
         icon: "success",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.href = "/adddata";
-      }
-    })
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = "/adddata";
+        }
+      })
         
       } else {
         Swal.fire({
