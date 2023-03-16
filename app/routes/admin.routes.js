@@ -24,6 +24,18 @@ module.exports = function (app) {
     controller.changedata
   );
 
+  app.get(
+    "/admineditpasswordpage",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.editPasswordPage
+  );
+  
+  app.post(
+    "/admineditpasswordpage",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.editPassword
+  );
+
   app.post(
     "/changedata",
     [authJwt.verifyToken, authJwt.isAdmin, verifyData.checkDuplicateData],
