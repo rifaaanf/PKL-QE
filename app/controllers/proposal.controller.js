@@ -357,13 +357,13 @@ async function createIDProposal(namaSTO, segmen) {
 
   let segmenNumber;
   switch (segmen) {
-    case "Kabel Feeder":
+    case "Feeder":
       segmenNumber = "01";
       break;
     case "ODC":
       segmenNumber = "02";
       break;
-    case "Kabel/Distribusi":
+    case "Distribusi":
       segmenNumber = "03";
       break;
     case "ODP":

@@ -8,48 +8,6 @@
     });
   });
 
-  //get namaalpro.name that starts with FE- from database
-  const fearray = [];
-  const odcsmt = [];
-  const odcjhr = [];
-  const odcmjb = [];
-  const smtdist = [];
-  const jhrdist = [];
-  const mjbdist = [];
-  const odpsmt = [];
-  const odpjhr = [];
-  const odpmjb = [];
-  const tiang = [];
-  fetch("/api/admin/getAllNamaAlpro")
-    .then((res) => res.json())
-    .then((data) => {
-      data.forEach((namaalpro) => {
-        if (namaalpro.name.startsWith("FE")) {
-          fearray.push(`${namaalpro.name}|${namaalpro.name}`);
-        } else if (namaalpro.name.startsWith("ODC-SMT")) {
-          odcsmt.push(`${namaalpro.name}|${namaalpro.name}`);
-        } else if (namaalpro.name.startsWith("ODC-JHR")) {
-          odcjhr.push(`${namaalpro.name}|${namaalpro.name}`);
-        } else if (namaalpro.name.startsWith("ODC-MJB")) {
-          odcmjb.push(`${namaalpro.name}|${namaalpro.name}`);
-        } else if (namaalpro.name.startsWith("SMT-FB-D")) {
-          smtdist.push(`${namaalpro.name}|${namaalpro.name}`);
-        } else if (namaalpro.name.startsWith("JHR-FB-D")) {
-          jhrdist.push(`${namaalpro.name}|${namaalpro.name}`);
-        } else if (namaalpro.name.startsWith("MJB-FB-D")) {
-          mjbdist.push(`${namaalpro.name}|${namaalpro.name}`);
-        } else if (namaalpro.name.startsWith("ODP-SMT-FB")) {
-          odpsmt.push(`${namaalpro.name}|${namaalpro.name}`);
-        } else if (namaalpro.name.startsWith("ODP-JHR-FB")) {
-          odpjhr.push(`${namaalpro.name}|${namaalpro.name}`);
-        } else if (namaalpro.name.startsWith("ODP-MJB-FB")) {
-          odpmjb.push(`${namaalpro.name}|${namaalpro.name}`);
-        } else if (namaalpro.name.startsWith("Tiang")) {
-          tiang.push(`${namaalpro.name}|${namaalpro.name}`);
-        }
-      });
-    });
-
   // make doughnut chart for proposal get all proposal with status APPROVED and else
   const chart = () => {
     fetch("/proposal")
@@ -149,43 +107,50 @@
     let sel1 = document.getElementById(s1);
     let sel2 = document.getElementById(s2);
     let sel3 = document.getElementById(s3);
-
+    let optarray = [];
     sel3.innerHTML =
       "<option class='disabled selected hidden' value = ''></option>";
 
-    if (sel2.value === "Kabel Feeder") {
-      var optionArray = fearray;
-    } else if (sel1.value === "SMT" && sel2.value === "ODC") {
-      var optionArray = odcsmt;
-    } else if (sel1.value === "JHR" && sel2.value === "ODC") {
-      var optionArray = odcjhr;
-    } else if (sel1.value === "MJB" && sel2.value === "ODC") {
-      var optionArray = odcmjb;
-    } else if (sel1.value === "SMT" && sel2.value === "Kabel/Distribusi") {
-      var optionArray = smtdist;
-    } else if (sel1.value === "JHR" && sel2.value === "Kabel/Distribusi") {
-      var optionArray = jhrdist;
-    } else if (sel1.value === "MJB" && sel2.value === "Kabel/Distribusi") {
-      var optionArray = mjbdist;
-    } else if (sel1.value === "SMT" && sel2.value === "ODP") {
-      var optionArray = odpsmt;
-    } else if (sel1.value === "JHR" && sel2.value === "ODP") {
-      var optionArray = odpjhr;
-    } else if (sel1.value === "MJB" && sel2.value === "ODP") {
-      var optionArray = odpmjb;
-    } else if (sel1.value != "" && sel2.value === "Tiang") {
-      var optionArray = tiang;
-    }
+    fetch("/api/admin/getAllNamaAlpro")
+      .then((res) => res.json())
+      .then((data) => {
+        data.forEach((namaalpro) => {
+          if (sel2.value !== "Feeder" || sel2.value !== "Distribusi") {
+            if (namaalpro.name.startsWith(`${sel2.value}-${sel1.value}`)) {
+              optarray.push(`${namaalpro.name}|${namaalpro.name}`);
+            }
+          }
+          if (sel2.value === "Feeder") {
+            if (namaalpro.name.startsWith("FE-")) {
+              optarray.push(`${namaalpro.name}|${namaalpro.name}`);
+              console.log(optarray);
+            }
+          }
+          if (sel2.value === "Distribusi") {
+            if (
+              namaalpro.name.startsWith(`${sel1.value}-FB`) ||
+              namaalpro.name.startsWith(`${sel1.value}-FA`)
+            ) {
+              optarray.push(`${namaalpro.name}|${namaalpro.name}`);
+            }
+          }
 
-    for (let option in optionArray) {
-      let pair = optionArray[option].split("|");
-      let newOption = document.createElement("option");
+          if (sel2.value === "Tiang") {
+            if (namaalpro.name.startsWith("Tiang")) {
+              optarray.push(`${namaalpro.name}|${namaalpro.name}`);
+            }
+          }
+        });
+        for (let option in optarray) {
+          let pair = optarray[option].split("|");
+          let newOption = document.createElement("option");
 
-      newOption.value = pair[0];
-      newOption.innerHTML = pair[1];
-      // add the new option
-      sel3.innerHTML = sel3.innerHTML + newOption.outerHTML;
-    }
+          newOption.value = pair[0];
+          newOption.innerHTML = pair[1];
+          // add the new option
+          sel3.innerHTML = sel3.innerHTML + newOption.outerHTML;
+        }
+      });
   };
 
   // add active-nav-link class to the current page and add opacity-75 hover:opacity-100 to the other page

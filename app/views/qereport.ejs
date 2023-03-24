@@ -39,7 +39,7 @@
           name="segmen"
           class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
           id="sel2"
-          onchange="dropdown('sel1',this.id,'sel3')"
+          onchange="dropdown('sel1',this.id,'sel3');jenisqematch()"
           type="text"
         > 
           <option value=""disabled selected hidden>Pilih Segmen</option>
@@ -85,13 +85,11 @@
         <select
           name="jenisQE"
           class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-          id="jenisQE"
+          id="QE"
           type="text"
         >
           <option value=""disabled selected hidden>Pilih QE</option>
-          <% jenisQE.forEach(function (jenisQE) { %>
-          <option value="<%= jenisQE.name %>"><%= jenisQE.name %></option>
-          <% })%>
+
         </select>
         <p id="qediisi" class="text-red-500 text-xs italic "></p>
       </div>
@@ -161,7 +159,7 @@
       var sel1 = document.getElementById("sel1").value;
       var sel2 = document.getElementById("sel2").value;
       var sel3 = document.getElementById("sel3").value;
-      var jenisQE = document.getElementById("jenisQE").value;
+      var jenisQE = document.getElementById("QE").value;
       if (sel1 == "") {
         //type catatan tidak boleh kosong under textarea with red color
         document.getElementById("namastodiisi").innerText =
@@ -199,7 +197,7 @@
         allowClear: true
       }
     );
-    $('#jenisQE').select2(
+    $('#QE').select2(
       {
         placeholder: 'Pilih Jenis QE',
         allowClear: true
