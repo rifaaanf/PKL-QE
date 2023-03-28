@@ -5,6 +5,7 @@ const Segmen = db.segmen;
 const jenisQE = db.jenisQE;
 const namaAlpro = db.namaAlpro;
 const Proposal = db.proposal;
+const Mitra = db.mitra;
 const bcrypt = require("bcryptjs");
 
 exports.formAdmin = (req, res) => {
@@ -66,9 +67,34 @@ exports.getAllNamaAlpro = (req, res) => {
   });
 };
 
+exports.getMitra = (req, res) => {
+  Mitra.find({}, (err, data) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    res.status(200).send(data);
+  });
+};
+
 exports.changestodata = (req, res) => {
   // change nama sto data name to new name
   namaSTO.findOneAndUpdate(
+    { name: req.body.name },
+    { name: req.body.namebaru },
+    { new: true },
+    (err, proposal) => {
+      if (err) {
+        res.status(500).send({ message: err });
+        return;
+      }
+      res.redirect("/changedata");
+    }
+  );
+};
+
+exports.changemitra = (req, res) => {
+  Mitra.findOneAndUpdate(
     { name: req.body.name },
     { name: req.body.namebaru },
     { new: true },
@@ -140,6 +166,15 @@ exports.addnamasto = (req, res) => {
   });
 };
 
+exports.addmitra = (req, res) => {
+  const mitra = new Mitra({
+    name: req.body.namebaru,
+  });
+  mitra.save((err, proposal) => {
+    res.redirect("/adddata");
+  });
+};
+
 exports.addjenisqe = (req, res) => {
   // add new jenisQE
   const jenisqe = new jenisQE({
@@ -207,6 +242,16 @@ exports.deletejenisqe = (req, res) => {
 exports.deletenamaalpro = (req, res) => {
   // delete namaAlpro
   namaAlpro.findOneAndDelete({ name: req.body.namebaru }, (err, proposal) => {
+    if (err) {
+      res.status(500).send({ message: err });
+      return;
+    }
+    res.redirect("/deletedata");
+  });
+};
+
+exports.deletemitra = (req, res) => {
+  Mitra.findOneAndDelete({ name: req.body.namebaru }, (err, proposal) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -329,7 +374,7 @@ exports.changedata = (req, res) => {
 exports.editPasswordPage = (req, res) => {
   Proposal.find({}, (err, proposal) => {
     User.find({}, (err, user) => {
-        res.render("layouts/main-layout-proposer", {
+      res.render("layouts/main-layout-proposer", {
         data: "admineditpasswordpage",
         proposal: proposal,
         user: user,
@@ -344,7 +389,7 @@ exports.editPasswordPage = (req, res) => {
 //   const user = req.body.user
 //   const newPassword = req.body.passwordbaru
 
-//   const hashedPassword = bcrypt.hashSync(newPassword, 8); 
+//   const hashedPassword = bcrypt.hashSync(newPassword, 8);
 //   User.findByIdAndUpdate(
 //     { username: user },
 //     { password: hashedPassword },
@@ -362,7 +407,7 @@ exports.editPasswordPage = (req, res) => {
 exports.editPassword = (req, res) => {
   const { user, passwordbaru } = req.body;
 
-  const hashedPassword = bcrypt.hashSync(passwordbaru, 8); 
+  const hashedPassword = bcrypt.hashSync(passwordbaru, 8);
 
   User.findOneAndUpdate(
     { username: user }, // pencarian user berdasarkan username
@@ -377,4 +422,3 @@ exports.editPassword = (req, res) => {
     }
   );
 };
-

@@ -15,6 +15,7 @@ module.exports = function (app) {
   app.get("/api/admin/getAllNamaSTO", controller.getnamasto);
   app.get("/api/admin/getAllSegmen", controller.getsegmen);
   app.get("/api/admin/getAllJenisQE", controller.getjenisqe);
+  app.get("/api/admin/getAllMitra", controller.getMitra);
 
   app.get("/detail/:id", [authJwt.verifyToken], controller.detailProposal);
 
@@ -29,7 +30,7 @@ module.exports = function (app) {
     [authJwt.verifyToken, authJwt.isAdmin],
     controller.editPasswordPage
   );
-  
+
   app.post(
     "/admineditpasswordpage",
     [authJwt.verifyToken, authJwt.isAdmin],
@@ -48,6 +49,8 @@ module.exports = function (app) {
         controller.changesegmendata(req, res);
       } else if (req.body.jenis === "Nama Alpro") {
         controller.changenamaalprodata(req, res);
+      } else if (req.body.jenis === "Mitra") {
+        controller.changemitra(req, res);
       }
     }
   );
@@ -70,6 +73,8 @@ module.exports = function (app) {
         controller.addsegmen(req, res);
       } else if (req.body.jenis === "Nama Alpro") {
         controller.addnamaalpro(req, res);
+      } else if (req.body.jenis === "Mitra") {
+        controller.addmitra(req, res);
       }
     }
   );
@@ -92,6 +97,8 @@ module.exports = function (app) {
         controller.deletesegmen(req, res);
       } else if (req.body.jenis === "Nama Alpro") {
         controller.deletenamaalpro(req, res);
+      } else if (req.body.jenis === "Mitra") {
+        controller.deletemitra(req, res);
       }
     }
   );

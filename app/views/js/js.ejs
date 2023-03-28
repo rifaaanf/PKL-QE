@@ -292,6 +292,17 @@
         });
       setdata = arraynamaalpro;
       // document.getElementById("formedit").action = "/deletedata/namaalpro";
+    } else if (sel1.value == "Mitra") {
+      let arraymitra = [];
+      await fetch("/api/admin/getAllMitra")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            arraymitra.push(`${nama.name}|${nama.name}`);
+          });
+        });
+      setdata = arraymitra;
+      // document.getElementById("formedit").action = "/deletedata/mitra";
     }
     sel2.innerHTML =
       "<option class='disabled selected hidden' value = ''>Pilih Data</option>";
@@ -384,6 +395,17 @@
         });
       setdata = arraynamaalpro;
       // document.getElementById("formedit").action = "/changedata/namaalpro";
+    } else if (sel1.value == "Mitra") {
+      let arraymitra = [];
+      await fetch("/api/admin/getAllMitra")
+        .then((res) => res.json())
+        .then((data) => {
+          data.forEach((nama) => {
+            arraymitra.push(`${nama.name}|${nama.name}`);
+          });
+        });
+      setdata = arraymitra;
+      // document.getElementById("formedit").action = "/changedata/mitra";
     }
 
     for (let option in setdata) {
