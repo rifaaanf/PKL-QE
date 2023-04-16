@@ -421,17 +421,6 @@
     // add every data to the sel2 dropdown
   };
 
-  const hiddens = () => {
-    let jenisQE = document.getElementById("QE");
-    let koordinatBaru = document.getElementById("koordinat");
-
-    if (!jenisQE.value.match("Normalisasi")) {
-      koordinatBaru.classList.add("hidden");
-    } else {
-      koordinatBaru.classList.remove("hidden");
-    }
-  };
-
   //ambil data proposal dari database berdasarkan parameter id
   const selected = () => {
     const id = window.location.pathname.split("/")[2];
@@ -445,7 +434,7 @@
         const sel3 = document.getElementById("sel3");
         const textalpro = document.getElementById("textalpro");
         const sel4 = document.getElementById("QE");
-        const sel5 = document.getElementById("koordinatODPBaru");
+        const sel5 = document.getElementById("koordinat");
         const sel6 = document.getElementById("keterangan");
 
         //set attribute selected pada option yang sesuai dengan data yang diambil dari database
@@ -453,7 +442,7 @@
         sel2.value = data.segmen;
         textalpro.value = data.namaAlpro;
         sel4.value = data.jenisQE;
-        sel5.value = data.koordinatODPBaru;
+        sel5.value = data.koordinat;
         sel6.value = data.keterangan;
       });
   };

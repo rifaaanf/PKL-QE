@@ -23,7 +23,7 @@ const Proposal = mongoose.model(
         type: String,
         required: [true, "Jenis QE wajib diisi"],
       },
-      koordinatODPBaru: {
+      koordinat: {
         type: String,
       },
       keterangan: {

@@ -103,7 +103,7 @@ exports.createProposal = async (req, res) => {
   const segmen = req.body.segmen;
   const namaAlpro = req.body.namaAlpro;
   const jenisQE = req.body.jenisQE;
-  const koordinatODPBaru = req.body.koordinatODPBaru;
+  const koordinat = req.body.koordinat;
   const keterangan = req.body.keterangan;
   const proposer = req.proposerId;
   const timeline = [[req.proposerName, Date(), "SUBMITTED"]];
@@ -116,7 +116,7 @@ exports.createProposal = async (req, res) => {
       segmen: segmen,
       namaAlpro: namaAlpro,
       jenisQE: jenisQE,
-      koordinatODPBaru: koordinatODPBaru,
+      koordinat: koordinat,
       keterangan: keterangan,
       proposer: proposer,
       timeline: timeline,
@@ -133,7 +133,7 @@ exports.createProposal = async (req, res) => {
           segmen: proposal.segmen,
           namaAlpro: proposal.namaAlpro,
           jenisQE: proposal.jenisQE,
-          koordinatODPBaru: proposal.koordinatODPBaru,
+          koordinat: proposal.koordinat,
           keterangan: proposal.keterangan,
           proposal: proposal,
           pindah: req.roleName,

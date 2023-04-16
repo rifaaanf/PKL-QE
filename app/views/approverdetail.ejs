@@ -83,19 +83,19 @@
                   <%= proposal.jenisQE %>
                 </td>
               </tr>
-              <% counter++; %> <% } %> <% if (proposal.koordinatODPBaru) { %>
+              <% counter++; %> <% } %> <% if (proposal.koordinat) { %>
               <tr
                 class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b"
               >
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
-                  koordinat ODP Baru
+                  Koordinat
                 </td>
                 <td
                   class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"
                 >
-                  <%= proposal.koordinatODPBaru %>
+                  <%= proposal.koordinat %>
                 </td>
               </tr>
               <% counter++ %> <% } %> <% if (proposal.keterangan) { %>
