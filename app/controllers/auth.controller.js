@@ -2,7 +2,6 @@ const SECRET = process.env.SECRET;
 const db = require("../models");
 const User = db.user;
 const Proposer = db.proposer;
-const Approver = db.approver;
 
 var bcrypt = require("bcryptjs");
 var jose = require("jose");

@@ -1,8 +1,4 @@
 const db = require("../models");
-const namaSTO = db.namaSTO;
-const segmen = db.segmen;
-const jenisQE = db.jenisQE;
-const namaAlpro = db.namaAlpro;
 const Proposal = db.proposal;
 const Mitra = db.mitra;
 
@@ -80,16 +76,16 @@ exports.executorInstallationProposal = (req, res) => {
   Proposal.find({
     executor: req.executorId,
   })
-    .sort({updatedAt: -1})
+    .sort({ updatedAt: -1 })
     .exec((err, proposal) => {
-    if (err) throw err;
+      if (err) throw err;
 
-    res.render("layouts/main-layout-executor", {
-      data: "installationproposal",
-      proposal: proposal,
-      pindah: req.roleName,
+      res.render("layouts/main-layout-executor", {
+        data: "installationproposal",
+        proposal: proposal,
+        pindah: req.roleName,
+      });
     });
-  });
 };
 
 exports.changeMitra = (req, res) => {
@@ -121,16 +117,16 @@ exports.executorClosedProposal = (req, res) => {
   Proposal.find({
     executor: req.executorId,
   })
-    .sort({updatedAt: -1})
+    .sort({ updatedAt: -1 })
     .exec((err, proposal) => {
-    if (err) throw err;
+      if (err) throw err;
 
-    res.render("layouts/main-layout-executor", {
-      data: "closedproposal",
-      proposal: proposal,
-      pindah: req.roleName,
+      res.render("layouts/main-layout-executor", {
+        data: "closedproposal",
+        proposal: proposal,
+        pindah: req.roleName,
+      });
     });
-  });
 };
 
 exports.allExecutorInstallationProposal = (req, res) => {

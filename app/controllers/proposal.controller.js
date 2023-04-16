@@ -1,4 +1,3 @@
-const { namaSTO, segmen } = require("../models");
 const db = require("../models");
 const Proposal = db.proposal;
 const fs = require("fs");
