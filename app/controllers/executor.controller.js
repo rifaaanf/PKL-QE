@@ -13,6 +13,17 @@ exports.executorDetail = (req, res) => {
   });
 };
 
+exports.installationDetail = (req, res) => {
+  var id = req.params.id;
+  Proposal.findById(id, (err, proposal) => {
+    res.render("layouts/main-layout-executor", {
+      data: "installationdetail",
+      proposal: proposal,
+      pindah: req.roleName,
+    });
+  });
+};
+
 exports.closedDetail = (req, res) => {
   var id = req.params.id;
   Proposal.findById(id, (err, proposal) => {

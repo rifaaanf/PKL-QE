@@ -28,7 +28,7 @@ module.exports = function (app) {
   );
 
   app.get(
-    "/redesignproposal",
+    "/redesign",
     [authJwt.verifyToken],
     controller.designerRedesignProposal
   );

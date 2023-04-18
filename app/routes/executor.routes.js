@@ -17,6 +17,12 @@ module.exports = function (app) {
   );
 
   app.get(
+    "/detail/:id/installation",
+    [authJwt.verifyToken],
+    controller.installationDetail
+  );
+
+  app.get(
     "/detail/:id/closeddetail",
     [authJwt.verifyToken],
     controller.closedDetail
@@ -30,7 +36,12 @@ module.exports = function (app) {
 
   app.post(
     "/detail/:id/executor/gantimitra",
-    [authJwt.verifyToken, authJwt.isExecutor, authJwt.getExecutorName, authJwt.getExecutorId],
+    [
+      authJwt.verifyToken,
+      authJwt.isExecutor,
+      authJwt.getExecutorName,
+      authJwt.getExecutorId,
+    ],
     controller.gantiMitra
   );
 
@@ -42,7 +53,12 @@ module.exports = function (app) {
 
   app.post(
     "/detail/:id/executor/pilihmitra",
-    [authJwt.verifyToken, authJwt.isExecutor, authJwt.getExecutorName, authJwt.getExecutorId],
+    [
+      authJwt.verifyToken,
+      authJwt.isExecutor,
+      authJwt.getExecutorName,
+      authJwt.getExecutorId,
+    ],
     controller.pilihMitra
   );
 
@@ -53,13 +69,13 @@ module.exports = function (app) {
   );
 
   app.get(
-    "/allinstallationproposal",
+    "/installation",
     [authJwt.verifyToken],
     controller.allExecutorInstallationProposal
   );
 
   app.get(
-    "/allclosedproposal",
+    "/closed",
     [authJwt.verifyToken],
     controller.allExecutorClosedProposal
   );
