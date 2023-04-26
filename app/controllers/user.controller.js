@@ -143,20 +143,6 @@ exports.dashboard = (req, res) => {
     });
 };
 
-exports.adminBoard = (req, res) => {
-  Proposal.find({})
-    .sort({ createdAt: -1 })
-    .exec((err, proposal) => {
-      Proposer.find({}, (err, proposer) => {
-        res.render("layouts/main-layout-admin", {
-          data: "admin",
-          proposal: proposal,
-          proposer: proposer,
-          pindah: req.roleName,
-        });
-      });
-    });
-};
 exports.proposerBoard = (req, res) => {
   // get logged in user's role name from x-access-token on the cookie
   Proposal.find({}, (err, proposal) => {
@@ -644,7 +630,7 @@ exports.changePasswordUser = (req, res) => {
   const newPassword = req.body.passwordbaru;
   const confirmPassword = req.body.konfirmasipasswordbaru;
 
-  const hashedPassword = bcrypt.hashSync(newPassword, 8); 
+  const hashedPassword = bcrypt.hashSync(newPassword, 8);
 
   User.findById(req.userId, (err, user) => {
     if (err) {
@@ -655,7 +641,10 @@ exports.changePasswordUser = (req, res) => {
     const isOldPasswordValid = bcrypt.compareSync(oldPassword, user.password);
     if (!isOldPasswordValid) {
       const errorMessage = "Password Lama Tidak Sesuai";
-      res.redirect(400,'/changepassworduserpage?error=' + encodeURIComponent(errorMessage));
+      res.redirect(
+        400,
+        "/changepassworduserpage?error=" + encodeURIComponent(errorMessage)
+      );
       return;
     }
 
@@ -678,7 +667,3 @@ exports.changePasswordUser = (req, res) => {
     );
   });
 };
-
-
-
-

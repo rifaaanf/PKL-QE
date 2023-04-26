@@ -8,54 +8,6 @@ const Proposal = db.proposal;
 const Mitra = db.mitra;
 const bcrypt = require("bcryptjs");
 
-exports.formAdmin = (req, res) => {
-  // namaSTO.find({}, (err, namasto) => {
-  //   res.render("layouts/main-layout-admin", {
-  //     data: "formAdmin",
-  //     namaSTO: namasto,
-  //   });
-  // });
-  // get all namaSTO and segmen
-  Proposal.find({}, (err, proposal) => {
-    namaSTO.find({}, (err, namasto) => {
-      Segmen.find({}, (err, segmen) => {
-        jenisQE.find({}, (err, jenisqe) => {
-          res.render("layouts/main-layout-proposer", {
-            data: "proposer",
-            namaSTO: namasto,
-            segmen: segmen,
-            jenisQE: jenisqe,
-            proposal: proposal,
-            pindah: req.roleName,
-          });
-        });
-      });
-    });
-  });
-};
-
-exports.detailProposal = (req, res) => {
-  // get role
-
-  namaSTO.find({}, (err, namasto) => {
-    Segmen.find({}, (err, segmen) => {
-      jenisQE.find({}, (err, jenisqe) => {
-        var id = req.params.id;
-        Proposal.findById(id, (err, proposal) => {
-          res.render("layouts/main-layout-admin", {
-            data: "detail",
-            proposal: proposal,
-            namaSTO: namasto,
-            segmen: segmen,
-            jenisQE: jenisqe,
-            pindah: req.roleName,
-          });
-        });
-      });
-    });
-  });
-};
-
 //get all namaAlpro
 exports.getAllNamaAlpro = (req, res) => {
   namaAlpro.find({}, (err, data) => {

@@ -1,8 +1,4 @@
 const db = require("../models");
-const namaSTO = db.namaSTO;
-const segmen = db.segmen;
-const jenisQE = db.jenisQE;
-const namaAlpro = db.namaAlpro;
 const Proposal = db.proposal;
 
 exports.proposerDetail = (req, res) => {

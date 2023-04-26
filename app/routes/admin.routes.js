@@ -17,8 +17,6 @@ module.exports = function (app) {
   app.get("/api/admin/getAllJenisQE", controller.getjenisqe);
   app.get("/api/admin/getAllMitra", controller.getMitra);
 
-  app.get("/detail/:id", [authJwt.verifyToken], controller.detailProposal);
-
   app.get(
     "/changedata",
     [authJwt.verifyToken, authJwt.isAdmin],
