@@ -9,9 +9,7 @@
           <table class="min-w-full text-center" style="width: 150px">
             <tbody>
               <% var counter = 0; %> <% if (proposal.idProposal) { %>
-              <tr
-                class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b"
-              >
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -24,9 +22,7 @@
                 </td>
               </tr>
               <% counter++; %> <% } %> <% if (proposal.namaSTO) { %>
-              <tr
-                class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b"
-              >
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -39,9 +35,7 @@
                 </td>
               </tr>
               <% counter++; %> <% } %> <% if (proposal.segmen) { %>
-              <tr
-                class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b"
-              >
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -54,9 +48,7 @@
                 </td>
               </tr>
               <% counter++; %> <% } %> <% if (proposal.namaAlpro) { %>
-              <tr
-                class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b"
-              >
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -69,9 +61,7 @@
                 </td>
               </tr>
               <% counter++; %> <% } %> <% if (proposal.jenisQE) { %>
-              <tr
-                class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b"
-              >
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -84,9 +74,7 @@
                 </td>
               </tr>
               <% counter++; %> <% } %> <% if (proposal.koordinat) { %>
-              <tr
-                class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b"
-              >
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -99,9 +87,7 @@
                 </td>
               </tr>
               <% counter++ %> <% } %> <% if (proposal.keterangan) { %>
-              <tr
-                class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b"
-              >
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -114,9 +100,7 @@
                 </td>
               </tr>
               <% counter++ %> <% } %> <% if (proposal.catatan) { %>
-              <tr
-                class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b"
-              >
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -130,9 +114,7 @@
               </tr>
               <% counter++ %> <% } %> <% if (proposal.design && proposal.rab) {
               %>
-              <tr
-                class="<%= counter % 2 == 0 ? 'bg-white' : 'bg-gray-100' %> border-b"
-              >
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -211,9 +193,7 @@
             </thead>
             <tbody>
               <% proposal.timeline.forEach(function (item, index) { %>
-              <tr
-                class="<%= index % 2 == 0 ? 'bg-gray-100 border-b' : 'bg-white border-b' %> text-center"
-              >
+              <tr class="bg-white border-b text-center">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >

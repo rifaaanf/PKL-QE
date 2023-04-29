@@ -20,7 +20,7 @@
                   <%= proposal.idProposal %>
                 </td>
               </tr>
-              <tr class="bg-gray-100 border-b">
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -44,7 +44,7 @@
                   <%= proposal.segmen %>
                 </td>
               </tr>
-              <tr class="bg-gray-100 border-b">
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -69,7 +69,7 @@
                 </td>
               </tr>
               <% if (proposal.koordinat) { %>
-              <tr class="bg-gray-100 border-b">
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -95,7 +95,7 @@
                 </td>
               </tr>
               <% } %> <% if (proposal.catatan) { %>
-              <tr class="bg-gray-100 border-b">
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -108,7 +108,7 @@
                 </td>
               </tr>
               <% } %> <% if (proposal.design && proposal.rab) { %>
-              <tr class="bg-gray-100 border-b">
+              <tr class="bg-white border-b">
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
                 >
@@ -203,7 +203,7 @@
             <tbody>
               <% proposal.timeline.forEach(function (item, index) { %>
               <tr
-                class="<%= index % 2 == 0 ? 'bg-gray-100 border-b' : 'bg-white border-b' %> text-center"
+                class="<%= index % 2 == 0 ? 'bg-white border-b' : 'bg-white border-b' %> text-center"
               >
                 <td
                   class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
