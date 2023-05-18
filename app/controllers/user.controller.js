@@ -50,12 +50,21 @@ exports.batchnamasto = (req, res) => {
     .fromFile(req.files.batch[0].path)
     .then((jsonObj) => {
       jsonObj.forEach((row) => {
-        new namaSTO({
-          name: row.name,
-        }).save((err) => {
+        //find namasto in db if not exist then create new, if exist then skip it
+        namaSTO.findOne({ name: row.name }, (err, namasto) => {
           if (err) {
             res.status(500).send({ message: err });
             return;
+          }
+          if (!namasto) {
+            new namaSTO({
+              name: row.name,
+            }).save((err) => {
+              if (err) {
+                res.status(500).send({ message: err });
+                return;
+              }
+            });
           }
         });
       });
@@ -71,12 +80,20 @@ exports.batchsegmen = (req, res) => {
     .fromFile(req.files.batch[0].path)
     .then((jsonObj) => {
       jsonObj.forEach((row) => {
-        new segmen({
-          name: row.name,
-        }).save((err) => {
+        segmen.findOne({ name: row.name }, (err, segmen) => {
           if (err) {
             res.status(500).send({ message: err });
             return;
+          }
+          if (!segmen) {
+            new segmen({
+              name: row.name,
+            }).save((err) => {
+              if (err) {
+                res.status(500).send({ message: err });
+                return;
+              }
+            });
           }
         });
       });
@@ -92,12 +109,20 @@ exports.batchnamaalpro = (req, res) => {
     .fromFile(req.files.batch[0].path)
     .then((jsonObj) => {
       jsonObj.forEach((row) => {
-        new namaAlpro({
-          name: row.name,
-        }).save((err) => {
+        namaAlpro.findOne({ name: row.name }, (err, namaalpro) => {
           if (err) {
             res.status(500).send({ message: err });
             return;
+          }
+          if (!namaalpro) {
+            new namaAlpro({
+              name: row.name,
+            }).save((err) => {
+              if (err) {
+                res.status(500).send({ message: err });
+                return;
+              }
+            });
           }
         });
       });
@@ -113,12 +138,20 @@ exports.batchjenisqe = (req, res) => {
     .fromFile(req.files.batch[0].path)
     .then((jsonObj) => {
       jsonObj.forEach((row) => {
-        new jenisQE({
-          name: row.name,
-        }).save((err) => {
+        jenisQE.findOne({ name: row.name }, (err, jenisqe) => {
           if (err) {
             res.status(500).send({ message: err });
             return;
+          }
+          if (!jenisqe) {
+            new jenisQE({
+              name: row.name,
+            }).save((err) => {
+              if (err) {
+                res.status(500).send({ message: err });
+                return;
+              }
+            });
           }
         });
       });

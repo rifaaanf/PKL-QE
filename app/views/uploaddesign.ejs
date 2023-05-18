@@ -47,7 +47,7 @@
       </label>
     </div>
     <div class="relative md:w-2/3">
-        <input id="nilairab" type="text" name="nilairab" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="inline-password" placeholder="Nilai RAB">
+        <input id="nilairab" type="number" name="nilairab" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="inline-password" placeholder="Nilai RAB">
 
     </div>
   </div>
@@ -81,6 +81,25 @@
         Swal.fire({
             title: "Error",
             text: "Semua field harus diisi!",
+            icon: "error",
+        });
+        return;
+    }
+
+    const designExt = design.split('.').pop();
+    const RabExt = rab.split('.').pop();
+    if (designExt !== "pdf" && designExt !== "docx" && designExt !== "kml" && designExt !== "png" && designExt !== "jpg" && designExt !== "jpeg") {
+        Swal.fire({
+            title: "Error",
+            text: "Format file salah!",
+            icon: "error",
+        });
+        return;
+    }
+    if (RabExt !== "xlsx" && RabExt !== "xls" && RabExt !== "csv") {
+        Swal.fire({
+            title: "Error",
+            text: "Format file salah!",
             icon: "error",
         });
         return;
