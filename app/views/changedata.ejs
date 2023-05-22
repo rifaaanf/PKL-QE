@@ -110,12 +110,14 @@
     );
 
   
-
-  form.addEventListener('submit', (e) => {
+  btn.addEventListener('click', (e) => {
+    console.log("A")
     const select1 = document.getElementById('sel1').value
     const select2 = document.getElementById('pilihdata').value
     const select3 = document.getElementById('sel3').value
+    console.log(select1)
     e.preventDefault()
+    console.log("A")
     const data = new FormData(form);
     const xhr = new XMLHttpRequest();
         if (select1 === "" || select2 === "" || select3 === "") {

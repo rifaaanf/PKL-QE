@@ -13,6 +13,7 @@ const jenisQE = db.jenisQE;
 const namaAlpro = db.namaAlpro;
 const Proposal = db.proposal;
 const csv = require("csvtojson");
+const Viewer = db.viewer;
 const Executor = db.executor;
 exports.designerBoard = (req, res) => {
   Proposal.find({})
@@ -372,6 +373,11 @@ exports.signup = (req, res) => {
     user: user._id,
     name: req.body.name,
   });
+
+  const viewer = new Viewer({
+    user: user._id,
+    name: req.body.name,
+  });
   // save user to database and make sure to save the user id to the approver/proposer
   user.save((err, user) => {
     if (err) {
@@ -595,7 +601,51 @@ exports.signup = (req, res) => {
           });
         }
       );
-    } else {
+    } else if (req.body.roles == "viewer") {
+      Role.findOne(
+        {
+          name: "viewer",
+        },
+        (err, role) => {
+          //if error then delete user
+          if (err) {
+            User.findByIdAndRemove(user._id, (err) => {
+              if (err) {
+                res.status(500).send({
+                  message: err,
+                });
+                return;
+              }
+            });
+            res.status(500).send({
+              message: err,
+            });
+            return;
+          }
+          user.roles = [role._id];
+          user.save((err) => {
+            if (err) {
+              res.status(500).send({
+                message: err,
+              });
+              return;
+            }
+            viewer.save((err, viewer) => {
+              if (err) {
+                res.status(500).send({
+                  message: err,
+                });
+                return;
+              }
+              res.send({
+                message: "User was registered successfully!",
+              });
+            });
+          });
+        }
+      );
+    }
+     else {
       Role.find(
         {
           name: { $in: req.body.roles },

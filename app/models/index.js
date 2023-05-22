@@ -18,8 +18,9 @@ db.namaAlpro = require("./namaAlpro.model");
 db.jenisQE = require("./jenisQE.model");
 db.executor = require("./executor.model")
 db.mitra = require("./mitra.model")
+db.viewer = require("./viewer.model")
 
-db.ROLES = ["admin", "proposer", "designer", "approver", "executor"];
+db.ROLES = ["admin", "proposer", "designer", "approver", "executor", "viewer"];
 db.NAMASTOS = ["SMT", "JHR", "MJB"];
 db.SEGMENS = ["Kabel Feeder", "ODC", "Kabel/Distribusi", "ODP"];
 db.JENISQES = ["Normalisasi ODP", "Box ODP", "Perapihan ODC"];

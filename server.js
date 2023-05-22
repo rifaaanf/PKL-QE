@@ -17,6 +17,7 @@ const segmen = db.segmen;
 const namaAlpro = db.namaAlpro;
 const jenisQE = db.jenisQE;
 const mitra = db.mitra;
+const viewer = db.viewer
 const multer = require("multer");
 
 var corsOptions = {
@@ -365,6 +366,16 @@ function initial() {
         }
 
         console.log("added 'executor' to roles collection");
+      });
+
+      new Role({
+        name: "viewer",
+      }).save((err) => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'viewer' to roles collection");
       });
     }
   });

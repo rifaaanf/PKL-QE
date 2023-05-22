@@ -9,6 +9,7 @@ const Designer = db.designer;
 const Proposal = db.proposal;
 const Approver = db.approver;
 const Executor = db.executor;
+const Admin = db.admin;
 
 getProposerId = (req, res, next) => {
   Proposer.findOne({
