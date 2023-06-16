@@ -1,158 +1,99 @@
-<form id ="formproposal" action="/proposal" method="post" class="w-full max-w-sm">
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label
-        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        for="inline-full-name"
-      >
-        Nama STO
-      </label>
-    </div>
-    <div class="relative md:w-2/3">
-      <select required
-        name="namaSTO"
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        id="sel1"
-        onchange="dropdown(this.id,'sel2','sel3')"
-        type="text"
-      >
-        <option value=""disabled selected hidden>Pilih STO</option>
-        <% namaSTO.forEach(function (namasto) { %>
-        <option value="<%= namasto.name %>"><%= namasto.name %></option>
-        <% })%>
-      </select>
-      <p id="namastodiisi" class="text-red-500 text-xs italic "></p>
-
-    </div>
-  </div>
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label
-        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        for="inline-password"
-      >
-        Segmen
-      </label>
-    </div>
-    <div class="relative md:w-2/3">
-      <select required
-        name="segmen"
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        id="sel2"
-        onchange="dropdown('sel1',this.id,'sel3');jenisqematch()"
-        type="text"
-      > 
-        <option value=""disabled selected hidden>Pilih Segmen</option>
-        <% segmen.forEach(function (segmen) { %>
-        <option value="<%= segmen.name %>"><%= segmen.name %></option>
-        <% })%>
-      </select>
-      <p id="segmendiisi" class="text-red-500 text-xs italic "></p>
-    </div>
-  </div>
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label
-        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        for="inline-password"
-      >
-        Nama Alpro
-      </label>
-    </div>
-    <div class="relative md:w-2/3">
-      <select required
-        name="namaAlpro"
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        id="sel3"
-        type="text"
-      > 
-      </select>
-      <p id="alprodiisi" class="text-red-500 text-xs italic "></p>
-      
-    </div>
-  </div>
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label
-        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        for="inline-password"
-      >
-        Jenis QE
-      </label>
-    </div>
-    <div class="relative md:w-2/3">
-      <select required
-        name="jenisQE"
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        id="QE"
-        type="text"
-
-      >
-        <option value=""disabled selected hidden>Pilih QE</option>
-
-      </select>
-      <p id="qediisi" class="text-red-500 text-xs italic "></p>
-    </div>
-  </div>
-  <div class="">
-    <div class="md:flex md:items-center mb-6">
+<div class="max-w-7xl bg-white rounded-lg overflow-hidden shadow-md">
+  <form id="formproposal" action="/proposal" method="post" class="w-full p-6">
+    <div class="md:items-center mb-6">
       <div class="md:w-1/3">
-        <label
-          class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-          for="inline-password"
-        >
-          Koordinat
+        <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" for="inline-full-name">
+          Nama STO
         </label>
       </div>
-      <div class="md:w-2/3">
-        <input
-        required
-          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-          id="koordinat"
-          name="koordinat"
-          type="text"
-          placeholder="Masukkan Koordinat Lokasi"
-        />
-        <p id="koordinatdiisi" class="text-red-500 text-xs italic "></p>
+      <div class="relative md:min-w-max z-10">
+        <select required name="namaSTO" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="sel1" onchange="dropdown(this.id,'sel2','sel3')" type="text">
+          <option value="" disabled selected hidden>Choose Nama STO</option>
+          <% namaSTO.forEach(function (namasto) { %>
+          <option value="<%= namasto.name %>"><%= namasto.name %></option>
+          <% })%>
+        </select>
+        <p id="namastodiisi" class="text-red-500 text-xs italic"></p>
       </div>
     </div>
-  </div>
-  <div class="md:flex mb-6">
-    <div class="md:w-1/3">
-      <label
-        class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-        for="inline-password"
-      >
-        Keterangan
-      </label>
+    <div class="md:items-center mb-6">
+      <div class="md:w-1/3">
+        <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" for="inline-password">
+          Segmen
+        </label>
+      </div>
+      <div class="relative md:min-w-max">
+        <select required name="segmen" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="sel2" onchange="dropdown('sel1',this.id,'sel3');jenisqematch()" type="text">
+          <option value="" disabled selected hidden>Choose Segmen</option>
+          <% segmen.forEach(function (segmen) { %>
+          <option value="<%= segmen.name %>"><%= segmen.name %></option>
+          <% })%>
+        </select>
+        <p id="segmendiisi" class="text-red-500 text-xs italic"></p>
+      </div>
     </div>
-    <div class="md:w-2/3">
-      <textarea
-        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        id="inline-password"
-        rows="5"
-        name="keterangan"
-      ></textarea>
+    <div class="md:items-center mb-6">
+      <div class="md:w-1/3">
+        <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" for="inline-password">
+          Nama Alpro
+        </label>
+      </div>
+      <div class="relative md:min-w-max">
+        <select required name="namaAlpro" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="sel3" type="text">
+        </select>
+        <p id="alprodiisi" class="text-red-500 text-xs italic"></p>
+      </div>
     </div>
-  </div>
-  <div class="md:flex md:items-center mb-1">
-    <div class="md:w-1/3"></div>
-  </div>
-  <div class="md:flex md:items-center">
-    <div class="md:w-1/3"></div>
-    <div class="md:w-2/3">
-      <input
-        id="submitproposal"
+    <div class="md:items-center mb-6">
+      <div class="md:w-1/3">
+        <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" for="inline-password">
+          Jenis QE
+        </label>
+      </div>
+      <div class="relative md:min-w-max">
+        <select required name="jenisQE" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="QE" type="text">
+          <option value="" disabled selected hidden>Choose Jenis QE</option>
+        </select>
+        <p id="qediisi" class="text-red-500 text-xs italic"></p>
+      </div>
+    </div>
+    <div class="">
+      <div class="md:items-center mb-6">
+        <div class="md:w-1/3">
+          <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" for="inline-password">
+            Koordinat
+          </label>
+        </div>
+        <div class="relative md:min-w-max">
+          <input required class="bg-white appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="koordinat" name="koordinat" type="text" placeholder="Input Koordinat Lokasi" />
+          <p id="koordinatdiisi" class="text-red-500 text-xs italic"></p>
+        </div>
+      </div>
+    </div>
+    <div class="md:items-center mb-6">
+      <div class="md:w-1/3">
+        <label class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4" for="inline-password">
+          Keterangan
+        </label>
+      </div>
+      <div class="relative md:min-w-max">
+        <textarea class="bg-white appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-password" rows="5" name="keterangan"></textarea>
+      </div>
+    </div>
+    <div class="md:flex md:items-center mb-1">
+      <div class="md:w-1/3"></div>
+    </div>
+    <!-- Tambahkan elemen-elemen lainnya di sini -->
+    <div class="md:items-end">
+      <div class=" md:flex md:w-full justify-end">
+        <input id="submitproposal"
+          class="shadow-lg bg-green-500 hover:bg-white hover:text-green-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" style="outline-style: solid; outline-color: #39b846; outline-width: 2px;"
+          type="submit" />
+      </div>
+    </div>
+  </form>
+</div>
 
-        class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-        type="submit"
-        
-      >
-        
-    </input>
-    </div>
-  </div>
-</form>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
@@ -168,28 +109,28 @@
     if (sel1 == "") {
       //type catatan tidak boleh kosong under textarea with red color
       document.getElementById("namastodiisi").innerText =
-        "Nama STO tidak boleh kosong";
+        "Nama STO cannot be empty";
     } else {
       document.getElementById("namastodiisi").innerText = "";
     } 
     
     if(sel2 == ""){
       document.getElementById("segmendiisi").innerText =
-        "Segmen tidak boleh kosong";
+        "Segmen cannot be empty";
     } else {
       document.getElementById("segmendiisi").innerText = "";
     } 
     
     if(sel3 == ""){
       document.getElementById("alprodiisi").innerText =
-        "Nama Alpro tidak boleh kosong";
+        "Nama Alpro cannot be empty";
     } else {
       document.getElementById("alprodiisi").innerText = "";
     } 
     
     if(QE == ""){
       document.getElementById("qediisi").innerText =
-        "Jenis QE tidak boleh kosong";
+        "Jenis QE cannot be empty";
     } else {
       document.getElementById("qediisi").innerText = "";
     } 
@@ -197,7 +138,7 @@
     if (koor == "") {
       //type catatan tidak boleh kosong under textarea with red color
       document.getElementById("koordinatdiisi").innerText =
-        "Koordinat tidak boleh kosong";
+        "Koordinat cannot be empty";
     } else {
       document.getElementById("koordinatdiisi").innerText = "";
     }
@@ -208,25 +149,25 @@
   });
   $('#sel1').select2(
     {
-      placeholder: 'Pilih Nama STO',
+      placeholder: 'Choose Nama STO',
       allowClear: true
     }
   );
   $('#sel2').select2(
     {
-      placeholder: 'Pilih Segmen',
+      placeholder: 'Choose Segmen',
       allowClear: true
     }
   );
   $('#sel3').select2(
     {
-      placeholder: 'Pilih Nama Alpro',
+      placeholder: 'Choose Nama Alpro',
       allowClear: true
     }
   );
   $('#QE').select2(
     {
-      placeholder: 'Pilih Jenis QE',
+      placeholder: 'Choose Jenis QE',
       allowClear: true
     }
   );

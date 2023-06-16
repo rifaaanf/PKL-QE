@@ -1,0 +1,195 @@
+<form id="formuserpanel" action="" method="post">
+    <p class="text-xl pb-3"><i class="fas fa-list mr-3"></i>User Management</p>
+    <input type="hidden" name="id" id="id" />
+    <div class="flex justify-between">
+        <input
+        class="shadow-lg bg-green-500 hover:bg-white hover:text-green-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded  mb-3" style="outline-style: solid; outline-color: #39b846; outline-width: 2px;"
+        type="button"
+        value="Add User"
+        onclick="window.location.href='/adduser'"
+      ></input>
+      
+      <div class="mb-3 xl:w-96">
+        <input
+          type="search"
+          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          id="exampleSearch"
+          placeholder="Search By Name"
+        />
+      </div>
+    </div>
+    <div class="rounded overflow-hidden shadow-lg bg-white">
+      <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+              <table class="min-w-full text-center" style="width: 150px">
+                <thead class="bg-gray-800 text-white">
+                  <tr>
+                    <th class="text-center py-3 px-4 font-semibold text-sm">
+                      Username
+                    </th>
+                    <th
+                      class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                    >
+                      Role
+                    </th>
+                    <th
+                      class="text-center py-3 px-4 uppercase font-semibold text-sm"
+                    >
+                      Action
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% var isDataAvailable = false; user.forEach(function (user,
+                  index) { if(user.username){ isDataAvailable = true; %>
+                  <tr class="bg-white border-b text-center">
+                    <td
+                      class="list text-sm uppercase text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                    >
+                      <%= user.username %>
+                    </td>
+                    <td
+                      class="text-sm uppercase text-gray-900 font-medium px-6 py-4 whitespace-nowrap"
+                    >
+                      <%= user.roles?.name %>
+                    </td>
+                    <td class="text-center py-3">
+                      <a
+                        type="button"
+                        class="inline-block px-6 py-2.5 bg-green-500 text-white font-medium font-bold text-xs leading-tight uppercase rounded shadow-md hover:bg-green-400 hover:shadow-lg focus:bg-green-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-500 active:shadow-lg transition duration-150 ease-in-out"
+                        href="/edituser/<%= user._id %>"
+                        >Edit</a
+                      >
+                      <button
+                        type="button"
+                        id="button-delete"
+                        class="button-delete inline-block px-6 py-2.5 bg-red-600 text-white font-medium font-bold text-xs leading-tight uppercase rounded shadow-md hover:bg-red-500 hover:shadow-lg focus:bg-red-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-600 active:shadow-lg transition duration-150 ease-in-out"
+                        data-id="<%= user._id %>"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                  <% } }); if (!isDataAvailable) { %>
+                  <tr>
+                    <td colspan="3" class="text-center py-3 px-4">
+                      No data available
+                    </td>
+                  </tr>
+                  <% } %>
+                </tbody>
+                <tfoot>
+                  <tr style="display: none">
+                    <td
+                      colspan="3"
+                      class="text-center text-gray-900 font-light px-6 py-4 whitespace-nowrap"
+                    >
+                      Data Not Found
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  
+  <script>
+    document
+      .querySelector("#exampleSearch")
+      .addEventListener("input", filterList);
+  
+    function filterList() {
+      const searchInput = document.querySelector("#exampleSearch");
+      const filter = searchInput.value.toLowerCase();
+  
+      const table = document.querySelector("table");
+      const list = document.querySelectorAll(".list");
+      const noData = table.querySelector("tfoot tr");
+  
+      let matchFound = false;
+  
+      list.forEach((item) => {
+        let text = item.textContent;
+        if (text.toLocaleLowerCase().includes(filter.toLocaleLowerCase())) {
+          item.parentElement.style.display = "";
+          matchFound = true;
+        } else {
+          item.parentElement.style.display = "none";
+        }
+      });
+  
+      if (matchFound) {
+        noData.style.display = "none";
+      } else {
+        noData.style.display = "";
+      }
+    }
+  
+    const form = document.getElementById("formuserpanel");
+    const btn = document.getElementById("button-delete");
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+  
+      Swal.fire({
+        title: "Delete User",
+        text: "Are You Sure Want To Delete User",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            "Deleted!",
+            "User Has Been Successfully Deleted",
+            "success"
+          ).then(() => {
+            form.submit();
+          });
+        }
+      });
+    });
+  
+    // get buttons with classname button-delete
+    const btns = document.querySelectorAll(".button-delete");
+    // for every button, add event listener
+    btns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+  
+        // get the id from data-id attribute
+        const id = e.target.getAttribute("data-id");
+  
+        // set the value of the hidden input to the id
+        document.querySelector("#id").value = id;
+  
+        Swal.fire({
+          title: "Delete User",
+          text: "Are You Sure Want To Delete User",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              "Deleted!",
+              "User Has Been Successfully Deleted",
+              "success"
+            ).then(() => {
+              form.submit();
+            });
+          }
+        });
+      });
+    });
+  </script>
+  <%- include('./js/js.ejs') %>
+  

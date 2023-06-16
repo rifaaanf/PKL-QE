@@ -673,7 +673,7 @@ exports.changePasswordUser = (req, res) => {
 
     const isOldPasswordValid = bcrypt.compareSync(oldPassword, user.password);
     if (!isOldPasswordValid) {
-      const errorMessage = "Password Lama Tidak Sesuai";
+      const errorMessage = "Old Password Does Not Match";
       res.redirect(
         400,
         "/changepassworduserpage?error=" + encodeURIComponent(errorMessage)

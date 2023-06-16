@@ -195,8 +195,9 @@
     let pindah = document.querySelector(".inbox").href.split("/");
     if (pindah[pindah.length - 1] == "admin") {
       document.getElementById("dbmenu").classList.remove("hidden");
-      document.getElementById("adduser").classList.remove("hidden");
+      // document.getElementById("adduser").classList.remove("hidden");
       document.getElementById("editpassword").classList.remove("hidden");
+      document.getElementById("userpanel").classList.remove("hidden");
     } else if (pindah[pindah.length - 1] == "proposer") {
       document.getElementById("myproposal").classList.remove("hidden");
       document.getElementById("proposer").classList.remove("hidden");
@@ -305,7 +306,7 @@
       // document.getElementById("formedit").action = "/deletedata/mitra";
     }
     sel2.innerHTML =
-      "<option class='disabled selected hidden' value = ''>Pilih Data</option>";
+      "<option class='disabled selected hidden' value = ''>Choose Data</option>";
     for (let option in setdata) {
       let pair = setdata[option].split("|");
       let newOption = document.createElement("option");
@@ -323,7 +324,7 @@
     const sel2 = document.getElementById("sel2");
     const QE = document.getElementById("QE");
     QE.innerHTML =
-      "<option class='disabled selected hidden' value = ''>Pilih Data</option>";
+      "<option class='disabled selected hidden' value = ''>Choose Data</option>";
     fetch("/api/admin/getAllJenisQE")
       .then((res) => res.json())
       .then((data) => {
@@ -346,7 +347,7 @@
     const sel2 = document.getElementById("pilihdata");
     let setdata = [];
     sel2.innerHTML =
-      "<option class='disabled selected hidden' value = ''>Pilih Data</option>";
+      "<option class='disabled selected hidden' value = ''>Choose Data</option>";
     if (sel1.value == "Nama STO") {
       // await fetch data from "/api/admin/getAllNamaSTO"
       let arraysto = [];

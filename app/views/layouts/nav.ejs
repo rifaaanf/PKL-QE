@@ -24,7 +24,7 @@
       href="/qereport"
       class="leftbar flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
-      <i class="fas fa-tachometer-alt mr-3"></i>
+      <i class="fas fa-file-invoice mr-5"></i>
       QE Report
     </a>
     <a
@@ -32,7 +32,7 @@
       href="/proposer"
       class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
-      <i class="fas fa-align-left mr-3"></i>
+      <i class="fas fa-align-left mr-4"></i>
       New Proposal
     </a>
     <a
@@ -40,7 +40,7 @@
       id="inbox"
       class="leftbar inbox hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
-      <i class="fas fa-solid fa-envelope mr-3"></i>
+      <i class="fas fa-solid fa-envelope mr-4"></i>
       Inbox
     </a>
     <a
@@ -48,7 +48,7 @@
       href="/showproposal"
       class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
-      <i class="fas fa-solid fa-file mr-3"></i>
+      <i class="fas fa-solid fa-file mr-5"></i>
       My Proposal
     </a>
     <a
@@ -56,7 +56,7 @@
       href="/submittedproposal"
       class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
-      <i class="fas fa-solid fa-file mr-4"></i>
+      <i class="fas fa-solid fa-file mr-5"></i>
       My Design
     </a>
 
@@ -74,7 +74,7 @@
       href="/closedproposal"
       class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
-      <i class="fas fa-check mr-3"></i>
+      <i class="fas fa-check mr-4"></i>
       Closed Order
     </a>
 
@@ -83,7 +83,7 @@
       id="dbmenu"
       onclick="dbedit()"
       class="leftbar hidden cursor-pointer flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
-      ><i class="fas fa-solid fa-database mr-3"></i>Database</a
+      ><i class="fas fa-solid fa-database mr-4"></i>Database</a
     >
     <div class="dbedit hidden">
       <a
@@ -103,13 +103,21 @@
       >
     </div>
 
-    <a
+    <!-- <a
       id="adduser"
       href="/adduser"
       class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
       <i class="fas fa-user-plus mr-3"></i>
       Add User
+    </a> -->
+    <a
+    id="userpanel"
+    href="/userpanel"
+    class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
+    >
+      <i class="fas fa-user mr-3"></i>
+      User Management
     </a>
 
     <a
@@ -117,7 +125,7 @@
       href="/admineditpasswordpage"
       class="leftbar hidden flex items-center transition ease-in-out duration-150 text-gray-600 py-4 pl-6 nav-item"
     >
-      <i class="fas fa-user-plus mr-3"></i>
+      <i class="fas fa-edit mr-3"></i>
       Change Password
     </a>
   </nav>

@@ -101,6 +101,30 @@ module.exports = function (app) {
     }
   );
 
+  app.get(
+    "/userpanel",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.userPanel
+  );
+
+  app.post(
+    "/userpanel",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.deleteUser
+  );
+
+  app.get(
+    "/edituser/:id",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.editUser
+  );
+
+  app.post(
+    "/edituser/:id",
+    [authJwt.verifyToken, authJwt.isAdmin],
+    controller.editUserData
+  );
+
   //   app.post(
   //     "/deletedata/namasto",
   //     [authJwt.verifyToken, authJwt.isAdmin],
