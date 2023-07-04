@@ -26,8 +26,7 @@ Pastikan telah menginstall kebutuhan yang digunakan untuk menjalankan aplikasi i
 ```
 
 5. Buka Web Browser.
-6. Buka laman localhost dengan port 8080.
-   [Localhost](https://localhost:8080)
+6. Buka laman [Localhost](https://localhost:8080) dengan port 8080.
 
 7. Masukkan akun yang terdaftar untuk melakukan autentikasi.
 
