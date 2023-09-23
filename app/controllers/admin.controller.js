@@ -462,9 +462,6 @@ exports.editUser = (req, res) => {
       } else if (role === "approver") {
         const approver = await Approver.findOne({ user: id }).exec();
         name = approver.name;
-      } else if (role === "viewer") {
-        const viewer = await Viewer.findOne({ user: id }).exec();
-        name = viewer.name;
       }
 
       // if (roleBaru != roleLama) {
