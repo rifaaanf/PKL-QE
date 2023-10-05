@@ -165,7 +165,7 @@ describe('User as Proposer', () => {
             segmen: 'ODC',
             namaAlpro: 'ODC-SMT-FA',
             jenisQE: 'Perapihan ODC',
-            koordinat: '123,123',
+            koordinat: '223,123',
             keterangan: 'zzz',
         }).set('Cookie', [`x-access-token=${token}`]).accept('json');
         proposalID = res.body.objectID;
