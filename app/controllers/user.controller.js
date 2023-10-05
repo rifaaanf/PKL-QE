@@ -681,10 +681,10 @@ exports.changePasswordUser = (req, res) => {
       return;
     }
 
-    // if (newPassword !== confirmPassword) {
-    //   res.status(400).send({ message: "konfirmasi password baru tidak sama dengan password baru" });
-    //   return;
-    // }
+    if (newPassword !== confirmPassword) {
+      res.status(400).send({ message: "konfirmasi password baru tidak sama dengan password baru" });
+      return;
+    }
 
     User.findByIdAndUpdate(
       req.userId,

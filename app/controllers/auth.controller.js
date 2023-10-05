@@ -88,8 +88,9 @@ exports.signin = (req, res) => {
           secure: true,
           sameSite: "none",
         });
-        res.redirect("/dashboard");
-
+        res.status(200).send({
+          token,
+        });
         // res.redirect(`/${user.roles.name}`);
       } else {
         var token = await new jose.SignJWT({
@@ -110,7 +111,9 @@ exports.signin = (req, res) => {
         // get user role from cookie
 
         //if x-access-token is set on client side then redirect to dashboard based on role
-        res.redirect("/dashboard");
+        res.status(200).send({
+          token,
+        });
       }
     });
 };

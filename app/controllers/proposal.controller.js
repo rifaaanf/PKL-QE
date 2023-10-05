@@ -124,7 +124,23 @@ exports.createProposal = async (req, res) => {
       if (err) {
         console.log(err);
         res.redirect("/proposer");
-      } else {
+      } 
+      else if (req.accepts("json")) {
+        res.status(200).send({
+          data: "proposalconfirmpage",
+          idProposal: proposal.idProposal,
+          namaSTO: proposal.namaSTO,
+          segmen: proposal.segmen,
+          namaAlpro: proposal.namaAlpro,
+          jenisQE: proposal.jenisQE,
+          koordinat: proposal.koordinat,
+          keterangan: proposal.keterangan,
+          proposal: proposal,
+          objectID: proposal._id,
+          pindah: req.roleName,
+        });
+      }
+      else {
         res.render("layouts/main-layout-proposer", {
           data: "proposalconfirmpage",
           idProposal: proposal.idProposal,
